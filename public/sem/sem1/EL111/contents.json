@@ -1,0 +1,15 @@
+{
+    "contents": [
+      {
+        "name": "assignments",
+        "label": "Assignments",
+        "type": "folder"
+      },
+      {
+        "name": "papers",
+        "label": "Papers",
+        "type": "folder"
+      }
+    ]
+  }
+  

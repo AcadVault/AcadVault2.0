@@ -1,0 +1,15 @@
+{
+    "contents": [
+      {
+        "name": "sem1",
+        "label": "Semester 1",
+        "type": "folder"
+      },
+      {
+        "name": "sem2",
+        "label": "Semester 2",
+        "type": "folder"
+      }
+    ]
+  }
+  

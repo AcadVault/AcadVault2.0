@@ -1,0 +1,20 @@
+{
+    "contents": [
+      {
+        "name": "EL111",
+        "label": "Basic Electronic Circuits",
+        "type": "folder"
+      },
+      {
+        "name": "SC107",
+        "label": "Calculus",
+        "type": "folder"
+      },
+      {
+        "name": "IT112",
+        "label": "Introduction to Programming",
+        "type": "folder"
+      }
+    ]
+  }
+  
