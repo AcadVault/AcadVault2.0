@@ -12,6 +12,7 @@
     "@auth/mongodb-adapter": "^2.0.9",
     "axios": "^1.6.2",
     "dotenv": "^16.3.1",
+    "googleapis": "^129.0.0",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.3",
     "next": "14.0.4",
