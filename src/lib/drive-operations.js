@@ -1,12 +1,13 @@
 import { Readable } from "stream";
 import { getDrive } from "./gdrive.config"
+import { ROOT_FOLDER_ID, MATERIALS_FOLDER_ID, REQUESTS_FOLDER_ID } from "@/lib/constants";
 
 export const searchFolder = async (folderName, parentFolderID) => {
-  if (folderName === 'ROOT') return process.env.DRIVE_ROOT_FOLDER_ID;
-  if (folderName === 'MATERIALS') return process.env.DRIVE_MATERIALS_FOLDER_ID;
-  if (folderName === 'REQUESTS') return process.env.DRIVE_REQUESTS_FOLDER_ID;
+  if (folderName === 'ROOT') return ROOT_FOLDER_ID;
+  if (folderName === 'MATERIALS') return MATERIALS_FOLDER_ID;
+  if (folderName === 'REQUESTS') return REQUESTS_FOLDER_ID;
 
-  const parentFilter = parentFolderID ? `'${parentFolderID}' in parents` : '';
+  const parentFilter = parentFolderID ? `and '${parentFolderID}' in parents` : '';
   const drive = getDrive();
   try {
     const res = await drive.files.list(
@@ -59,6 +60,27 @@ export const createFolder = async (folderName, parentFolderName) => {
       fields: 'id',
     });
     return data.id;
+  } catch (err) {
+    throw err;
+  }
+}
+
+
+export const listAllFolders = async (parentFolderName) => {
+  if (!['ROOT', 'MATERIALS', 'REQUESTS'].includes(parentFolderName)) {
+    throw { message: "outside allowed directories" }
+  };
+  const parentFolderID = await searchFolder(parentFolderName);
+  const drive = getDrive();
+  try {
+    const res = await drive.files.list(
+      {
+        q: `mimeType='application/vnd.google-apps.folder' and trashed=false and '${parentFolderID}' in parents`,
+        fields: 'files(id, name)'
+      },
+    );
+    if (res.data.files) return res.data.files;
+    else throw { message: 'folder-not-found' };
   } catch (err) {
     throw err;
   }

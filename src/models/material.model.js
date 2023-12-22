@@ -6,12 +6,25 @@ const MaterialSchema = new Schema({
     required: true,
     unique: true,
   },
-  course: {
+  courseName: {
     type: String,
     required: true,
   },
-  tags: {
-    type: [String],
+  materialType: {
+    type: String,
+    required: true,
+  },
+  exam: {
+    type: String,
+  },
+  number: {
+    type: Number,
+  },
+  year: {
+    type: Number,
+  },
+  referenceBookName: {
+    type: String,
   },
   // comments:{
   //   type:[String]
@@ -19,3 +32,4 @@ const MaterialSchema = new Schema({
 });
 
 export const Material = models.Material || model('Material', MaterialSchema);
+export default MaterialSchema;

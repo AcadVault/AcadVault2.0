@@ -3,7 +3,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
-import SessionProvider from "@/lib/SessionProvider";
+import SessionProvider from "@/components/sessionProvider";
 
 export const metadata = {
   title: "AcadVault 2.0",

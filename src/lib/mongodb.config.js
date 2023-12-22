@@ -17,12 +17,12 @@ if (process.env.NODE_ENV === "development") {
   client = new MongoClient(uri, options)
   clientPromise = client.connect()
 }
+export { clientPromise };
 
-const connectMongoDB = async (dbName) => {
+export const connectMongoDB = async (dbName) => {
   try {
     mongoose.connect(uri, { dbName });
   } catch (error) {
     console.log(error);
   }
 }
-export { clientPromise, connectMongoDB };
