@@ -14,7 +14,7 @@ const NavBar = () => {
                     </a>
                     <div class="flex items-center space-x-6 rtl:space-x-reverse">
                         <a href="https://github.com/AcadVault/AcadVault2.0" target="_blank" class="text-sm  text-gray-500 dark:text-white hover:underline">Github</a>
-                        <a href="/login" class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">SignIn</a>
+                        <a href="/login" class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Login</a>
                     </div>
                 </div>
             </nav>
