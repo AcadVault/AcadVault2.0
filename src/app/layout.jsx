@@ -1,8 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
-import SessionProvider from "components/SessionProvider";
-import Navbar from "components/Navbar";
+import SessionProvider from "../components/SessionProvider";
+import Navbar from "../components/Navbar";
 
 export const metadata = {
   title: "AcadVault 2.0",
