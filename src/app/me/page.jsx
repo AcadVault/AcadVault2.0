@@ -3,10 +3,11 @@
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import Loading from "@/components/Loading";
 
 const ProfilePage = () => {
   const session = useSession();
-  if (session.status === "loading") return "";
+  if (session.status === "loading") return (<Loading/>);
   if (session.status === "unauthenticated") redirect("/login");
 
   return (

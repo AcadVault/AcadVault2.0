@@ -2,10 +2,11 @@
 
 import { redirect } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
+import Loading from "@/components/Loading";
 
 const LoginPage = () => {
   const session = useSession();
-  if (session.status === "loading") return "";
+  if (session.status === "loading") return (<Loading/>);
   if (session.status === "authenticated") redirect("/");
   return (
       <div class="fixed left-0 top-0 -z-10 h-full w-full">
