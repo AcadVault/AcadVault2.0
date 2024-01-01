@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
-import FileUploader from "@/components/Fileuploader";
+import FileUploader from "@/components/FileUploader";
 import { EXAMS, MATERIALS } from "@/lib/constants";
 import { useRouter } from "next/navigation";
 
