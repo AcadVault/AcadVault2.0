@@ -4,6 +4,7 @@ import { uploadFile } from "@/lib/drive-operations";
 import { Material } from "@/models/material.model";
 import { Request as MaterialRequest } from "@/models/request.model";
 import { connectMongoDB } from "@/lib/mongodb.config";
+import { REQUESTS_FOLDER_ID } from '@/lib/constants'
 
 export const POST = async (req) => {
   try {
@@ -22,14 +23,13 @@ export const POST = async (req) => {
     const data = { studentID, courseName, materialType, year, number, exam, referenceBookName, file, requestTime };
     const fileName = `${generateFilename(data)}.${getExtention(file.name)}`;
 
-    const { id } = await uploadFile(file, courseName, fileName);
+    const { id } = await uploadFile(file, 'Requests', fileName);
     const fileID = id;
 
-    await connectMongoDB('catalouge');
+    await connectMongoDB('catalogue');
     const material = new Material({ fileID, courseName, materialType, exam, number, year, referenceBookName });
     const request = new MaterialRequest({ material, studentID, requestTime, status: "REQUESTED" })
     await request.save();
-
     return NextResponse.json({ success: true, data: { ...data, fileID, fileName } });
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message })

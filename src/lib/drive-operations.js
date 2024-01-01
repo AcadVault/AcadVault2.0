@@ -1,18 +1,19 @@
 import { Readable } from "stream";
 import { getDrive } from "./gdrive.config"
-import { ROOT_FOLDER_ID, MATERIALS_FOLDER_ID, REQUESTS_FOLDER_ID } from "@/lib/constants";
+import { ROOT_FOLDER_ID } from "@/lib/constants";
 
-export const searchFolder = async (folderName, parentFolderID) => {
+export const searchFolder = async (folderName, parentFolderName) => {
   if (folderName === 'ROOT') return ROOT_FOLDER_ID;
-  if (folderName === 'MATERIALS') return MATERIALS_FOLDER_ID;
-  if (folderName === 'REQUESTS') return REQUESTS_FOLDER_ID;
-
-  const parentFilter = parentFolderID ? `and '${parentFolderID}' in parents` : '';
+  let parentFilter = '';
+  if (parentFolderName) {
+    const parentFolderID = await searchFolder(parentFolderName);
+    parentFilter = parentFolderName ? `and '${parentFolderID}' in parents` : '';
+  }
   const drive = getDrive();
   try {
     const res = await drive.files.list(
       {
-        q: `mimeType='application/vnd.google-apps.folder' and trashed=false and name='${folderName}'` + parentFilter,
+        q: `mimeType='application/vnd.google-apps.folder' and trashed=false and name='${folderName}' ${parentFilter}`,
         fields: 'files(id)'
       },
     );
@@ -44,7 +45,7 @@ export const uploadFile = async (fileObject, folderName, fileName) => {
 }
 
 export const createFolder = async (folderName, parentFolderName) => {
-  if (!['ROOT', 'MATERIALS', 'REQUESTS'].includes(parentFolderName)) {
+  if (!['ROOT', 'Materials', 'Requests'].includes(parentFolderName)) {
     throw { message: "outside allowed directories" }
   };
   const drive = getDrive();
@@ -67,7 +68,7 @@ export const createFolder = async (folderName, parentFolderName) => {
 
 
 export const listAllFolders = async (parentFolderName) => {
-  if (!['ROOT', 'MATERIALS', 'REQUESTS'].includes(parentFolderName)) {
+  if (!['ROOT', 'Materials', 'Requests'].includes(parentFolderName)) {
     throw { message: "outside allowed directories" }
   };
   const parentFolderID = await searchFolder(parentFolderName);

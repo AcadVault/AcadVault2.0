@@ -1,9 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
-import { authOptions } from "./api/auth/[...nextauth]/route";
-import { getServerSession } from "next-auth";
-import SessionProvider from "@/components/sessionProvider";
+import SessionProvider from "@/components/SessionProvider";
 
 export const metadata = {
   title: "AcadVault 2.0",
@@ -11,7 +9,6 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const session = await getServerSession(authOptions);
   return (
     <html lang="en">
       <body className={inter.className}>

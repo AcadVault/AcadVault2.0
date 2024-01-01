@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
 import { searchFolder, listAllFolders } from "@/lib/drive-operations"
-import { MATERIALS_FOLDER_ID } from "@/lib/constants";
 
 export const GET = async (request) => {
   try {
@@ -9,12 +8,12 @@ export const GET = async (request) => {
     if (!courseName) throw { message: "courseName isn't provided" }
     let data;
     if (courseName === "*") {
-      data = await listAllFolders('MATERIALS');
+      data = await listAllFolders('Materials');
       data.sort((f1, f2) => {
         return f1.name.localeCompare(f2.name)
       })
     } else {
-      const courseFolderID = await searchFolder(courseName, MATERIALS_FOLDER_ID);
+      const courseFolderID = await searchFolder(courseName, 'Materials');
       data = { id: courseFolderID, name: courseName };
     }
     return NextResponse.json({ success: true, data })
