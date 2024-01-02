@@ -13,10 +13,7 @@ const RequestSchema = new Schema({
   status: {
     type: String,
     required: true,
-  },
-  requestTime: {
-    type: Date,
   }
-});
+}, { timestamps: true });
 
 export const Request = models.Request || model('Request', RequestSchema);

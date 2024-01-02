@@ -4,11 +4,20 @@ import { uploadFile } from "@/lib/drive-operations";
 import { Material } from "@/models/material.model";
 import { Request as MaterialRequest } from "@/models/request.model";
 import { connectMongoDB } from "@/lib/mongodb.config";
-import { REQUESTS_FOLDER_ID } from '@/lib/constants'
+
+export const GET = async (req) => {
+  try {
+    await connectMongoDB('catalogue');
+    const requests = await MaterialRequest.find({});
+    return NextResponse.json({ success: true, data: requests })
+  } catch (error) {
+    return NextResponse.json({ success: false, error: error.message })
+  }
+}
 
 export const POST = async (req) => {
   try {
-    const formData = await req.formData()
+    const formData = await req.formData();
     const studentID = formData.get('studentID');
     const courseName = formData.get('otherCourseName') || formData.get('courseName');
     const materialType = formData.get('materialType');

@@ -28,8 +28,8 @@ const MaterialSchema = new Schema({
   },
   approvedBy: {
     type: String,
-  }
-});
+  },
+}, { timestamps: true });
 
 export const Material = models.Material || model('Material', MaterialSchema);
 export default MaterialSchema;

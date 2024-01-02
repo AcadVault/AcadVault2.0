@@ -56,7 +56,7 @@ export default function NewMaterialPage() {
       formData.append("courseName", courseName);
       formData.append("file", file);
       formData.set("materialType", materialType);
-      const response = await axios.postForm("/api/material/request", formData);
+      const response = await axios.postForm("/api/requests", formData);
       console.log(response.data);
     } catch (e) {
       console.log(e);
