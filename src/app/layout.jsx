@@ -1,8 +1,9 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
-import SessionProvider from "../components/SessionProvider";
-import Navbar from "../components/NavBar";
+import SessionProvider from "@/components/SessionProvider";
+import Redirecter from "@/components/Redirecter";
+import Navbar from "@/components/NavBar";
 
 export const metadata = {
   title: "AcadVault 2.0",
@@ -20,8 +21,10 @@ export default async function RootLayout({ children }) {
           </div>
         </div>
         <SessionProvider>
-          <Navbar />
-          {children}
+          <Redirecter>
+            <Navbar />
+            {children}
+          </Redirecter>
         </SessionProvider>
       </body>
     </html>
