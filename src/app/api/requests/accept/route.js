@@ -1,24 +1,24 @@
-import Request from '@/models/Request';
-import Material from '@/models/Material';
+import { Material } from "@/models/material.model";
+import { Request as MaterialRequest } from "@/models/request.model";
 
 export const POST = async (req) => {
   const { requestID } = await req.json();
 
   try {
-    const request = await Request.findOne({ _id: requestID });
+    const materialRequest = await MaterialRequest.findOne({ _id: requestID });
 
-    if (!request) {
+    if (!materialRequest) {
       return NextResponse.json({ success: false, error: 'Request not found' });
     }
 
-    request.status = 'ACCEPTED';
-    await request.save();
+    materialRequest.status = 'ACCEPTED';
+    await materialRequest.save();
 
-    const { material } = request;
+    const { material } = materialRequest;
     const newMaterial = new Material(material);
     await newMaterial.save();
 
-    return NextResponse.json({ success: true, data: request });
+    return NextResponse.json({ success: true, data: materialRequest });
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message });
   }
