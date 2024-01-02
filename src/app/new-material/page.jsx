@@ -9,6 +9,7 @@ import FileUploader from "@/components/FileUploader";
 import { EXAMS, MATERIALS } from "@/lib/constants";
 import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
+import { Toaster, toast } from "react-hot-toast";
 
 export default function NewMaterialPage() {
   const session = useSession();
@@ -26,6 +27,7 @@ export default function NewMaterialPage() {
 
   const [courseName, setCourseName] = useState(null);
   const [materialType, setMaterialType] = useState(materialsList[0]);
+  const [isUploading, setIsUploading] = useState(false);
 
   const fetchCourses = async () => {
     try {
@@ -42,29 +44,50 @@ export default function NewMaterialPage() {
     fetchCourses();
   }, []);
 
-  if (session.status === "loading" || coursesList.length === 0) return (<Loading/>);
+  if (session.status === "loading" || coursesList.length === 0) return (<Loading />);
   if (session.status === "unauthenticated") redirect("/login");
+
+  const uploadData = async (e) => {
+    const formData = new FormData(e.target);
+    formData.append("studentID", session.data.user.email.split("@")[0]);
+    formData.append("courseName", courseName);
+    formData.append("file", file);
+    formData.set("materialType", materialType);
+    setIsUploading(true)
+    const response = await axios.postForm("/api/material/request", formData);
+    e.target.reset();
+    setFile(null);
+    setIsUploading(false)
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!file) {
-      console.log("file not selected");
+      toast.error("file not selected");
       return;
     }
-    try {
-      const formData = new FormData(e.target);
-      formData.append("studentID", session.data.user.email.split("@")[0]);
-      formData.append("courseName", courseName);
-      formData.append("file", file);
-      formData.set("materialType", materialType);
-      const response = await axios.postForm("/api/material/request", formData);
-      console.log(response.data);
-    } catch (e) {
-      console.log(e);
-    }
+    toast.promise(
+      uploadData(e),
+      {
+        loading: 'Uploading...',
+        success: <b>Material Requested Successfully</b>,
+        error: <b>Could not upload</b>,
+      },
+      {
+        success: {
+          duration: 2000,
+          icon: '👏',
+        },
+        error: {
+          duration: 2000,
+          icon: '😞',
+        },
+      }
+    );
   };
 
   return (
     <div class="left-0 top-0 -z-10 h-full w-full">
+      <Toaster position="top-center" reverseOrder={false} />
       <div class="flex items-center justify-center p-8 text-white">
         <div class="mx-auto w-full max-w-[750px]">
           <form onSubmit={handleSubmit}>
@@ -139,52 +162,52 @@ export default function NewMaterialPage() {
                 </div>
                 {(materialType === MATERIALS.ASSIGNMENT_QUESTIONS ||
                   materialType === MATERIALS.ASSIGNMENT_SOLUTION) && (
-                  <div class="mb-5">
-                    <label class="mb-3 block text-base font-medium ">
-                      Which Lab/Tutorial?
-                    </label>
-                    <select name="number" class="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md" >
-                      {[...Array(12).keys()].map((i) => {
-                        return (
-                          <option value={i + 1} key={i + 1}>
-                            {i + 1}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
-                )}
+                    <div class="mb-5">
+                      <label class="mb-3 block text-base font-medium ">
+                        Which Lab/Tutorial?
+                      </label>
+                      <select name="number" class="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md" >
+                        {[...Array(12).keys()].map((i) => {
+                          return (
+                            <option value={i + 1} key={i + 1}>
+                              {i + 1}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+                  )}
                 {(materialType === MATERIALS.EXAM_QUESTION_PAPER ||
                   materialType === MATERIALS.EXAM_PAPER_SOLUTION) && (
-                  <div class="mb-5">
-                    <label class="mb-3 block text-base font-medium ">
-                      Which Exam?
-                    </label>
-                    <select name="exam" class="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md" >
-                      {examsList.map((exam, index) => {
-                        return (
-                          <option value={exam} key={index}>
-                            {exam}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
-                )}
+                    <div class="mb-5">
+                      <label class="mb-3 block text-base font-medium ">
+                        Which Exam?
+                      </label>
+                      <select name="exam" class="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md" >
+                        {examsList.map((exam, index) => {
+                          return (
+                            <option value={exam} key={index}>
+                              {exam}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+                  )}
               </div>
             )}
 
             <div class="flex justify-center content-center mt-10">
-              <button type="submit" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-                <span class="relative inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+              <button type="submit" disabled={isUploading} class=" inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                <span class="inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-4 h-4 me-2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
                   </svg>
                   Submit
                 </span>
               </button>
-              <button type="button" onClick={() => router.back()} class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-                <span class="relative inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+              <button type="button" onClick={() => router.back()} class=" inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                <span class="inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                   Cancel
                 </span>
               </button>
