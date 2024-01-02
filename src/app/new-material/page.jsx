@@ -7,6 +7,7 @@ import FileUploader from "@/components/FileUploader";
 import { EXAMS, MATERIALS } from "@/lib/constants";
 import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
+import { Toaster, toast } from "react-hot-toast";
 
 export default function NewMaterialPage() {
   const session = useSession();
@@ -24,6 +25,7 @@ export default function NewMaterialPage() {
 
   const [courseName, setCourseName] = useState(null);
   const [materialType, setMaterialType] = useState(materialsList[0]);
+  const [isUploading, setIsUploading] = useState(false);
 
   const fetchCourses = async () => {
     try {
@@ -42,43 +44,63 @@ export default function NewMaterialPage() {
 
   if (coursesList.length === 0) return <Loading />;
 
+  const uploadData = async (e) => {
+    const formData = new FormData(e.target);
+    formData.append("studentID", session.data.user.email.split("@")[0]);
+    formData.append("courseName", courseName);
+    formData.append("file", file);
+    formData.set("materialType", materialType);
+    setIsUploading(true);
+    const response = await axios.postForm("/api/material/request", formData);
+    e.target.reset();
+    setFile(null);
+    setIsUploading(false);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!file) {
-      console.log("file not selected");
+      toast.error("file not selected");
       return;
     }
-    try {
-      const formData = new FormData(e.target);
-      formData.append("studentID", session.data.user.email.split("@")[0]);
-      formData.append("courseName", courseName);
-      formData.append("file", file);
-      formData.set("materialType", materialType);
-      const response = await axios.postForm("/api/requests", formData);
-      console.log(response.data);
-    } catch (e) {
-      console.log(e);
-    }
+    toast.promise(
+      uploadData(e),
+      {
+        loading: "Uploading...",
+        success: <b>Material Requested Successfully</b>,
+        error: <b>Could not upload</b>,
+      },
+      {
+        success: {
+          duration: 2000,
+          icon: "👏",
+        },
+        error: {
+          duration: 2000,
+          icon: "😞",
+        },
+      }
+    );
   };
 
   return (
-    <div class="left-0 top-0 -z-10 h-full w-full">
-      <div class="flex items-center justify-center p-8 text-white">
-        <div class="mx-auto w-full max-w-[750px]">
+    <div className="left-0 top-0 -z-10 h-full w-full">
+      <Toaster position="top-center" reverseOrder={false} />
+      <div className="flex items-center justify-center p-8 text-white">
+        <div className="mx-auto w-full max-w-[750px]">
           <form onSubmit={handleSubmit}>
             <FileUploader file={file} setFile={setFile} />
 
-            <div class="mb-5">
+            <div className="mb-5">
               <label
                 htmlFor="courseName"
-                class="mb-3 block text-base font-medium "
+                className="mb-3 block text-base font-medium "
               >
                 Which course does this material belong?
               </label>
               <select
                 id="courseName"
                 name="courseName"
-                class="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
                 onChange={(e) => setCourseName(e.target.value)}
               >
                 {[
@@ -97,35 +119,35 @@ export default function NewMaterialPage() {
             </div>
 
             {courseName === "Other" && (
-              <div class="-mt-3 mb-5 ml-3">
+              <div className="-mt-3 mb-5 ml-3">
                 <input
                   name="otherCourseName"
                   placeholder="Specify Course Name"
-                  class="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
                   required
                 />
               </div>
             )}
 
-            <div class="mb-5">
-              <label class="mb-3 block text-base font-medium ">
+            <div className="mb-5">
+              <label className="mb-3 block text-base font-medium ">
                 Which type of material is it?
               </label>
-              <div class="grid grid-cols-2 grid-flow-row">
+              <div className="grid grid-cols-2 grid-flow-row">
                 {materialsList.map((_materialType, index) => {
                   return (
-                    <div class="w-full" key={index}>
+                    <div className="w-full" key={index}>
                       <input
                         id={_materialType}
                         type="radio"
                         name="materialType"
-                        class="h-3 w-3"
+                        className="h-3 w-3"
                         defaultChecked={index === 0}
                         onChange={(e) => setMaterialType(_materialType)}
                       />
                       <label
                         htmlFor={_materialType}
-                        class="pl-3 text-base font-normal "
+                        className="pl-3 text-base font-normal "
                       >
                         {_materialType}
                       </label>
@@ -136,27 +158,27 @@ export default function NewMaterialPage() {
             </div>
 
             {materialType === MATERIALS.REFERENCE_BOOK ? (
-              <div class="mb-5">
-                <label class="mb-3 block text-base font-medium ">
+              <div className="mb-5">
+                <label className="mb-3 block text-base font-medium ">
                   Reference Book Name
                 </label>
                 <input
                   type="text"
                   name="referenceBookName"
                   placeholder="Reference Book Name (with author)"
-                  class="w-full rounded-md border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  className="w-full rounded-md border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
                   required
                 />
               </div>
             ) : (
               <div>
-                <div class="mb-5">
-                  <label class="mb-3 block text-base font-medium ">
+                <div className="mb-5">
+                  <label className="mb-3 block text-base font-medium ">
                     Of which year?
                   </label>
                   <select
                     name="year"
-                    class="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                    className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
                   >
                     {yearsList.map((year, index) => {
                       return (
@@ -169,13 +191,13 @@ export default function NewMaterialPage() {
                 </div>
                 {(materialType === MATERIALS.ASSIGNMENT_QUESTIONS ||
                   materialType === MATERIALS.ASSIGNMENT_SOLUTION) && (
-                  <div class="mb-5">
-                    <label class="mb-3 block text-base font-medium ">
+                  <div className="mb-5">
+                    <label className="mb-3 block text-base font-medium ">
                       Which Lab/Tutorial?
                     </label>
                     <select
                       name="number"
-                      class="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                      className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     >
                       {[...Array(12).keys()].map((i) => {
                         return (
@@ -189,13 +211,13 @@ export default function NewMaterialPage() {
                 )}
                 {(materialType === MATERIALS.EXAM_QUESTION_PAPER ||
                   materialType === MATERIALS.EXAM_PAPER_SOLUTION) && (
-                  <div class="mb-5">
-                    <label class="mb-3 block text-base font-medium ">
+                  <div className="mb-5">
+                    <label className="mb-3 block text-base font-medium ">
                       Which Exam?
                     </label>
                     <select
                       name="exam"
-                      class="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                      className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     >
                       {examsList.map((exam, index) => {
                         return (
@@ -210,19 +232,20 @@ export default function NewMaterialPage() {
               </div>
             )}
 
-            <div class="flex justify-center content-center mt-10">
+            <div className="flex justify-center content-center mt-10">
               <button
                 type="submit"
-                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+                disabled={isUploading}
+                className=" inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
               >
-                <span class="relative inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                <span className="inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    class="w-4 h-4 me-2"
+                    className="w-4 h-4 me-2"
                   >
                     <path
                       strokeLinecap="round"
@@ -236,9 +259,9 @@ export default function NewMaterialPage() {
               <button
                 type="button"
                 onClick={() => router.back()}
-                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+                className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
               >
-                <span class="relative inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                <span className="relative inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                   Cancel
                 </span>
               </button>

@@ -2,7 +2,7 @@
 
 export default function FileUploader({ file, setFile }) {
   const setHighlight = (isHighlighted) => {
-    const effect = "bg-[#00000010]";
+    const effect = "bg-[rgba(255,255,255,0.075)]";
     if (isHighlighted)
       document.getElementById("drag-area").classList.add(effect);
     else document.getElementById("drag-area").classList.remove(effect);
@@ -15,7 +15,7 @@ export default function FileUploader({ file, setFile }) {
   const dragOverHandler = dragEnterHandler;
   const dragLeaveHandler = (e) => {
     e.preventDefault();
-    setHighlight(true);
+    setHighlight(false);
   };
   const dropHandler = (e) => {
     e.preventDefault();
