@@ -26,9 +26,9 @@ const MaterialSchema = new Schema({
   referenceBookName: {
     type: String,
   },
-  // comments:{
-  //   type:[String]
-  // }
+  approvedBy: {
+    type: String,
+  }
 });
 
 export const Material = models.Material || model('Material', MaterialSchema);
