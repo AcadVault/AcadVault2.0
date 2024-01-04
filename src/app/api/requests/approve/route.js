@@ -1,26 +1,33 @@
-import { Material } from "@/models/material.model";
+import { ApprovedMaterial, UnapprovedMaterial } from "@/models/material.model";
 import { Request as MaterialRequest } from "@/models/request.model";
 import { NextResponse } from "next/server";
 import { moveFile } from "@/lib/drive-operations";
+import { connectMongoDB } from "@/lib/mongodb.config";
 
 export const POST = async (req) => {
   const { requestID, approverID } = await req.json();
 
   try {
+    await connectMongoDB('catalogue');
+
     const materialRequest = await MaterialRequest.findOne({ _id: requestID });
     if (!materialRequest) {
       return NextResponse.json({ success: false, error: 'Request not found' });
     }
 
-    const { fileID, courseName, materialType, exam, number, year, referenceBookName } = materialRequest.material;
-    const material = new Material({ fileID, courseName, materialType, exam, number, year, referenceBookName });
-    material.approvedBy = approverID;
-
-    materialRequest.material.approvedBy = approverID;
-    materialRequest.status = 'APPROVED';
     await moveFile(material.fileID, 'Requests', material.courseName);
+
+    const oldMaterial = await UnapprovedMaterial.findByIdAndDelete(materialRequest.material);
+    const { fileID, courseName, materialType, exam, number, year, referenceBookName } = oldMaterial;
+
+    const material = new ApprovedMaterial({ fileID, courseName, materialType, exam, number, year, referenceBookName });
+    material.approvedBy = approverID;
     await material.save();
+
+    materialRequest.status = 'APPROVED';
+    materialRequest.material = material._id;
     await materialRequest.save();
+    await materialRequest.populate('material');
 
     return NextResponse.json({ success: true, data: materialRequest });
   } catch (error) {

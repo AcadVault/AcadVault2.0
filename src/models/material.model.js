@@ -4,7 +4,6 @@ const MaterialSchema = new Schema({
   fileID: {
     type: String,
     required: true,
-    unique: true,
   },
   courseName: {
     type: String,
@@ -31,5 +30,6 @@ const MaterialSchema = new Schema({
   },
 }, { timestamps: true });
 
-export const Material = models.Material || model('Material', MaterialSchema);
+export const UnapprovedMaterial = models.UnapprovedMaterial || model('UnapprovedMaterial', MaterialSchema);
+export const ApprovedMaterial = models.ApprovedMaterial || model('ApprovedMaterial', MaterialSchema);
 export default MaterialSchema;

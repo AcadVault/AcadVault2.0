@@ -61,7 +61,6 @@ export default function NewMaterialPage() {
       e.target.reset();
       setFile(null);
       setIsUploading(false);
-      console.log(e.message);
       throw e;
     }
   };

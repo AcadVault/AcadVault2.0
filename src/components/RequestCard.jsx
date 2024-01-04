@@ -28,7 +28,12 @@ const RequestCard = (props) => {
         requestID: data._id,
         approverID: props.currentUser.email.split("@")[0],
       });
-      setData(response.data.data);
+      if (response.data.success) {
+        setData(response.data.data);
+      } else {
+        console.log(response.data.error);
+        throw { message: response.data.error };
+      }
       setIsProcessing(false);
     } catch (error) {
       console.log(error.message);
