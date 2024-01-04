@@ -11,7 +11,7 @@ const MaterialCard = ({ data }) => {
   };
 
   return (
-    <div className="w-11/12 mx-auto my-4 border border-gray-500 rounded-xl p-2 text-white backdrop backdrop-blur-sm bg-black bg-opacity-50 relative">
+    <div className="w-11/12 mx-auto my-3 border border-gray-500 rounded-xl p-2 text-white backdrop backdrop-blur-sm bg-black bg-opacity-50 relative">
       <div>
         <span className="text-gray-500">Course</span>
         <span className="text-gray-200 ml-1">{data.courseName}</span>
