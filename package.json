@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^2.0.9",
+    "@vercel/speed-insights": "^1.0.2",
     "axios": "^1.6.2",
     "dotenv": "^16.3.1",
     "googleapis": "^129.0.0",
