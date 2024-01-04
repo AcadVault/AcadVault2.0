@@ -7,7 +7,7 @@ import FileUploader from "@/components/FileUploader";
 import { EXAMS, MATERIALS } from "@/lib/constants";
 import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 export default function NewMaterialPage() {
   const session = useSession();
@@ -45,16 +45,25 @@ export default function NewMaterialPage() {
   if (coursesList.length === 0) return <Loading />;
 
   const uploadData = async (e) => {
-    const formData = new FormData(e.target);
-    formData.append("studentID", session.data.user.email.split("@")[0]);
-    formData.append("courseName", courseName);
-    formData.append("file", file);
-    formData.set("materialType", materialType);
-    setIsUploading(true);
-    const response = await axios.postForm("/api/material/request", formData);
-    e.target.reset();
-    setFile(null);
-    setIsUploading(false);
+    try {
+      const formData = new FormData(e.target);
+      formData.append("studentID", session.data.user.email.split("@")[0]);
+      formData.append("courseName", courseName);
+      formData.append("file", file);
+      formData.set("materialType", materialType);
+      setIsUploading(true);
+      const response = await axios.postForm("/api/requests", formData);
+      console.log(response.data);
+      e.target.reset();
+      setFile(null);
+      setIsUploading(false);
+    } catch (e) {
+      e.target.reset();
+      setFile(null);
+      setIsUploading(false);
+      console.log(e.message);
+      throw e;
+    }
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -66,7 +75,7 @@ export default function NewMaterialPage() {
       uploadData(e),
       {
         loading: "Uploading...",
-        success: <b>Material Requested Successfully</b>,
+        success: <b>Material requested successfully!</b>,
         error: <b>Could not upload</b>,
       },
       {
@@ -84,7 +93,6 @@ export default function NewMaterialPage() {
 
   return (
     <div className="left-0 top-0 -z-10 h-full w-full">
-      <Toaster position="top-center" reverseOrder={false} />
       <div className="flex items-center justify-center p-8 text-white">
         <div className="mx-auto w-full max-w-[750px]">
           <form onSubmit={handleSubmit}>
@@ -236,7 +244,7 @@ export default function NewMaterialPage() {
               <button
                 type="submit"
                 disabled={isUploading}
-                className=" inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+                className=" inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span className="inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                   <svg

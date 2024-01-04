@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { isAdmin, generateFilename, getExtention } from "@/lib/helper-functions";
+import { generateFilename, getExtention } from "@/lib/server-helper-functions";
 import { uploadFile } from "@/lib/drive-operations";
 import { Material } from "@/models/material.model";
 import { Request as MaterialRequest } from "@/models/request.model";
@@ -32,14 +32,14 @@ export const POST = async (req) => {
     const data = { studentID, courseName, materialType, year, number, exam, referenceBookName, file, requestTime };
     const fileName = `${generateFilename(data)}.${getExtention(file.name)}`;
 
-    const { id } = await uploadFile(file, 'Requests', fileName);
+    const { id, webViewLink } = await uploadFile(file, 'Requests', fileName);
     const fileID = id;
 
     await connectMongoDB('catalogue');
     const material = new Material({ fileID, courseName, materialType, exam, number, year, referenceBookName });
     const request = new MaterialRequest({ material, studentID, requestTime, status: "REQUESTED" })
     await request.save();
-    return NextResponse.json({ success: true, data: { ...data, fileID, fileName } });
+    return NextResponse.json({ success: true, data: { ...data, fileID, fileName, webViewLink } });
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message })
   }

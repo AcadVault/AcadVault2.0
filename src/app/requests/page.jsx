@@ -1,26 +1,37 @@
-import RequestCard from '@/components/RequestCard';
+"use client";
+
+import RequestCard from "@/components/RequestCard";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useSession } from "next-auth/react";
 
 function RequestsPage() {
-    const data = {
-        _id: '6589951370426ab9a1894bb8',
-        material: {
-            fileID: '1QpBoohu5j1DRhiKTrWwcVGQree2g-3Ci',
-            courseName: 'Design and Analysis of Algorithms',
-            materialType: 'Exam Question Paper',
-            exam: 'Insem-I',
-            year: 2019,
-            _id: '6589951370426ab9a1894bb7',
-        },
-        studentID: '202101048',
-        status: 'REQUESTED',
-        requestTime: '2023-12-25T14:43:28.256Z',
-        __v: 0,
+  const [data, setData] = useState([]);
+  const session = useSession();
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("/api/requests");
+      setData(response.data.data);
+    } catch (error) {
+      console.log(error.message);
     }
-    return (
-      <div class="left-0 top-0 -z-10 h-full w-full">
-        <RequestCard data={data} />
-      </div>
-    )
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  return (
+    <div className="left-0 top-0 -z-10 h-full w-full">
+      {data.map((request, index) => (
+        <RequestCard
+          data={request}
+          currentUser={session.data.user}
+          key={index}
+        />
+      ))}
+    </div>
+  );
 }
 
-export default RequestsPage
+export default RequestsPage;
