@@ -1,10 +1,12 @@
-import MaterialSchema from './material.model';
 import { Schema, models, model } from "mongoose";
 
 const RequestSchema = new Schema({
   material: {
-    type: MaterialSchema,
+    type: Schema.Types.ObjectId,
     required: true,
+    ref: function () {
+      return this.status === 'APPROVED' ? 'ApprovedMaterial' : 'UnapprovedMaterial';
+    }
   },
   studentID: {
     type: String,

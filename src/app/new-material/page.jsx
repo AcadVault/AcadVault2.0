@@ -53,7 +53,6 @@ export default function NewMaterialPage() {
       formData.set("materialType", materialType);
       setIsUploading(true);
       const response = await axios.postForm("/api/requests", formData);
-      console.log(response.data);
       e.target.reset();
       setFile(null);
       setIsUploading(false);
@@ -61,7 +60,6 @@ export default function NewMaterialPage() {
       e.target.reset();
       setFile(null);
       setIsUploading(false);
-      console.log(e.message);
       throw e;
     }
   };

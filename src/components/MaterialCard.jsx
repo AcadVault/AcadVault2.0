@@ -11,37 +11,37 @@ const MaterialCard = ({ data }) => {
   };
 
   return (
-    <div className="w-11/12 mx-auto my-4 border border-gray-500 rounded-xl p-2 text-white backdrop backdrop-blur-sm bg-black bg-opacity-50 relative">
-      <div>
-        <span className="text-gray-500">Course</span>
-        <span className="text-gray-200 ml-1">{data.courseName}</span>
+    <div className="w-11/12 mx-auto my-3 border border-gray-500 rounded-xl p-2 text-white backdrop backdrop-blur-sm bg-black bg-opacity-50 relative">
+      <div className="flex">
+        <div className="text-gray-500">Course</div>
+        <div className="text-gray-200 ml-1">{data.courseName}</div>
       </div>
-      <div>
-        <span className="text-gray-500">Material type</span>
-        <span className="text-gray-200 ml-1">{data.materialType}</span>
+      <div className="flex">
+        <div className="text-gray-500">Material type</div>
+        <div className="text-gray-200 ml-1">{data.materialType}</div>
       </div>
       {data.referenceBookName && (
         <div className="flex">
-          <span className="text-gray-500 whitespace-nowrap">Book name</span>
-          <span className="text-gray-200 ml-1">{data.referenceBookName}</span>
+          <div className="text-gray-500 whitespace-nowrap">Book name</div>
+          <div className="text-gray-200 ml-1">{data.referenceBookName}</div>
         </div>
       )}
       {data.exam && (
-        <div>
-          <span className="text-gray-500">Exam</span>
-          <span className="text-gray-200 ml-1">{data.exam}</span>
+        <div className="flex">
+          <div className="text-gray-500">Exam</div>
+          <div className="text-gray-200 ml-1">{data.exam}</div>
         </div>
       )}
       {data.number && (
-        <div>
-          <span className="text-gray-500">Assignment no.</span>
-          <span className="text-gray-200 ml-1">{data.number}</span>
+        <div className="flex">
+          <div className="text-gray-500">Assignment no.</div>
+          <div className="text-gray-200 ml-1">{data.number}</div>
         </div>
       )}
       {data.year && (
-        <div>
-          <span className="text-gray-500">Year</span>
-          <span className="text-gray-200 ml-1">{data.year}</span>
+        <div className="flex">
+          <div className="text-gray-500">Year</div>
+          <div className="text-gray-200 ml-1">{data.year}</div>
         </div>
       )}
       <div className="flex justify-between mt-2 align-bottom">

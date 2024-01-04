@@ -28,7 +28,11 @@ const RequestCard = (props) => {
         requestID: data._id,
         approverID: props.currentUser.email.split("@")[0],
       });
-      setData(response.data.data);
+      if (response.data.success) {
+        setData(response.data.data);
+      } else {
+        throw { message: response.data.error };
+      }
       setIsProcessing(false);
     } catch (error) {
       console.log(error.message);
@@ -59,7 +63,7 @@ const RequestCard = (props) => {
   };
 
   return (
-    <div className="w-11/12 md:w-4/5 mx-auto my-4 border border-gray-500 rounded-xl p-4 text-white backdrop backdrop-blur-sm bg-white bg-opacity-5">
+    <div className="w-11/12 text-xs md:w-3/4 md:text-base mx-auto my-6 border border-gray-500 rounded-xl p-4 text-white backdrop backdrop-blur-sm bg-white bg-opacity-5 relative">
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row">
           <div className="text-gray-500">Submitted by </div>

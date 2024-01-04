@@ -7,8 +7,11 @@ export default function Home() {
         <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
           AcadVault2.0
         </h1>
-        <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-          A living open-source repository of academic resources for DA-IICT
+        <p className="mb-6 text-lg font-medium text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+          A living open-source repository of{" "}
+          <span className="font-bold from-purple-600 via-pink-600 to-blue-600 bg-gradient-to-r bg-clip-text text-transparent">
+            Academic Resources for DA-IICT
+          </span>
         </p>
         <div className="flex flex-row">
           <a href="https://github.com/Acadvault/AcadVault2.0" target="_blank">

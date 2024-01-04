@@ -1,14 +1,14 @@
 import { NextResponse } from "next/server";
 import { generateFilename, getExtention } from "@/lib/server-helper-functions";
 import { uploadFile } from "@/lib/drive-operations";
-import { Material } from "@/models/material.model";
+import { UnapprovedMaterial, ApprovedMaterial } from "@/models/material.model";
 import { Request as MaterialRequest } from "@/models/request.model";
 import { connectMongoDB } from "@/lib/mongodb.config";
 
-export const GET = async (req) => {
+export const GET = async () => {
   try {
     await connectMongoDB('catalogue');
-    const requests = await MaterialRequest.find({});
+    const requests = await MaterialRequest.find({}).populate('material');
     return NextResponse.json({ success: true, data: requests })
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message })
@@ -27,17 +27,17 @@ export const POST = async (req) => {
     const number = formData.get('number') || undefined;
     const exam = formData.get('exam') || undefined;
     const referenceBookName = formData.get('referenceBookName') || undefined;
-    const requestTime = new Date();
 
-    const data = { studentID, courseName, materialType, year, number, exam, referenceBookName, file, requestTime };
+    const data = { studentID, courseName, materialType, year, number, exam, referenceBookName, file };
     const fileName = `${generateFilename(data)}.${getExtention(file.name)}`;
 
     const { id, webViewLink } = await uploadFile(file, 'Requests', fileName);
     const fileID = id;
 
     await connectMongoDB('catalogue');
-    const material = new Material({ fileID, courseName, materialType, exam, number, year, referenceBookName });
-    const request = new MaterialRequest({ material, studentID, requestTime, status: "REQUESTED" })
+    const material = new UnapprovedMaterial({ fileID, courseName, materialType, exam, number, year, referenceBookName });
+    await material.save();
+    const request = new MaterialRequest({ material: material._id, studentID, status: "REQUESTED" })
     await request.save();
     return NextResponse.json({ success: true, data: { ...data, fileID, fileName, webViewLink } });
   } catch (error) {
