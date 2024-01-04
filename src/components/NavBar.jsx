@@ -1,40 +1,68 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import { isAdmin as isEmailAdmin } from "@/lib/server-helper-functions";
+import { useEffect, useState } from "react";
+import { usePathname } from 'next/navigation'
 
 const NavBar = () => {
-    const session = useSession();
+  const session = useSession();
+  const [isAdmin, setIsAdmin] = useState(false);
+  const activeColor = '#7E57C2'
 
-    if (session.status === "unauthenticated") {
-        return (
-            <nav className="bg-transparent">
-                <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
-                    <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">AcadVault2.0</span>
-                    </a>
-                    <div className="flex items-center space-x-6 rtl:space-x-reverse">
-                        <a href="https://github.com/AcadVault/AcadVault2.0" target="_blank" className="text-sm  text-gray-500 dark:text-white hover:underline">Github</a>
-                        <a href="/login" className="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Login</a>
-                    </div>
-                </div>
-            </nav>
-        )
-    } else {
-        return (
-            <nav className="bg-transparent">
-                <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
-                    <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">AcadVault2.0</span>
-                    </a>
-                    <div className="flex items-center space-x-6 rtl:space-x-reverse">
-                        <a href="https://github.com/AcadVault/AcadVault2.0" target="_blank" className="text-sm  text-gray-500 dark:text-white hover:underline">Github</a>
-                        <a href="/me" className="text-sm  text-gray-500 dark:text-white hover:underline">Profile</a>
-                        <a href="/new-material" className="text-sm  text-gray-500 dark:text-white hover:underline">Upload</a>
-                    </div>
-                </div>
-            </nav>
-        )
+  useEffect(() => {
+    const comupteIsAdmin = async () => {
+      setIsAdmin(await isEmailAdmin(session.data.user.email));
+    };
+    if (session.status === "authenticated") {
+      comupteIsAdmin();
     }
-}
+  }, [session]);
 
-export default NavBar
+  const pathname = usePathname()
+
+  return (
+    <nav className="bg-transparent">
+      <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
+        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+            AcadVault2.0
+          </span>
+        </a>
+        <div className="flex items-center space-x-6 rtl:space-x-reverse">
+          {session.status === "unauthenticated" ? (''
+          ) : (
+            <>
+              <a
+                href="/new-material"
+                style={{color: pathname === '/new-material' ? `${activeColor}` : '',fontWeight: pathname === '/new-material' ? 'bold' : ''}}
+                className="text-sm text-[#FFFFFFA0] hover:text-blue-400 transition-all"
+              >
+                Upload
+              </a>
+
+              {isAdmin && (
+                <a 
+                href="/requests" 
+                style={{color: pathname === '/requests' ? `${activeColor}` : '',fontWeight: pathname === '/requests' ? 'bold' : ''}}
+                className="text-sm text-[#FFFFFFA0] hover:text-blue-400 transition-all" 
+                >
+                  Requests
+                </a>
+              )}
+              <a
+                href="/me"
+                style={{color: pathname === '/me' ? `${activeColor}` : '' ,fontWeight: pathname === '/me' ? 'bold' : ''}}
+                className="text-sm text-[#FFFFFFA0] hover:text-blue-400 transition-all"
+              >
+                Profile
+              </a>
+            </>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default NavBar;

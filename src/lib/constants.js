@@ -1,4 +1,6 @@
 export const ROOT_FOLDER_ID = process.env.DRIVE_ROOT_FOLDER_ID;
+export const MATERIALS_FOLDER_ID = process.env.DRIVE_MATERIALS_FOLDER_ID;
+export const REQUESTS_FOLDER_ID = process.env.DRIVE_REQUESTS_FOLDER_ID;
 
 export const EXAMS = {
   INSEM1: 'Insem-I',

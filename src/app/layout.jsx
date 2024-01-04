@@ -4,6 +4,7 @@ const inter = Inter({ subsets: ["latin"] });
 import SessionProvider from "@/components/SessionProvider";
 import Redirecter from "@/components/Redirecter";
 import Navbar from "@/components/NavBar";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "AcadVault 2.0",
@@ -22,6 +23,7 @@ export default async function RootLayout({ children }) {
         </div>
         <SessionProvider>
           <Redirecter>
+            <Toaster position="top-center" reverseOrder={false} />
             <Navbar />
             {children}
           </Redirecter>
