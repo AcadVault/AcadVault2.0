@@ -31,7 +31,6 @@ const RequestCard = (props) => {
       if (response.data.success) {
         setData(response.data.data);
       } else {
-        console.log(response.data.error);
         throw { message: response.data.error };
       }
       setIsProcessing(false);
@@ -64,7 +63,7 @@ const RequestCard = (props) => {
   };
 
   return (
-    <div className="w-11/12 text-xs md:w-3/4 md:text-base mx-auto my-6 border border-gray-500 rounded-xl p-4 text-white backdrop backdrop-blur-sm bg-black bg-opacity-10 relative">
+    <div className="w-11/12 text-xs md:w-3/4 md:text-base mx-auto my-6 border border-gray-500 rounded-xl p-4 text-white backdrop backdrop-blur-sm bg-white bg-opacity-5 relative">
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row">
           <div className="text-gray-500">Submitted by </div>

@@ -15,7 +15,6 @@ export const POST = async (req) => {
       return NextResponse.json({ success: false, error: 'Request not found' });
     }
 
-    await moveFile(material.fileID, 'Requests', material.courseName);
 
     const oldMaterial = await UnapprovedMaterial.findByIdAndDelete(materialRequest.material);
     const { fileID, courseName, materialType, exam, number, year, referenceBookName } = oldMaterial;
@@ -29,6 +28,7 @@ export const POST = async (req) => {
     await materialRequest.save();
     await materialRequest.populate('material');
 
+    await moveFile(material.fileID, 'Requests', material.courseName);
     return NextResponse.json({ success: true, data: materialRequest });
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message });
