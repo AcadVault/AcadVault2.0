@@ -1,6 +1,8 @@
 "use client";
+import { formatDate } from "@/lib/client-helper-functions";
 
 const MaterialCard = ({ data }) => {
+  const formattedTime = formatDate(data.createdAt);
   const handleOpenFile = async () => {
     try {
       const webViewLink = `https://drive.google.com/file/d/${data.fileID}/view`;
@@ -11,7 +13,7 @@ const MaterialCard = ({ data }) => {
   };
 
   return (
-    <div className="w-11/12 mx-auto my-3 border border-gray-500 rounded-xl p-2 text-white backdrop backdrop-blur-sm bg-black bg-opacity-50 relative">
+    <div className="w-11/12 mx-auto my-3 border border-gray-500 rounded-xl p-3 text-white backdrop backdrop-blur-sm bg-black bg-opacity-50">
       <div className="flex">
         <div className="text-gray-500">Course</div>
         <div className="text-gray-200 ml-1">{data.courseName}</div>
@@ -53,8 +55,15 @@ const MaterialCard = ({ data }) => {
         </button>
         {data.approvedBy && (
           <div className="flex flex-col justify-end">
-            <div className="text-gray-500 text-sm">
-              {`✅Approved by ${data.approvedBy}`}
+            <div className="flex text-gray-500 text-sm">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+                </svg>
+              </span>
+              <span>
+                {`Approved on ${formattedTime}`}
+              </span>
             </div>
           </div>
         )}
