@@ -8,6 +8,7 @@ export const GET = async (request) => {
     const courseName = searchParams.get('courseName');
     await connectMongoDB('catalogue'); 
     if (!courseName) throw { message: "courseName isn't provided" }
+    await connectMongoDB('catalogue');
     const data = courseName === "*" ? await Course.find({}).sort({ courseName: 1 }) : await Course.findOne({ courseName });
     return NextResponse.json({ success: true, data })
   }

@@ -23,7 +23,7 @@ const BrowseMaterialPage = () => {
         {allCourses.map(({ courseName }, index) => {
           return (
             <div key={index}>
-              <a href={`/browse-material/${courseName}`}>
+              <a href={`/browse/${courseName}`}>
                 <div className="bg-[#c45fff50] mx-2 my-1 hover:bg-[#c96bffbd] px-5 py-3 text-[#ffffff] text-lg rounded-lg">
                   <h1>{courseName}</h1>
                 </div>

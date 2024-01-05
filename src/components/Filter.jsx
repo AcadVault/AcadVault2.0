@@ -1,7 +1,14 @@
 "use client";
 
 import { useState } from "react";
-const Filter = ({ filter, setFilter }) => {
+
+const Filter = () => {
+  const [filter, setFilter] = useState({
+    courseName: "",
+    exam: false,
+    assignment: false,
+    referenceBook: false,
+  });
   const handleCheckboxChange = (e) => {
     const { id, checked } = e.target;
     setFilter({ ...filter, [id]: checked });
