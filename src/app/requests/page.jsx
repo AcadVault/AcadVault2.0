@@ -23,13 +23,15 @@ function RequestsPage() {
 
   return (
     <div className="left-0 top-0 -z-10 h-full w-full">
-      {data.map((request, index) => (
-        <RequestCard
-          data={request}
-          currentUser={session.data.user}
-          key={index}
-        />
-      ))}
+      <div className="w-full h-full mt-10">
+        {data.map((request, index) => (
+          <RequestCard
+            data={request}
+            currentUser={session.data.user}
+            key={index}
+          />
+        ))}
+      </div>
     </div>
   );
 }
