@@ -2,7 +2,6 @@
 
 import RequestCard from "@/components/RequestCard";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useSession } from "next-auth/react";
 
 function RequestsPage() {
@@ -11,8 +10,9 @@ function RequestsPage() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("/api/requests");
-      setData(response.data.data);
+      const response = await fetch("/api/requests");
+      const { data } = await response.json();
+      setData(data);
     } catch (error) {
       console.log(error.message);
     }

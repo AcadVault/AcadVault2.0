@@ -2,7 +2,6 @@
 
 import MaterialCard from "@/components/MaterialCard";
 import { formatDate } from "@/lib/client-helper-functions";
-import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -24,14 +23,22 @@ const RequestCard = (props) => {
   const approveRequest = async () => {
     try {
       setIsProcessing(true);
-      const response = await axios.post("/api/requests/approve", {
-        requestID: data._id,
-        approverID: props.currentUser.email.split("@")[0],
+      const response = await fetch("/api/requests/approve", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          requestID: data._id,
+          approverID: props.currentUser.email.split("@")[0],
+        }),
       });
-      if (response.data.success) {
-        setData(response.data.data);
+
+      const res = await response.json();
+      if (res.success) {
+        setData(res.data);
       } else {
-        throw { message: response.data.error };
+        throw new Error(res.error);
       }
       setIsProcessing(false);
     } catch (error) {

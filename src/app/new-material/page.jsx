@@ -1,6 +1,5 @@
 "use client";
 
-import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import FileUploader from "@/components/FileUploader";
@@ -29,10 +28,9 @@ export default function NewMaterialPage() {
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get("api/courses", {
-        params: { courseName: "*" },
-      });
-      setCoursesList(response.data.data);
+      const response = await fetch("api/courses?courseName=*");
+      const data = await response.json();
+      setCoursesList(data.data);
     } catch (e) {
       console.log(e);
     }
@@ -52,7 +50,10 @@ export default function NewMaterialPage() {
       formData.append("file", file);
       formData.set("materialType", materialType);
       setIsUploading(true);
-      const response = await axios.postForm("/api/requests", formData);
+      await fetch("/api/requests", {
+        method: "POST",
+        body: formData,
+      });
       e.target.reset();
       setFile(null);
       setIsUploading(false);

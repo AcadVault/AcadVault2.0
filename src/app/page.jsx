@@ -1,6 +1,6 @@
 "use client";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <div className="fixed left-0 top-0 -z-10 h-full w-full">
       <div className="relative flex flex-col items-center justify-center h-full text-center content-center">
