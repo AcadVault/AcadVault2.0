@@ -110,10 +110,10 @@ export default function NewMaterialPage() {
                 onChange={(e) => setCourseName(e.target.value)}
               >
                 {[
-                  ...coursesList.map(({ name }, index) => {
+                  ...coursesList.map(({ courseName }, index) => {
                     return (
-                      <option value={name} key={index}>
-                        {name}
+                      <option value={courseName} key={index}>
+                        {courseName}
                       </option>
                     );
                   }),
