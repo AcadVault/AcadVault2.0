@@ -7,6 +7,7 @@ import { EXAMS, MATERIALS } from "@/lib/constants";
 import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
 import { toast } from "react-hot-toast";
+import { PiUploadSimpleBold } from "react-icons/pi";
 
 export default function NewMaterialPage() {
   const session = useSession();
@@ -140,23 +141,15 @@ export default function NewMaterialPage() {
               <label className="mb-3 block text-base font-medium ">
                 Which type of material is it?
               </label>
-              <div className="grid grid-cols-2 grid-flow-row">
+              <div className="grid grid-cols-2 grid-flow-row gap-4">
                 {materialsList.map((_materialType, index) => {
                   return (
                     <div className="w-full" key={index}>
-                      <input
-                        id={_materialType}
-                        type="radio"
-                        name="materialType"
-                        className="h-3 w-3"
-                        defaultChecked={index === 0}
-                        onChange={(e) => setMaterialType(_materialType)}
-                      />
-                      <label
-                        htmlFor={_materialType}
-                        className="pl-3 text-base font-normal "
-                      >
-                        {_materialType}
+                      <input id={_materialType} type="radio" name="materialType" className="hidden peer" defaultChecked={index === 0} onChange={(e) => setMaterialType(_materialType)} />
+                      <label htmlFor={_materialType} className="inline-flex w-full py-4 px-2 text-gray-500 justify-center bg-transparent backdrop backdrop-blur-sm outline outline-gray-200 outline-1 rounded-lg cursor-pointer peer-checked:outline-[#1c6bfeb3] peer-checked:outline-4 peer-checked:bg-[#4385ff23] peer-checked:text-blue-600 hover:text-gray-600" >
+                        <div className="block">
+                          <div className="w-full text-lg font-semibold">{_materialType}</div>
+                        </div>
                       </label>
                     </div>
                   );
@@ -198,44 +191,44 @@ export default function NewMaterialPage() {
                 </div>
                 {(materialType === MATERIALS.ASSIGNMENT_QUESTIONS ||
                   materialType === MATERIALS.ASSIGNMENT_SOLUTION) && (
-                  <div className="mb-5">
-                    <label className="mb-3 block text-base font-medium ">
-                      Which Lab/Tutorial?
-                    </label>
-                    <select
-                      name="number"
-                      className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                    >
-                      {[...Array(12).keys()].map((i) => {
-                        return (
-                          <option value={i + 1} key={i + 1}>
-                            {i + 1}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
-                )}
+                    <div className="mb-5">
+                      <label className="mb-3 block text-base font-medium ">
+                        Which Lab/Tutorial?
+                      </label>
+                      <select
+                        name="number"
+                        className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                      >
+                        {[...Array(12).keys()].map((i) => {
+                          return (
+                            <option value={i + 1} key={i + 1}>
+                              {i + 1}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+                  )}
                 {(materialType === MATERIALS.EXAM_QUESTION_PAPER ||
                   materialType === MATERIALS.EXAM_PAPER_SOLUTION) && (
-                  <div className="mb-5">
-                    <label className="mb-3 block text-base font-medium ">
-                      Which Exam?
-                    </label>
-                    <select
-                      name="exam"
-                      className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                    >
-                      {examsList.map((exam, index) => {
-                        return (
-                          <option value={exam} key={index}>
-                            {exam}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
-                )}
+                    <div className="mb-5">
+                      <label className="mb-3 block text-base font-medium ">
+                        Which Exam?
+                      </label>
+                      <select
+                        name="exam"
+                        className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                      >
+                        {examsList.map((exam, index) => {
+                          return (
+                            <option value={exam} key={index}>
+                              {exam}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+                  )}
               </div>
             )}
 
@@ -246,20 +239,7 @@ export default function NewMaterialPage() {
                 className=" inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span className="inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-4 h-4 me-2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
-                    />
-                  </svg>
+                  <PiUploadSimpleBold className="w-4 h-4 me-2" />
                   Submit
                 </span>
               </button>

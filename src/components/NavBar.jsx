@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { isAdmin as isEmailAdmin } from "@/lib/server-helper-functions";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { FaRegUserCircle } from "react-icons/fa";
 
 const NavBar = () => {
   const session = useSession();
@@ -76,7 +77,7 @@ const NavBar = () => {
                 }}
                 className="text-sm text-[#FFFFFFA0] hover:text-blue-400 transition-all"
               >
-                Profile
+                <FaRegUserCircle className="inline-block w-5 h-5 me-1" /> 
               </a>
             </>
           )}
