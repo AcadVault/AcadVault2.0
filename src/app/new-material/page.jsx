@@ -145,10 +145,22 @@ export default function NewMaterialPage() {
                 {materialsList.map((_materialType, index) => {
                   return (
                     <div className="w-full" key={index}>
-                      <input id={_materialType} type="radio" name="materialType" className="hidden peer" defaultChecked={index === 0} onChange={(e) => setMaterialType(_materialType)} />
-                      <label htmlFor={_materialType} className="inline-flex w-full py-4 px-2 text-gray-500 justify-center bg-transparent backdrop backdrop-blur-sm outline outline-gray-200 outline-1 rounded-lg cursor-pointer peer-checked:outline-[#1c6bfeb3] peer-checked:outline-4 peer-checked:bg-[#4385ff23] peer-checked:text-blue-600 hover:text-gray-600" >
+                      <input
+                        id={_materialType}
+                        type="radio"
+                        name="materialType"
+                        className="hidden peer"
+                        defaultChecked={index === 0}
+                        onChange={(e) => setMaterialType(_materialType)}
+                      />
+                      <label
+                        htmlFor={_materialType}
+                        className="inline-flex w-full py-4 px-2 text-gray-500 justify-center bg-transparent backdrop backdrop-blur-sm outline outline-gray-200 outline-1 rounded-lg cursor-pointer peer-checked:outline-[#1c6bfeb3] peer-checked:outline-4 peer-checked:bg-[#4385ff23] peer-checked:text-blue-600 hover:text-gray-600"
+                      >
                         <div className="block">
-                          <div className="w-full text-lg font-semibold">{_materialType}</div>
+                          <div className="w-full text-lg font-semibold">
+                            {_materialType}
+                          </div>
                         </div>
                       </label>
                     </div>

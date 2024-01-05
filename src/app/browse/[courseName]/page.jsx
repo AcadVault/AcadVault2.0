@@ -2,9 +2,13 @@ import { MATERIAL_CATEGORIES } from "@/lib/constants";
 
 const page = ({ params }) => {
   const courseName = decodeURIComponent(params.courseName);
+  const materialCategoryList = [];
+  for (const key in MATERIAL_CATEGORIES)
+    materialCategoryList.push(MATERIAL_CATEGORIES[key]);
+
   return (
-    <div className="w-2/3 mx-auto">
-      {/* {MATERIAL_CATEGORIES.map((category, index) => {
+    <div className="flex flex-col w-2/3 mx-auto">
+      {materialCategoryList.map((category, index) => {
         return (
           <a
             key={index}
@@ -14,7 +18,7 @@ const page = ({ params }) => {
             {category}
           </a>
         );
-      })} */}
+      })}
     </div>
   );
 };
