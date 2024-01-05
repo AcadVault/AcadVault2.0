@@ -28,7 +28,7 @@ const MaterialResultsPage = ({ params }) => {
   }, [filter]);
 
   return (
-    <div className="flex flex-col mx-auto w-2/3">
+    <div className="flex flex-col mx-auto w-11/12 md:w-4/5">
       {data.map((material, index) => {
         return <MaterialCard key={index} data={material} />;
       })}
