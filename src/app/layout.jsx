@@ -5,6 +5,7 @@ import SessionProvider from "@/components/SessionProvider";
 import Redirecter from "@/components/Redirecter";
 import Navbar from "@/components/NavBar";
 import { Toaster } from "react-hot-toast";
+import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata = {
@@ -16,6 +17,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.class}>
+        <Analytics />
         <SpeedInsights />
         <div className="fixed left-0 top-0 -z-10 h-full w-full">
           <div className="relative h-full w-full bg-slate-950">
