@@ -3,7 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import FileUploader from "@/components/FileUploader";
-import { EXAMS, MATERIALS } from "@/lib/constants";
+import { EXAMS, MATERIAL_TYPES } from "@/lib/constants";
 import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
 import { toast } from "react-hot-toast";
@@ -18,7 +18,7 @@ export default function NewMaterialPage() {
   const examsList = [];
   const [coursesList, setCoursesList] = useState([]);
 
-  for (const key in MATERIALS) materialsList.push(MATERIALS[key]);
+  for (const key in MATERIAL_TYPES) materialsList.push(MATERIAL_TYPES[key]);
   for (const key in EXAMS) examsList.push(EXAMS[key]);
   for (let i = 2019; i <= new Date().getFullYear(); i++) yearsList.push(i);
 
@@ -164,7 +164,7 @@ export default function NewMaterialPage() {
               </div>
             </div>
 
-            {materialType === MATERIALS.REFERENCE_BOOK ? (
+            {materialType === MATERIAL_TYPES.REFERENCE_BOOK ? (
               <div className="mb-5">
                 <label className="mb-3 block text-base font-medium ">
                   Reference Book Name
@@ -196,8 +196,8 @@ export default function NewMaterialPage() {
                     })}
                   </select>
                 </div>
-                {(materialType === MATERIALS.ASSIGNMENT_QUESTIONS ||
-                  materialType === MATERIALS.ASSIGNMENT_SOLUTION) && (
+                {(materialType === MATERIAL_TYPES.ASSIGNMENT_QUESTIONS ||
+                  materialType === MATERIAL_TYPES.ASSIGNMENT_SOLUTION) && (
                   <div className="mb-5">
                     <label className="mb-3 block text-base font-medium ">
                       Which Lab/Tutorial?
@@ -216,8 +216,8 @@ export default function NewMaterialPage() {
                     </select>
                   </div>
                 )}
-                {(materialType === MATERIALS.EXAM_QUESTION_PAPER ||
-                  materialType === MATERIALS.EXAM_PAPER_SOLUTION) && (
+                {(materialType === MATERIAL_TYPES.EXAM_QUESTION_PAPER ||
+                  materialType === MATERIAL_TYPES.EXAM_PAPER_SOLUTION) && (
                   <div className="mb-5">
                     <label className="mb-3 block text-base font-medium ">
                       Which Exam?

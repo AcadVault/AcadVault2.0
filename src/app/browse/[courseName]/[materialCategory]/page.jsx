@@ -4,8 +4,11 @@ import { useState, useEffect } from "react";
 import MaterialCard from "@/components/MaterialCard";
 
 const MaterialResultsPage = ({ params }) => {
+  const { materialCategory } = params;
   const courseName = decodeURIComponent(params.courseName);
+
   const [data, setData] = useState([]);
+  console.log(params);
   const [filter, setFilter] = useState({ courseName });
 
   useEffect(() => {

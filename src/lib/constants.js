@@ -8,10 +8,16 @@ export const EXAMS = {
   MIDSEM: 'Midsem',
   ENDSEM: 'Endsem'
 };
-export const MATERIALS = {
+export const MATERIAL_TYPES = {
   ASSIGNMENT_QUESTIONS: "Assignment Questions",
   ASSIGNMENT_SOLUTION: "Assignment Solution",
   EXAM_QUESTION_PAPER: "Exam Question Paper",
   EXAM_PAPER_SOLUTION: "Exam Paper Solution",
   REFERENCE_BOOK: "Reference Book",
 };
+export const MATERIAL_CATEGORIES = {
+  EXAMS: "Exams",
+  ASSIGNMENTS: "Assignments",
+  REFERENCE_BOOKS: "Reference Books",
+};
+

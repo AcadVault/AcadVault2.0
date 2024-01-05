@@ -35,11 +35,10 @@ const NavBar = () => {
           ) : (
             <>
               <a
-                href="/browse-material"
+                href="/browse"
                 style={{
-                  color:
-                    pathname === "/browse-material" ? `${activeColor}` : "",
-                  fontWeight: pathname === "/browse-material" ? "bold" : "",
+                  color: pathname === "/browse" ? `${activeColor}` : "",
+                  fontWeight: pathname === "/browse" ? "bold" : "",
                 }}
                 className="text-sm text-[#FFFFFFA0] hover:text-blue-400 transition-all"
               >
