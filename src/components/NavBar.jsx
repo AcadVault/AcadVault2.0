@@ -9,7 +9,7 @@ import { FaRegUserCircle } from "react-icons/fa";
 const NavBar = () => {
   const session = useSession();
   const [isAdmin, setIsAdmin] = useState(false);
-  const activeColor = "#7E57C2";
+  const activeColor = "#A97AFF";
 
   useEffect(() => {
     const comupteIsAdmin = async () => {
@@ -76,7 +76,7 @@ const NavBar = () => {
                 }}
                 className="text-sm text-[#FFFFFFA0] hover:text-blue-400 transition-all"
               >
-                <FaRegUserCircle className="inline-block w-5 h-5 me-1" /> 
+                <FaRegUserCircle className="inline-block w-5 h-5 me-1" />
               </a>
             </>
           )}
