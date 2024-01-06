@@ -10,6 +10,9 @@ const CourseSchema = new Schema({
     type: String,
     required: true,
   },
+  categoryCode: {
+    type: String,
+  },
 });
 
 export const Course = models.Course || model('Course', CourseSchema);
