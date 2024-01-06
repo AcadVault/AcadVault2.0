@@ -7,18 +7,16 @@ const page = ({ params }) => {
     materialCategoryList.push(MATERIAL_CATEGORIES[key]);
 
   return (
-    <div className="flex flex-col w-2/3 mx-auto">
-      {materialCategoryList.map((category, index) => {
-        return (
-          <a
-            key={index}
-            href={`/browse/${courseName}/${category}`}
-            className="px-5 py-5 my-2 bg-[#ffffff] bg-opacity-25 hover:bg-opacity-40 font-bold text-white rounded-xl"
-          >
-            {category}
-          </a>
-        );
-      })}
+    <div className="left-0 top-0 -z-10 h-full w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 grid-flow-row mx-auto w-11/12 sm:w-4/5 md:w-2/3 gap-4 mt-10">
+        {materialCategoryList.map((category, index) => {
+          return (
+            <a key={index} href={`/browse/${courseName}/${category}`} className="bg-[rgb(246,245,245)] bg-opacity-5 backdrop-filter backdrop-blur-sm hover:outline rounded-lg transition ease-in-out duration-300 p-5 text-[#ffffff] text-lg hover:outline-2 hover:outline-gray-50 hover:bg-opacity-10 transform hover:-translate-y-1 text-center" >
+              {category}
+            </a>
+          );
+        })}
+      </div>
     </div>
   );
 };

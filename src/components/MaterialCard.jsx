@@ -14,7 +14,7 @@ const MaterialCard = ({ data }) => {
   };
 
   return (
-    <div className="w-11/12 mx-auto my-3 border border-gray-500 rounded-xl p-3 text-white backdrop backdrop-blur-sm bg-black bg-opacity-50">
+    <div className="w-11/12 mx-auto my-3 bg-[rgb(0,0,0)] bg-opacity-25 backdrop-filter backdrop-blur-sm outline outline-1 outline-gray-500 rounded-lg transition ease-in-out duration-300 p-3 text-[#ffffff]">
       <div className="flex">
         <div className="text-gray-500">Course</div>
         <div className="text-gray-200 ml-1">{data.courseName}</div>

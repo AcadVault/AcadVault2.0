@@ -12,7 +12,7 @@ const LoginPage = () => {
           AcadVault2.0
         </h1>
         <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-          A living open-source repository of <span className="font-bold from-purple-600 via-pink-600 to-blue-600 bg-gradient-to-r bg-clip-text text-transparent">academic resources for DA-IICT</span>
+          A living open-source repository of academic resources for DA-IICT
         </p>
         <div className="flex flex-row">
           <a href="https://github.com/Acadvault/AcadVault2.0" target="_blank">

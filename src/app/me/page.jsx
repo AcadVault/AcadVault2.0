@@ -10,7 +10,7 @@ const ProfilePage = () => {
     <div className="fixed left-0 top-0 -z-10 h-full w-full">
       <div className="flex items-center justify-center h-full">
         <div className="container mx-auto ">
-          <div className="text-white bg-transparent backdrop-blur-sm bg-opacity-10 border border-gray-500 relative shadow rounded-lg w-5/6 md:w-5/6 lg:w-4/6 xl:w-3/6 mx-auto py-5 px-5">
+          <div className="relative bg-[rgb(246,245,245)] bg-opacity-5 backdrop-filter backdrop-blur-sm outline outline-1 outline-gray-500 rounded-lg transition ease-in-out duration-300 p-3 text-[#ffffff] w-11/12 md:w-5/6 lg:w-4/6 xl:w-3/6 mx-auto py-5 px-5">
             <div className="flex justify-center">
               <Image
                 src={session.data.user.image}

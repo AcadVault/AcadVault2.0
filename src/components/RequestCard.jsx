@@ -70,7 +70,7 @@ const RequestCard = (props) => {
   };
 
   return (
-    <div className="w-11/12 text-xs md:w-3/4 md:text-base mx-auto my-6 border border-gray-500 rounded-xl p-4 text-white backdrop backdrop-blur-sm bg-white bg-opacity-5 relative">
+    <div className="w-11/12 text-xs md:w-3/4 md:text-base mx-auto my-6 bg-[rgb(246,245,245)] bg-opacity-5 backdrop-filter backdrop-blur-sm outline outline-1 outline-gray-500 rounded-lg transition ease-in-out duration-300 p-3 text-[#ffffff]">
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row">
           <div className="text-gray-500">Submitted by </div>
