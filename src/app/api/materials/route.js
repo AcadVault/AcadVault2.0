@@ -6,7 +6,6 @@ import { MATERIAL_TYPES, MATERIAL_CATEGORIES } from '@/lib/constants';
 export const GET = async (request) => {
   try {
     const { searchParams } = request.nextUrl;
-    console.log(searchParams);
     const courseName = searchParams.get('courseName');
     let materialType = searchParams.get('materialType');
     const exam = searchParams.get('exam');
@@ -17,6 +16,8 @@ export const GET = async (request) => {
       materialType = { $in: [MATERIAL_TYPES.EXAM_QUESTION_PAPER, MATERIAL_TYPES.EXAM_PAPER_SOLUTION] };
     } else if (materialCategory === MATERIAL_CATEGORIES.ASSIGNMENTS) {
       materialType = { $in: [MATERIAL_TYPES.ASSIGNMENT_QUESTIONS, MATERIAL_TYPES.ASSIGNMENT_SOLUTION] };
+    } else if (materialCategory === MATERIAL_CATEGORIES.LECTURES) {
+      materialType = { $in: [MATERIAL_TYPES.LECTURE_SLIDES, MATERIAL_TYPES.HANDWRITTEN_NOTES] };
     } else if (materialCategory === MATERIAL_CATEGORIES.REFERENCE_BOOKS) {
       materialType = MATERIAL_TYPES.REFERENCE_BOOK;
     }
@@ -27,7 +28,6 @@ export const GET = async (request) => {
         delete filterObject[key];
       }
     }
-    console.log(filterObject);
     await connectMongoDB('catalogue');
     const data = await ApprovedMaterial.find(filterObject);
     return NextResponse.json({ success: true, data })

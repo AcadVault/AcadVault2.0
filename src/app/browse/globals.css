@@ -1,0 +1,27 @@
+.card-text-0 {
+  @apply text-4xl lg:text-5xl font-extrabold;
+}
+
+.card-text-1 {
+  @apply text-3xl lg:text-4xl font-bold;
+}
+
+.card-text-2 {
+  @apply text-2xl lg:text-3xl font-bold;
+}
+
+.card-text-3 {
+  @apply text-xl lg:text-2xl font-normal;
+}
+
+.card-text-4 {
+  @apply text-lg lg:text-xl opacity-90;
+}
+
+.card-text-5 {
+  @apply text-xs lg:text-base font-light opacity-75;
+}
+
+.card-text-6 {
+  @apply text-xs lg:text-sm font-extralight opacity-70;
+}

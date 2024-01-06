@@ -9,7 +9,8 @@ import { FaRegUserCircle } from "react-icons/fa";
 const NavBar = () => {
   const session = useSession();
   const [isAdmin, setIsAdmin] = useState(false);
-  const activeColor = "#7E57C2";
+  const activeColor = "#A97AFF";
+  const pathname = usePathname();
 
   useEffect(() => {
     const comupteIsAdmin = async () => {
@@ -19,8 +20,6 @@ const NavBar = () => {
       comupteIsAdmin();
     }
   }, [session]);
-
-  const pathname = usePathname();
 
   return (
     <nav className="bg-transparent">
@@ -38,7 +37,7 @@ const NavBar = () => {
               <a
                 href="/browse"
                 style={{
-                  color: pathname === "/browse" ? `${activeColor}` : "",
+                  color: pathname.includes("/browse") ? `${activeColor}` : "",
                   fontWeight: pathname === "/browse" ? "bold" : "",
                 }}
                 className="text-sm text-[#FFFFFFA0] hover:text-blue-400 transition-all"
@@ -76,7 +75,7 @@ const NavBar = () => {
                 }}
                 className="text-sm text-[#FFFFFFA0] hover:text-blue-400 transition-all"
               >
-                <FaRegUserCircle className="inline-block w-5 h-5 me-1" /> 
+                <FaRegUserCircle className="inline-block w-5 h-5 me-1" />
               </a>
             </>
           )}

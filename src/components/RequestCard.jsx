@@ -40,11 +40,37 @@ const RequestCard = (props) => {
       } else {
         throw new Error(res.error);
       }
-      setIsProcessing(false);
     } catch (error) {
       console.log(error.message);
-      setIsProcessing(false);
       throw error;
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+  const rejectRequest = async () => {
+    try {
+      setIsProcessing(true);
+      const response = await fetch("/api/requests/reject", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          requestID: data._id,
+        }),
+      });
+
+      const res = await response.json();
+      if (res.success) {
+        setData(res.data);
+      } else {
+        throw new Error(res.error);
+      }
+    } catch (error) {
+      console.log(error.message);
+      throw error;
+    } finally {
+      setIsProcessing(false);
     }
   };
 
@@ -69,8 +95,29 @@ const RequestCard = (props) => {
     );
   };
 
+  const handleReject = async () => {
+    toast.promise(
+      rejectRequest(),
+      {
+        loading: "Rejecting...",
+        success: <b>Material requested rejected successfully!</b>,
+        error: <b>Could not reject</b>,
+      },
+      {
+        success: {
+          duration: 2000,
+          icon: "👏",
+        },
+        error: {
+          duration: 2000,
+          icon: "😞",
+        },
+      }
+    );
+  };
+
   return (
-    <div className="w-11/12 text-xs md:w-3/4 md:text-base mx-auto my-6 bg-[rgb(246,245,245)] bg-opacity-5 backdrop-filter backdrop-blur-sm outline outline-1 outline-gray-500 rounded-lg transition ease-in-out duration-300 p-3 text-[#ffffff]">
+    <div className="text-xs md:text-base border border-gray-500 rounded-xl p-4 text-white backdrop backdrop-blur-sm bg-white bg-opacity-5">
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row">
           <div className="text-gray-500">Submitted by </div>
@@ -90,15 +137,26 @@ const RequestCard = (props) => {
         <div className="flex flex-col justify-end">
           <div className="text-gray-500">Posted on {formattedRequestTime}</div>
         </div>
-        {data.status !== "APPROVED" && (
-          <button
-            onClick={handleApprove}
-            className="bg-[#39b03f] hover:bg-[#60e162] text-white font-semibold py-1.5 px-4 ml-3 rounded disabled:bg-opacity-50 disabled:cursor-not-allowed"
-            disabled={isProcessing}
-          >
-            Approve
-          </button>
-        )}
+        <div>
+          {data.status !== "APPROVED" && (
+            <button
+              onClick={handleApprove}
+              className="bg-[#39b03f] hover:bg-[#60e162] text-white font-semibold py-1.5 px-4 ml-3 rounded disabled:bg-opacity-50 disabled:cursor-not-allowed"
+              disabled={isProcessing}
+            >
+              Approve
+            </button>
+          )}
+          {data.status !== "REJECTED" && (
+            <button
+              onClick={handleReject}
+              className="bg-[#da3636] hover:bg-[#ff6262] text-white font-semibold py-1.5 px-4 ml-3 rounded disabled:bg-opacity-50 disabled:cursor-not-allowed"
+              disabled={isProcessing}
+            >
+              Reject
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
