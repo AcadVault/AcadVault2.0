@@ -1,12 +1,22 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
-  theme: {
-    extend: {},
+import defaultTheme from 'tailwindcss/defaultTheme'
+import colors from 'tailwindcss/colors'
+
+export const content = [
+  './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+  './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+  './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+]
+export const theme = {
+  colors: {
+    ...colors,
+    primary: '#020617',
+    secondary: '#FFD990',
   },
-  plugins: [],
+  screens: {
+    ...defaultTheme.screens,
+    xs: '320px',
+  },
+  extend: {}
 }
+export const plugins = []

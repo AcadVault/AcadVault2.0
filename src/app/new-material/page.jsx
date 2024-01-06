@@ -47,22 +47,24 @@ export default function NewMaterialPage() {
     try {
       const formData = new FormData(e.target);
       formData.append("studentID", session.data.user.email.split("@")[0]);
-      formData.append("courseName", courseName);
       formData.append("file", file);
       formData.set("materialType", materialType);
       setIsUploading(true);
-      await fetch("/api/requests", {
+      const response = await fetch("/api/requests", {
         method: "POST",
         body: formData,
       });
-      e.target.reset();
-      setFile(null);
-      setIsUploading(false);
+      const data = await response.json();
+      if (!data.success) throw new Error(data.error);
     } catch (e) {
+      console.log(e);
+      throw e;
+    } finally {
       e.target.reset();
       setFile(null);
       setIsUploading(false);
-      throw e;
+      setCourseName(null);
+      setMaterialType(materialsList[0]);
     }
   };
   const handleSubmit = async (e) => {
@@ -101,25 +103,33 @@ export default function NewMaterialPage() {
             <div className="mb-5">
               <label
                 htmlFor="courseName"
-                className="mb-3 block text-base font-medium "
+                className="mb-3 block text-base font-medium"
               >
                 Which course does this material belong?
               </label>
               <select
                 id="courseName"
                 name="courseName"
-                className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md"
                 onChange={(e) => setCourseName(e.target.value)}
               >
                 {[
                   ...coursesList.map(({ courseName }, index) => {
                     return (
-                      <option value={courseName} key={index}>
+                      <option
+                        value={courseName}
+                        key={index}
+                        className="text-[#676c79]"
+                      >
                         {courseName}
                       </option>
                     );
                   }),
-                  <option value="Other" key={coursesList.length}>
+                  <option
+                    value="Other"
+                    key={coursesList.length}
+                    className="text-[#676c79]"
+                  >
                     Other
                   </option>,
                 ]}
@@ -131,7 +141,7 @@ export default function NewMaterialPage() {
                 <input
                   name="otherCourseName"
                   placeholder="Specify Course Name"
-                  className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md"
                   required
                 />
               </div>
@@ -141,32 +151,24 @@ export default function NewMaterialPage() {
               <label className="mb-3 block text-base font-medium ">
                 Which type of material is it?
               </label>
-              <div className="grid grid-cols-2 grid-flow-row gap-4">
+              <select
+                id="materialType"
+                name="materialType"
+                className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                onChange={(e) => setMaterialType(e.target.value)}
+              >
                 {materialsList.map((_materialType, index) => {
                   return (
-                    <div className="w-full" key={index}>
-                      <input
-                        id={_materialType}
-                        type="radio"
-                        name="materialType"
-                        className="hidden peer"
-                        defaultChecked={index === 0}
-                        onChange={(e) => setMaterialType(_materialType)}
-                      />
-                      <label
-                        htmlFor={_materialType}
-                        className="inline-flex w-full py-4 px-2 text-gray-500 justify-center bg-transparent backdrop backdrop-blur-sm outline outline-gray-200 outline-1 rounded-lg cursor-pointer peer-checked:outline-[#1c6bfeb3] peer-checked:outline-4 peer-checked:bg-[#4385ff23] peer-checked:text-blue-600 hover:text-gray-600"
-                      >
-                        <div className="block">
-                          <div className="w-full text-lg font-semibold">
-                            {_materialType}
-                          </div>
-                        </div>
-                      </label>
-                    </div>
+                    <option
+                      value={_materialType}
+                      key={index}
+                      className="text-[#676c79]"
+                    >
+                      {_materialType}
+                    </option>
                   );
                 })}
-              </div>
+              </select>
             </div>
 
             {materialType === MATERIAL_TYPES.REFERENCE_BOOK ? (
@@ -178,7 +180,7 @@ export default function NewMaterialPage() {
                   type="text"
                   name="referenceBookName"
                   placeholder="Reference Book Name (with author)"
-                  className="w-full rounded-md border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  className="w-full rounded-md border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] placeholder:opacity-50 outline-none focus:border-[#6A64F1] focus:shadow-md"
                   required
                 />
               </div>
@@ -190,11 +192,15 @@ export default function NewMaterialPage() {
                   </label>
                   <select
                     name="year"
-                    className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                    className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md"
                   >
                     {yearsList.map((year, index) => {
                       return (
-                        <option value={year} key={index}>
+                        <option
+                          value={year}
+                          key={index}
+                          className="text-[#676c79]"
+                        >
                           {year}
                         </option>
                       );
@@ -209,11 +215,15 @@ export default function NewMaterialPage() {
                     </label>
                     <select
                       name="number"
-                      className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                      className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     >
                       {[...Array(12).keys()].map((i) => {
                         return (
-                          <option value={i + 1} key={i + 1}>
+                          <option
+                            value={i + 1}
+                            key={i + 1}
+                            className="text-[#676c79]"
+                          >
                             {i + 1}
                           </option>
                         );
@@ -229,16 +239,36 @@ export default function NewMaterialPage() {
                     </label>
                     <select
                       name="exam"
-                      className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#5c636f] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                      className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     >
                       {examsList.map((exam, index) => {
                         return (
-                          <option value={exam} key={index}>
+                          <option
+                            value={exam}
+                            key={index}
+                            className="text-[#676c79]"
+                          >
                             {exam}
                           </option>
                         );
                       })}
                     </select>
+                  </div>
+                )}
+                {materialType === MATERIAL_TYPES.LECTURE_SLIDES && (
+                  <div className="mb-5">
+                    <label className="mb-3 block text-base font-medium ">
+                      Which Lecture?
+                    </label>
+                    <input
+                      type="number"
+                      name="number"
+                      min="1"
+                      max="40"
+                      placeholder="Lecture Number"
+                      className="w-full rounded-md border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] placeholder:opacity-50 outline-none focus:border-[#6A64F1] focus:shadow-md"
+                      required
+                    />
                   </div>
                 )}
               </div>

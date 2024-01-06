@@ -1,26 +1,28 @@
 import { MATERIAL_CATEGORIES } from "@/lib/constants";
+import BrowseCard from "@/components/BrowseCard";
 
-const page = ({ params }) => {
+const MaterialCategoryListPage = ({ params }) => {
+  const categoryCode = params.categoryCode;
   const courseName = decodeURIComponent(params.courseName);
+
   const materialCategoryList = [];
   for (const key in MATERIAL_CATEGORIES)
     materialCategoryList.push(MATERIAL_CATEGORIES[key]);
 
   return (
-    <div className="flex flex-col w-2/3 mx-auto">
+    <div className="grid grid-flow-row gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto">
       {materialCategoryList.map((category, index) => {
         return (
-          <a
+          <BrowseCard
             key={index}
-            href={`/browse/${courseName}/${category}`}
-            className="px-5 py-5 my-2 bg-[#ffffff] bg-opacity-25 hover:bg-opacity-40 font-bold text-white rounded-xl"
+            href={`/browse/${categoryCode}/${courseName}/${category}`}
           >
-            {category}
-          </a>
+            <div className="card-text-2">{category}</div>
+          </BrowseCard>
         );
       })}
     </div>
   );
 };
 
-export default page;
+export default MaterialCategoryListPage;

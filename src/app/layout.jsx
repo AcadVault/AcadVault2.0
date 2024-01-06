@@ -16,7 +16,7 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.class}>
+      <body className={inter.className}>
         <Analytics />
         <SpeedInsights />
         <div className="fixed left-0 top-0 -z-10 h-full w-full">

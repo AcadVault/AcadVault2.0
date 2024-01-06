@@ -14,10 +14,22 @@ export const MATERIAL_TYPES = {
   EXAM_QUESTION_PAPER: "Exam Question Paper",
   EXAM_PAPER_SOLUTION: "Exam Paper Solution",
   REFERENCE_BOOK: "Reference Book",
+  LECTURE_SLIDES: "Lecture Slides",
+  HANDWRITTEN_NOTES: "Handwritten Notes",
 };
 export const MATERIAL_CATEGORIES = {
   EXAMS: "Exams",
+  LECTURES: "Lectures",
   ASSIGNMENTS: "Assignments",
   REFERENCE_BOOKS: "Reference Books",
 };
-
+export const COURSE_CATEGORY_CODES = [
+  "IT",
+  "EL",
+  "CT",
+  "SC",
+  "IE",
+  "HM",
+  "MC",
+  "CS",
+]

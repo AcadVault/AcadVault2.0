@@ -1,16 +1,11 @@
 "use client";
-import { formatDate } from "@/lib/client-helper-functions";
+import { formatDate, openFile } from "@/lib/client-helper-functions";
 import { GoVerified } from "react-icons/go";
 
 const MaterialCard = ({ data }) => {
-  const formattedTime = formatDate(data.createdAt);
+  const formattedDate = formatDate(data.createdAt);
   const handleOpenFile = async () => {
-    try {
-      const webViewLink = `https://drive.google.com/file/d/${data.fileID}/view`;
-      window.open(webViewLink, "_blank");
-    } catch (error) {
-      console.error("Error opening file:", error);
-    }
+    openFile(data.fileID);
   };
 
   return (
@@ -26,7 +21,9 @@ const MaterialCard = ({ data }) => {
       {data.referenceBookName && (
         <div className="flex">
           <div className="text-gray-500 whitespace-nowrap">Book name</div>
-          <div className="text-gray-200 ml-1">{data.referenceBookName}</div>
+          <div className="text-gray-200 ml-1 break-words overflow-hidden">
+            {data.referenceBookName}
+          </div>
         </div>
       )}
       {data.exam && (
@@ -56,11 +53,15 @@ const MaterialCard = ({ data }) => {
         </button>
         {data.approvedBy && (
           <div className="flex flex-col justify-end">
-            <div className="flex text-gray-500 text-sm">
+            <div className="flex items-center gap-1 text-gray-500 text-sm">
               <span>
-                <GoVerified className="class=w-6 h-6" stroke-width="1.5" stroke="#6370ff"/>
+                <GoVerified
+                  className="w-4 h-4"
+                  stroke-width="1.5"
+                  stroke="#6370ff"
+                />
               </span>
-              <span className="ml-0.5">{`Approved on ${formattedTime}`}</span>
+              <span>{`Approved on ${formattedDate}`}</span>
             </div>
           </div>
         )}

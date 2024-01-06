@@ -10,6 +10,7 @@ const NavBar = () => {
   const session = useSession();
   const [isAdmin, setIsAdmin] = useState(false);
   const activeColor = "#A97AFF";
+  const pathname = usePathname();
 
   useEffect(() => {
     const comupteIsAdmin = async () => {
@@ -19,8 +20,6 @@ const NavBar = () => {
       comupteIsAdmin();
     }
   }, [session]);
-
-  const pathname = usePathname();
 
   return (
     <nav className="bg-white bg-opacity-[0.02]">
@@ -38,7 +37,7 @@ const NavBar = () => {
               <a
                 href="/browse"
                 style={{
-                  color: pathname === "/browse" ? `${activeColor}` : "",
+                  color: pathname.includes("/browse") ? `${activeColor}` : "",
                   fontWeight: pathname === "/browse" ? "bold" : "",
                 }}
                 className="text-sm text-[#FFFFFFA0] hover:text-blue-400 transition-all"
