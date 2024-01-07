@@ -91,209 +91,207 @@ export default function NewMaterialPage() {
   };
 
   return (
-    <div className="left-0 top-0 -z-10 h-full w-full">
-      <div className="flex items-center justify-center p-8 text-white">
-        <div className="mx-auto w-full max-w-[750px]">
-          <form onSubmit={handleSubmit}>
-            <FileUploader file={file} setFile={setFile} />
+    <div className="flex items-center justify-center p-8 text-white">
+      <div className="mx-auto w-full max-w-[750px]">
+        <form onSubmit={handleSubmit}>
+          <FileUploader file={file} setFile={setFile} />
 
-            <div className="mb-5">
-              <label
-                htmlFor="courseName"
-                className="mb-3 block text-base font-medium"
-              >
-                Which course does this material belong?
-              </label>
-              <select
-                id="courseName"
-                name="courseName"
-                className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                onChange={(e) => setCourseName(e.target.value)}
-              >
-                {[
-                  ...coursesList.map(({ courseName }, index) => {
-                    return (
-                      <option
-                        value={courseName}
-                        key={index}
-                        className="text-[#676c79]"
-                      >
-                        {courseName}
-                      </option>
-                    );
-                  }),
-                  <option
-                    value="Other"
-                    key={coursesList.length}
-                    className="text-[#676c79]"
-                  >
-                    Other
-                  </option>,
-                ]}
-              </select>
-            </div>
-
-            {courseName === "Other" && (
-              <div className="-mt-3 mb-5 ml-3">
-                <input
-                  name="otherCourseName"
-                  placeholder="Specify Course Name"
-                  className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                  required
-                />
-              </div>
-            )}
-
-            <div className="mb-5">
-              <label className="mb-3 block text-base font-medium ">
-                Which type of material is it?
-              </label>
-              <select
-                id="materialType"
-                name="materialType"
-                className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                onChange={(e) => setMaterialType(e.target.value)}
-              >
-                {materialsList.map((_materialType, index) => {
+          <div className="mb-5">
+            <label
+              htmlFor="courseName"
+              className="mb-3 block text-base font-medium"
+            >
+              Which course does this material belong?
+            </label>
+            <select
+              id="courseName"
+              name="courseName"
+              className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              onChange={(e) => setCourseName(e.target.value)}
+            >
+              {[
+                ...coursesList.map(({ courseName }, index) => {
                   return (
                     <option
-                      value={_materialType}
+                      value={courseName}
                       key={index}
                       className="text-[#676c79]"
                     >
-                      {_materialType}
+                      {courseName}
                     </option>
                   );
-                })}
-              </select>
-            </div>
+                }),
+                <option
+                  value="Other"
+                  key={coursesList.length}
+                  className="text-[#676c79]"
+                >
+                  Other
+                </option>,
+              ]}
+            </select>
+          </div>
 
-            {materialType === MATERIAL_TYPES.REFERENCE_BOOK ? (
+          {courseName === "Other" && (
+            <div className="-mt-3 mb-5 ml-3">
+              <input
+                name="otherCourseName"
+                placeholder="Specify Course Name"
+                className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                required
+              />
+            </div>
+          )}
+
+          <div className="mb-5">
+            <label className="mb-3 block text-base font-medium ">
+              Which type of material is it?
+            </label>
+            <select
+              id="materialType"
+              name="materialType"
+              className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              onChange={(e) => setMaterialType(e.target.value)}
+            >
+              {materialsList.map((_materialType, index) => {
+                return (
+                  <option
+                    value={_materialType}
+                    key={index}
+                    className="text-[#676c79]"
+                  >
+                    {_materialType}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+
+          {materialType === MATERIAL_TYPES.REFERENCE_BOOK ? (
+            <div className="mb-5">
+              <label className="mb-3 block text-base font-medium ">
+                Reference Book Name
+              </label>
+              <input
+                type="text"
+                name="referenceBookName"
+                placeholder="Reference Book Name (with author)"
+                className="w-full rounded-md border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] placeholder:opacity-50 outline-none focus:border-[#6A64F1] focus:shadow-md"
+                required
+              />
+            </div>
+          ) : (
+            <div>
               <div className="mb-5">
                 <label className="mb-3 block text-base font-medium ">
-                  Reference Book Name
+                  Of which year?
                 </label>
-                <input
-                  type="text"
-                  name="referenceBookName"
-                  placeholder="Reference Book Name (with author)"
-                  className="w-full rounded-md border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] placeholder:opacity-50 outline-none focus:border-[#6A64F1] focus:shadow-md"
-                  required
-                />
+                <select
+                  name="year"
+                  className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                >
+                  {yearsList.map((year, index) => {
+                    return (
+                      <option
+                        value={year}
+                        key={index}
+                        className="text-[#676c79]"
+                      >
+                        {year}
+                      </option>
+                    );
+                  })}
+                </select>
               </div>
-            ) : (
-              <div>
+              {(materialType === MATERIAL_TYPES.ASSIGNMENT_QUESTIONS ||
+                materialType === MATERIAL_TYPES.ASSIGNMENT_SOLUTION) && (
                 <div className="mb-5">
                   <label className="mb-3 block text-base font-medium ">
-                    Of which year?
+                    Which Lab/Tutorial?
                   </label>
                   <select
-                    name="year"
+                    name="number"
                     className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md"
                   >
-                    {yearsList.map((year, index) => {
+                    {[...Array(12).keys()].map((i) => {
                       return (
                         <option
-                          value={year}
-                          key={index}
+                          value={i + 1}
+                          key={i + 1}
                           className="text-[#676c79]"
                         >
-                          {year}
+                          {i + 1}
                         </option>
                       );
                     })}
                   </select>
                 </div>
-                {(materialType === MATERIAL_TYPES.ASSIGNMENT_QUESTIONS ||
-                  materialType === MATERIAL_TYPES.ASSIGNMENT_SOLUTION) && (
-                  <div className="mb-5">
-                    <label className="mb-3 block text-base font-medium ">
-                      Which Lab/Tutorial?
-                    </label>
-                    <select
-                      name="number"
-                      className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                    >
-                      {[...Array(12).keys()].map((i) => {
-                        return (
-                          <option
-                            value={i + 1}
-                            key={i + 1}
-                            className="text-[#676c79]"
-                          >
-                            {i + 1}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
-                )}
-                {(materialType === MATERIAL_TYPES.EXAM_QUESTION_PAPER ||
-                  materialType === MATERIAL_TYPES.EXAM_PAPER_SOLUTION) && (
-                  <div className="mb-5">
-                    <label className="mb-3 block text-base font-medium ">
-                      Which Exam?
-                    </label>
-                    <select
-                      name="exam"
-                      className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                    >
-                      {examsList.map((exam, index) => {
-                        return (
-                          <option
-                            value={exam}
-                            key={index}
-                            className="text-[#676c79]"
-                          >
-                            {exam}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
-                )}
-                {materialType === MATERIAL_TYPES.LECTURE_SLIDES && (
-                  <div className="mb-5">
-                    <label className="mb-3 block text-base font-medium ">
-                      Which Lecture?
-                    </label>
-                    <input
-                      type="number"
-                      name="number"
-                      min="1"
-                      max="40"
-                      placeholder="Lecture Number"
-                      className="w-full rounded-md border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] placeholder:opacity-50 outline-none focus:border-[#6A64F1] focus:shadow-md"
-                      required
-                    />
-                  </div>
-                )}
-              </div>
-            )}
-
-            <div className="flex justify-center content-center mt-10">
-              <button
-                type="submit"
-                disabled={isUploading}
-                className=" inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <span className="inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                  <PiUploadSimpleBold className="w-4 h-4 me-2" />
-                  Submit
-                </span>
-              </button>
-              <button
-                type="button"
-                onClick={() => router.back()}
-                className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
-              >
-                <span className="relative inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                  Cancel
-                </span>
-              </button>
+              )}
+              {(materialType === MATERIAL_TYPES.EXAM_QUESTION_PAPER ||
+                materialType === MATERIAL_TYPES.EXAM_PAPER_SOLUTION) && (
+                <div className="mb-5">
+                  <label className="mb-3 block text-base font-medium ">
+                    Which Exam?
+                  </label>
+                  <select
+                    name="exam"
+                    className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  >
+                    {examsList.map((exam, index) => {
+                      return (
+                        <option
+                          value={exam}
+                          key={index}
+                          className="text-[#676c79]"
+                        >
+                          {exam}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+              )}
+              {materialType === MATERIAL_TYPES.LECTURE_SLIDES && (
+                <div className="mb-5">
+                  <label className="mb-3 block text-base font-medium ">
+                    Which Lecture?
+                  </label>
+                  <input
+                    type="number"
+                    name="number"
+                    min="1"
+                    max="40"
+                    placeholder="Lecture Number"
+                    className="w-full rounded-md border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] placeholder:opacity-50 outline-none focus:border-[#6A64F1] focus:shadow-md"
+                    required
+                  />
+                </div>
+              )}
             </div>
-          </form>
-        </div>
+          )}
+
+          <div className="flex justify-center content-center mt-10">
+            <button
+              type="submit"
+              disabled={isUploading}
+              className=" inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <span className="inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                <PiUploadSimpleBold className="w-4 h-4 me-2" />
+                Submit
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => router.back()}
+              className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+            >
+              <span className="relative inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                Cancel
+              </span>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

@@ -17,15 +17,10 @@ const NavBar = ({ isResourceManager }) => {
     <nav className="bg-white bg-opacity-[0.02]">
       <div
         className={`${
-          isMenuOpen ? "bg-black bg-opacity-20 backdrop backdrop-blur-sm" : ""
+          isMenuOpen ? "bg-black bg-opacity-20" : ""
         } flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4 transition-all duration-300`}
       >
-        <a
-          href="/"
-          className={`${
-            isMenuOpen ? "hidden" : "flex"
-          } items-center space-x-3 rtl:space-x-reverse`}
-        >
+        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             AcadVault2.0
           </span>
@@ -61,7 +56,9 @@ const NavBar = ({ isResourceManager }) => {
           </button>
           <div
             className={`${
-              isMenuOpen ? "flex" : "hidden"
+              isMenuOpen
+                ? "flex absolute right-5 top-16 py-3 z-50 bg-white bg-opacity-90 rounded-md  min-w-[200px] items-center"
+                : "hidden"
             } flex-col lg:flex lg:flex-row lg:items-center lg:w-auto lg:space-x-6 rtl:space-x-reverse`}
           >
             {pathname !== "/login" && (
@@ -72,7 +69,8 @@ const NavBar = ({ isResourceManager }) => {
                     color: pathname.includes("/browse") ? `${activeColor}` : "",
                     fontWeight: pathname.includes("/browse") ? "bold" : "",
                   }}
-                  className="text-sm text-[#FFFFFFA0] hover:text-blue-400 transition-all mt-2 lg:mt-0"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-sm text-[#000] lg:text-[#FFFFFFA0] max-lg:w-full max-lg:h-full max-lg:hover:bg-[#48343422] lg:hover:text-blue-400 transition-all max-lg:px-5 max-lg:py-2 lg:mt-0"
                 >
                   Browse
                 </a>
@@ -82,7 +80,8 @@ const NavBar = ({ isResourceManager }) => {
                     color: pathname === "/new-material" ? `${activeColor}` : "",
                     fontWeight: pathname === "/new-material" ? "bold" : "",
                   }}
-                  className="text-sm text-[#FFFFFFA0] hover:text-blue-400 transition-all mt-2 lg:mt-0"
+                  onClick={() => setIsMenuOpen}
+                  className="text-sm text-[#000] lg:text-[#FFFFFFA0] w-full h-full hover:bg-[#0002] lg:hover:text-blue-400 transition-all max-lg:px-5 max-lg:py-2 lg:mt-0"
                 >
                   Upload
                 </a>
@@ -93,7 +92,8 @@ const NavBar = ({ isResourceManager }) => {
                       color: pathname === "/requests" ? `${activeColor}` : "",
                       fontWeight: pathname === "/requests" ? "bold" : "",
                     }}
-                    className="text-sm text-[#FFFFFFA0] hover:text-blue-400 transition-all mt-2 lg:mt-0"
+                    onClick={() => setIsMenuOpen}
+                    className="text-sm text-[#000] lg:text-[#FFFFFFA0] w-full h-full hover:bg-[#0002] lg:hover:text-blue-400 transition-all max-lg:px-5 max-lg:py-2 lg:mt-0"
                   >
                     Requests
                   </a>
@@ -104,7 +104,8 @@ const NavBar = ({ isResourceManager }) => {
                     color: pathname === "/about" ? `${activeColor}` : "",
                     fontWeight: pathname === "/about" ? "bold" : "",
                   }}
-                  className="text-sm text-[#FFFFFFA0] hover:text-blue-400 transition-all mt-2 lg:mt-0"
+                  onClick={() => setIsMenuOpen}
+                  className="text-sm text-[#000] lg:text-[#FFFFFFA0] w-full h-full hover:bg-[#0002] lg:hover:text-blue-400 transition-all max-lg:px-5 max-lg:py-2 lg:mt-0"
                 >
                   About
                 </a>
@@ -114,9 +115,14 @@ const NavBar = ({ isResourceManager }) => {
                     color: pathname === "/me" ? `${activeColor}` : "",
                     fontWeight: pathname === "/me" ? "bold" : "",
                   }}
-                  className="text-sm text-[#FFFFFFA0] hover:text-blue-400 transition-all mt-2 lg:mt-0"
+                  onClick={() => setIsMenuOpen}
+                  className="text-sm text-[#000] lg:text-[#FFFFFFA0] w-full h-full hover:bg-[#0002] lg:hover:text-blue-400 transition-all max-lg:px-5 max-lg:py-2 lg:mt-0"
                 >
-                  <FaRegUserCircle className="inline-block w-5 h-5 me-1" />
+                  {isMenuOpen ? (
+                    "Profile"
+                  ) : (
+                    <FaRegUserCircle className="inline-block w-5 h-5 me-1" />
+                  )}
                 </a>
               </>
             )}
