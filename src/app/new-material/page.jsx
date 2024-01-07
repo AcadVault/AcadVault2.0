@@ -15,7 +15,7 @@ export default function NewMaterialPage() {
   const materialsList = [];
   const yearsList = [];
   const examsList = [];
-  const [coursesList, setCoursesList] = useState([]);
+  const [coursesList, setCoursesList] = useState(null);
 
   for (const key in MATERIAL_TYPES) materialsList.push(MATERIAL_TYPES[key]);
   for (const key in EXAMS) examsList.push(EXAMS[key]);
@@ -39,7 +39,7 @@ export default function NewMaterialPage() {
     fetchCourses();
   }, []);
 
-  if (coursesList.length === 0) return <Loading />;
+  if (coursesList === null) return <Loading />;
 
   const uploadData = async (e) => {
     try {

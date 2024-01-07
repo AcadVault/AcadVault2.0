@@ -63,7 +63,7 @@ export const createFolder = async (folderName, parentFolderName) => {
       },
       fields: 'id',
     });
-    return data.id;
+    return data;
   } catch (err) {
     throw err;
   }

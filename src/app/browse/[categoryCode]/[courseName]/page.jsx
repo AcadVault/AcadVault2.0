@@ -17,7 +17,9 @@ const MaterialCategoryListPage = ({ params }) => {
             key={index}
             href={`/browse/${categoryCode}/${courseName}/${category}`}
           >
-            <div className="card-text-2">{category}</div>
+            <div className="card-text-2">
+              <div className="max-sm:text-base">{category}</div>
+            </div>
           </BrowseCard>
         );
       })}

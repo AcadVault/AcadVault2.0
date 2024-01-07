@@ -3,9 +3,10 @@
 import RequestCard from "@/components/RequestCard";
 import { useState, useEffect } from "react";
 import Loading from "@/components/Loading";
+import NothingHere from "@/components/NothingHere";
 
 function RequestsPage() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
 
   const fetchData = async () => {
     try {
@@ -20,7 +21,9 @@ function RequestsPage() {
     fetchData();
   }, []);
 
-  if (data.length === 0) return <Loading />;
+  if (data === null) return <Loading />;
+  if (data.length === 0) return <NothingHere />;
+
   return (
     <div className="grid grid-cols-1 w-5/6 xs:w-3/4 mx-auto gap-5 lg:grid-cols-2 mt-10">
       {data.map((request, index) => (
