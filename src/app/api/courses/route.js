@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import { Course } from "@/models/course.model";
 import { connectMongoDB } from "@/lib/mongodb.config";
+import { createFolder } from "@/lib/drive-operations";
 
 export const GET = async (request) => {
   try {
@@ -28,8 +29,15 @@ export const GET = async (request) => {
 
 export const POST = async (request) => {
   try {
-    const { courseName, folderID, categoryCode } = await request.json();
+    const { courseName, categoryCode } = await request.json();
     await connectMongoDB('catalogue');
+    const _course = await Course.findOne({ courseName });
+    if (_course) {
+      return NextResponse.json({ success: false, error: 'Course already exists' }, { status: 400 })
+    }
+
+    const { id } = await createFolder(courseName, 'Materials');
+    const folderID = id;
     const course = new Course({ courseName, folderID, categoryCode });
     await course.save();
     return NextResponse.json({ success: true, data: course })

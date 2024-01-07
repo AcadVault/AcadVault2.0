@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from "react";
 import BrowseMaterialCard from "@/components/BrowseMaterialCard";
+import Loading from "@/components/Loading";
+import NothingHere from "@/components/NothingHere";
 
 const MaterialResultsPage = ({ params }) => {
   const courseName = decodeURIComponent(params.courseName);
   const materialCategory = decodeURIComponent(params.materialCategory);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,14 +28,9 @@ const MaterialResultsPage = ({ params }) => {
     };
     fetchData();
   }, [courseName, materialCategory]);
-  
-  if(data.length === 0) return (
-    <div className="flex justify-center items-center h-96">
-      <div className="text-2xl font-bold text-gray-500">
-        Nothing here!
-      </div>
-    </div>
-  )
+
+  if (data === null) return <Loading />;
+  if (data.length === 0) return <NothingHere />;
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
