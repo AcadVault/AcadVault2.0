@@ -1,5 +1,5 @@
 .card-text-0 {
-  @apply text-4xl lg:text-5xl font-extrabold;
+  @apply text-4xl font-extrabold;
 }
 
 .card-text-1 {

@@ -1,9 +1,5 @@
-'use server';
-
-export const isAdmin = (emailID) => {
-  const sid = emailID.split("@")[0];
-  return process.env.ADMINS.includes(sid);
-}
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/next-auth.config";
 
 export const generateFilename = ({ courseName, materialType, year, exam, number, referenceBookName }) => {
   if (referenceBookName) return referenceBookName;
@@ -17,4 +13,19 @@ export const generateFilename = ({ courseName, materialType, year, exam, number,
 export const getExtention = (fileName) => {
   const arr = fileName.split(".");
   return arr[arr.length - 1];
+}
+
+export const getSession = async () => {
+  const session = await getServerSession(authOptions);
+  return session;
+}
+
+export const getCurrentUser = async () => {
+  const session = await getSession();
+  if (!session) return null;
+  return session.user;
+}
+export const isResourceManager = async (id) => {
+  if (!id) return false;
+  return process.env.RESOURCE_MANAGERS.includes(id);
 }

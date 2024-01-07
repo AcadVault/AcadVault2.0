@@ -8,6 +8,11 @@ export const PUT = async (req) => {
   const { requestID } = await req.json();
 
   try {
+    const user = await getCurrentUser();
+    if (!user) throw new Error('User not found');
+    const approverID = user.id;
+    if (!isResourceManager(approverID)) throw new Error('User not authorized');
+
     await connectMongoDB('catalogue');
 
     const materialRequest = await MaterialRequest.findOne({ _id: requestID });

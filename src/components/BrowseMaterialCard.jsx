@@ -59,7 +59,7 @@ const BrowseMaterialCard = ({ data }) => {
             <span>
               <GoVerified
                 className="w-3 h-3 opacity-60"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="#6370ff"
               />
             </span>

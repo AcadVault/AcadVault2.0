@@ -4,6 +4,7 @@ import { uploadFile } from "@/lib/drive-operations";
 import { UnapprovedMaterial, ApprovedMaterial } from "@/models/material.model";
 import { Request as MaterialRequest } from "@/models/request.model";
 import { connectMongoDB } from "@/lib/mongodb.config";
+import { getCurrentUser } from "@/lib/server-helper-functions";
 
 export const GET = async () => {
   try {
@@ -18,7 +19,9 @@ export const GET = async () => {
 export const POST = async (req) => {
   try {
     const formData = await req.formData();
-    const studentID = formData.get('studentID');
+    const user = await getCurrentUser();
+    if (!user) throw new Error('User not found');
+    const studentID = user.id;
     const courseName = formData.get('otherCourseName') || formData.get('courseName');
     const materialType = formData.get('materialType');
     const file = formData.get('file');

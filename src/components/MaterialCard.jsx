@@ -21,7 +21,9 @@ const MaterialCard = ({ data }) => {
       {data.referenceBookName && (
         <div className="flex">
           <div className="text-gray-500 whitespace-nowrap">Book name</div>
-          <div className="text-gray-200 ml-1 break-words overflow-hidden">{data.referenceBookName}</div>
+          <div className="text-gray-200 ml-1 break-words overflow-hidden">
+            {data.referenceBookName}
+          </div>
         </div>
       )}
       {data.exam && (
@@ -43,11 +45,22 @@ const MaterialCard = ({ data }) => {
         </div>
       )}
       <div className="flex justify-between mt-2 align-bottom">
-        <button onClick={handleOpenFile} className="bg-[#461f60] hover:bg-[#6c4387] text-white py-1 px-4 rounded">Open File</button>
+        <button
+          onClick={handleOpenFile}
+          className="bg-[#461f60] hover:bg-[#6c4387] text-white py-1 px-4 rounded"
+        >
+          Open File
+        </button>
         {data.approvedBy && (
           <div className="flex flex-col justify-end">
             <div className="flex items-center gap-1 text-gray-500 text-sm">
-              <span><GoVerified className="w-4 h-4" stroke-width="1.5" stroke="#6370ff"/></span>
+              <span>
+                <GoVerified
+                  className="w-4 h-4"
+                  strokeWidth="1.5"
+                  stroke="#6370ff"
+                />
+              </span>
               <span>{`Approved on ${formattedDate}`}</span>
             </div>
           </div>
