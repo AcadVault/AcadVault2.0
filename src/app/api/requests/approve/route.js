@@ -3,11 +3,16 @@ import { Request as MaterialRequest } from "@/models/request.model";
 import { NextResponse } from "next/server";
 import { moveFile } from "@/lib/drive-operations";
 import { connectMongoDB } from "@/lib/mongodb.config";
+import { getCurrentUser } from "@/lib/server-helper-functions";
 
-export const POST = async (req) => {
-  const { requestID, approverID } = await req.json();
-
+export const PUT = async (req) => {
+  const { requestID } = await req.json();
   try {
+    const user = await getCurrentUser();
+    if (!user) throw new Error('User not found');
+    const approverID = user.id;
+    if (!isResourceManager(approverID)) throw new Error('User not authorized');
+
     await connectMongoDB('catalogue');
 
     const materialRequest = await MaterialRequest.findOne({ _id: requestID });
