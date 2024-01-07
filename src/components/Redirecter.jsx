@@ -23,10 +23,8 @@ const Redirecter = ({ children }) => {
   }, [session]);
 
   if (session.status === "loading") return <Loading />;
-  if (session.status === "unauthenticated" && pathname !== "/login")
-    redirect("/login");
-  if (session.status === "authenticated" && pathname === "/login")
-    redirect("/");
+  if (session.status === "unauthenticated" && !(pathname === "/login" || pathname === "/about")) redirect("/login");
+  if (session.status === "authenticated" && pathname === "/login") redirect("/");
   //if (isAdmin && pathname === "/requests") redirect("/");
 
   return children;
