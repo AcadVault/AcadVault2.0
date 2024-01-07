@@ -1,6 +1,5 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import FileUploader from "@/components/FileUploader";
 import { EXAMS, MATERIAL_TYPES } from "@/lib/constants";
@@ -10,7 +9,6 @@ import { toast } from "react-hot-toast";
 import { PiUploadSimpleBold } from "react-icons/pi";
 
 export default function NewMaterialPage() {
-  const session = useSession();
   const router = useRouter();
   const [file, setFile] = useState(null);
 
@@ -46,7 +44,6 @@ export default function NewMaterialPage() {
   const uploadData = async (e) => {
     try {
       const formData = new FormData(e.target);
-      formData.append("studentID", session.data.user.email.split("@")[0]);
       formData.append("file", file);
       formData.set("materialType", materialType);
       setIsUploading(true);

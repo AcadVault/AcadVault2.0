@@ -17,36 +17,14 @@ const Filter = () => {
   return (
     <div className="flex text-white justify-between">
       <div>
-        <input
-          type="text"
-          onChange={(e) => {
-            setFilter({ ...filter, courseName: e.target.value });
-          }}
-        />
+        <input type="text" onChange={(e) => { setFilter({ ...filter, courseName: e.target.value }); }} />
       </div>
       <div>
-        <input
-          type="checkbox"
-          id="exam"
-          value="exam"
-          onChange={handleCheckboxChange}
-        />
+        <input type="checkbox" id="exam" value="exam" onChange={handleCheckboxChange} />
         <label htmlFor="exam">Exam</label>
-
-        <input
-          type="checkbox"
-          id="assignment"
-          value="assignment"
-          onChange={handleCheckboxChange}
-        />
+        <input type="checkbox" id="assignment" value="assignment" onChange={handleCheckboxChange} />
         <label htmlFor="assignment">Assignment</label>
-
-        <input
-          type="checkbox"
-          id="referenceBook"
-          value="assignment"
-          onChange={handleCheckboxChange}
-        />
+        <input type="checkbox" id="referenceBook" value="assignment" onChange={handleCheckboxChange} />
         <label htmlFor="referenceBook">Reference Book</label>
       </div>
     </div>

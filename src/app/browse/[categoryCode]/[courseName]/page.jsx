@@ -10,7 +10,7 @@ const MaterialCategoryListPage = ({ params }) => {
     materialCategoryList.push(MATERIAL_CATEGORIES[key]);
 
   return (
-    <div className="grid grid-flow-row gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto">
+    <div className="grid gap-4 md:gap-6 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mx-auto">
       {materialCategoryList.map((category, index) => {
         return (
           <BrowseCard

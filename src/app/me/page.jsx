@@ -1,10 +1,12 @@
 "use client";
 
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import Image from "next/image";
+import { useContext } from "react";
+import { SessionContext } from "@/components/SessionProvider";
 
 const ProfilePage = () => {
-  const session = useSession();
+  const { session } = useContext(SessionContext);
 
   return (
     <div className="fixed left-0 top-0 -z-10 h-full w-full">
@@ -13,7 +15,7 @@ const ProfilePage = () => {
           <div className="relative bg-[rgb(246,245,245)] bg-opacity-5 backdrop-filter backdrop-blur-sm outline outline-1 outline-gray-500 rounded-lg transition ease-in-out duration-300 p-3 text-[#ffffff] w-11/12 md:w-5/6 lg:w-4/6 xl:w-3/6 mx-auto py-5 px-5">
             <div className="flex justify-center">
               <Image
-                src={session.data.user.image}
+                src={session.user.image}
                 alt=""
                 width={100}
                 height={100}
@@ -23,10 +25,10 @@ const ProfilePage = () => {
             </div>
             <div className="mt-16">
               <h1 className="font-bold text-center text-3xl">
-                Hi, {session.data.user.name}!
+                Hi, {session.user.name}!
               </h1>
               <p className="text-center text-sm text-gray-400 font-medium">
-                {session.data.user.email}
+                {session.user.email}
               </p>
               <div className="flex items-center justify-center mt-3">
                 <button

@@ -1,12 +1,11 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
-const inter = Inter({ subsets: ["latin"] });
 import SessionProvider from "@/components/SessionProvider";
 import Redirecter from "@/components/Redirecter";
 import Navbar from "@/components/NavBar";
 import { Toaster } from "react-hot-toast";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { isResourceManager, getSession } from "@/lib/server-helper-functions";
 
 export const metadata = {
   title: "AcadVault 2.0",
@@ -14,21 +13,25 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
+  const session = await getSession();
+  const _isResourceManager =
+    session && session.user && (await isResourceManager(session.user.id));
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <Analytics />
         <SpeedInsights />
+        <Toaster position="top-center" reverseOrder={false} />
+        <Toaster position="top-center" reverseOrder={false} />
         <div className="fixed left-0 top-0 -z-10 h-full w-full">
           <div className="relative h-full w-full bg-slate-950">
             <div className="absolute bottom-0 left-[-20%] right-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
             <div className="absolute bottom-0 right-[-20%] top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
           </div>
         </div>
-        <SessionProvider>
-          <Redirecter>
-            <Toaster position="top-center" reverseOrder={false} />
-            <Navbar />
+        <SessionProvider session={session}>
+          <Redirecter session={session} isResourceManager={_isResourceManager}>
+            <Navbar isResourceManager={_isResourceManager} />
             {children}
           </Redirecter>
         </SessionProvider>

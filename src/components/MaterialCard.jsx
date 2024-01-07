@@ -57,7 +57,7 @@ const MaterialCard = ({ data }) => {
               <span>
                 <GoVerified
                   className="w-4 h-4"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="#6370ff"
                 />
               </span>

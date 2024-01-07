@@ -2,11 +2,10 @@
 
 import RequestCard from "@/components/RequestCard";
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
+import Loading from "@/components/Loading";
 
 function RequestsPage() {
   const [data, setData] = useState([]);
-  const session = useSession();
 
   const fetchData = async () => {
     try {
@@ -21,14 +20,11 @@ function RequestsPage() {
     fetchData();
   }, []);
 
+  if (data.length === 0) return <Loading />;
   return (
-    <div className="grid grid-cols-1 w-3/4 mx-auto gap-5 lg:grid-cols-2 mt-10">
+    <div className="grid grid-cols-1 w-5/6 xs:w-3/4 mx-auto gap-5 lg:grid-cols-2 mt-10">
       {data.map((request, index) => (
-        <RequestCard
-          data={request}
-          currentUser={session.data.user}
-          key={index}
-        />
+        <RequestCard data={request} key={index} />
       ))}
     </div>
   );
