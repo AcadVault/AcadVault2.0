@@ -25,6 +25,7 @@ export const getCurrentUser = async () => {
   if (!session) return null;
   return session.user;
 }
+
 export const isResourceManager = async (id) => {
   if (!id) return false;
   return process.env.RESOURCE_MANAGERS.includes(id);
