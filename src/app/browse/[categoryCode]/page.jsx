@@ -23,7 +23,7 @@ const CourseListPage = ({ params }) => {
   }, [categoryCode]);
 
   return (
-    <div className="grid gap-4 md:gap-6 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mx-auto">
+    <div className="grid gap-2 md:gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mx-auto">
       {allCourses.map(({ courseName }, index) => {
         return (
           <BrowseCard

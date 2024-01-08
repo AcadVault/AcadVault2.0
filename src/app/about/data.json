@@ -18,5 +18,34 @@
             "instagram": "https://www.instagram.com/pranshu.05/",
             "pfp": "https://avatars.githubusercontent.com/u/70943732?v=4"
         }
+    ],
+    "RCMANAGERS": [
+        {
+            "name": "Jay Malaviya",
+            "position": "Co-Founder",
+            "linkedin": "https://www.linkedin.com/in/jay-malaviya/",
+            "github": "https://github.com/jam-burger",
+            "twitter": "https://twitter.com/jay_malaviya_",
+            "instagram": "https://www.instagram.com/jay_mlvy/",
+            "pfp": "https://avatars.githubusercontent.com/u/89834788?v=4"
+        },
+        {
+            "name": "Pranshu Patel",
+            "position": "Co-Founder",
+            "linkedin": "https://www.linkedin.com/in/pranshu05",
+            "github": "https://github.com/pranshu05",
+            "twitter": "https://twitter.com/Pranshu_05",
+            "instagram": "https://www.instagram.com/pranshu.05/",
+            "pfp": "https://avatars.githubusercontent.com/u/70943732?v=4"
+        },
+        {
+            "name": "Jash Shah",
+            "position": "Resource Manager",
+            "linkedin": "https://www.linkedin.com/in/jashshah0803/",
+            "github": "https://github.com/jash0803",
+            "twitter": "https://twitter.com/jashshah0803",
+            "instagram": "https://www.instagram.com/jash0803/",
+            "pfp": "https://avatars.githubusercontent.com/u/105346233?v=4"
+        }
     ]
 }
