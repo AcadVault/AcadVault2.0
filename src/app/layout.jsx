@@ -26,9 +26,9 @@ export default async function RootLayout({ children }) {
         <Toaster position="top-center" reverseOrder={false} />
         <div className="fixed left-0 top-0 -z-10 h-full w-full">
           <div className="flex h-full w-full bg-primary pt-[40%]">
-            <div className="max-md:hidden absolute bottom-0 left-[-20%] right-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
-            <div className="h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.10),rgba(0,0,0,0))]"></div>
-            <div className="max-md:hidden absolute bottom-0 right-[-20%] top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
+            <div className="max-sm:hidden absolute bottom-0 left-[-20%] right-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
+            <div className="mx-auto h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.10),rgba(0,0,0,0))]"></div>
+            <div className="max-sm:hidden absolute bottom-0 right-[-20%] top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
           </div>
         </div>
         <SessionProvider session={session}>
