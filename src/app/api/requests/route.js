@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import { generateFilename, getExtention } from "@/lib/server-helper-functions";
 import { uploadFile } from "@/lib/drive-operations";
-import { UnapprovedMaterial, ApprovedMaterial } from "@/models/material.model";
+import { UnapprovedMaterial } from "@/models/material.model";
 import { Request as MaterialRequest } from "@/models/request.model";
 import { connectMongoDB } from "@/lib/mongodb.config";
-import { getCurrentUser } from "@/lib/server-helper-functions";
+import { getCurrentUser, isResourceManager } from "@/lib/server-helper-functions";
 
 export const GET = async () => {
   try {

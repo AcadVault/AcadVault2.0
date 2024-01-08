@@ -3,7 +3,7 @@ import { Request as MaterialRequest } from "@/models/request.model";
 import { NextResponse } from "next/server";
 import { moveFile } from "@/lib/drive-operations";
 import { connectMongoDB } from "@/lib/mongodb.config";
-import { getCurrentUser } from "@/lib/server-helper-functions";
+import { getCurrentUser, isResourceManager } from "@/lib/server-helper-functions";
 
 export const PUT = async (req) => {
   const { requestID } = await req.json();
