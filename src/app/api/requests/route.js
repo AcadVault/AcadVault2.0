@@ -4,7 +4,7 @@ import { uploadFile } from "@/lib/drive-operations";
 import { UnapprovedMaterial } from "@/models/material.model";
 import { Request as MaterialRequest } from "@/models/request.model";
 import { connectMongoDB } from "@/lib/mongodb.config";
-import { getCurrentUser, isResourceManager } from "@/lib/server-helper-functions";
+import { getCurrentUser } from "@/lib/server-helper-functions";
 
 export const GET = async () => {
   try {

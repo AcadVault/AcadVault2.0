@@ -9,10 +9,10 @@ const ProfilePage = () => {
   const { session } = useContext(SessionContext);
 
   return (
-    <div className="fixed left-0 top-0 -z-10 h-full w-full">
+    <div className="fixed left-0 top-0 h-full w-full">
       <div className="flex items-center justify-center h-full">
         <div className="mx-auto w-11/12 sm:w-3/4 md:w-2/3 lg:w-2/5">
-          <div className="relative bg-[rgb(246,245,245)] bg-opacity-5 backdrop-filter backdrop-blur-sm outline outline-1 outline-gray-500 rounded-lg transition ease-in-out duration-300 p-3 text-[#ffffff] py-5 px-5">
+          <div className="bg-white bg-opacity-5  backdrop-filter backdrop-blur-sm outline outline-1 outline-gray-500 rounded-lg transition ease-in-out duration-300 p-3 text-[#ffffff] py-5 px-5">
             <div className="flex justify-center">
               <Image
                 src={session.user.image}
@@ -33,9 +33,9 @@ const ProfilePage = () => {
               <div className="flex items-center justify-center mt-3">
                 <button
                   onClick={() => signOut({ callbackUrl: "/login" })}
-                  className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+                  className="inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
                 >
-                  <span className="relative inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  <span className="inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                     Log out
                   </span>
                 </button>

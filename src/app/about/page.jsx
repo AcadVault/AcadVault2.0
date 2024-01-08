@@ -8,7 +8,7 @@ const AboutPage = () => {
   const managers = [...founders, ...data.resourceManagers];
 
   return (
-    <div className="left-0 top-0 -z-10 h-full w-full">
+    <div className="left-0 top-0 h-full w-full">
       <h1 className="text-3xl font-bold text-white text-center mt-10">
         What is AcadVault2.0?
       </h1>
@@ -43,7 +43,7 @@ const AboutPage = () => {
           <ContributorCard key={index} data={manager} />
         ))}
       </div>
-      <footer className="relative bottom-0 left-0 w-full bg-transparent text-white text-sm p-5">
+      <footer className="bottom-0 left-0 w-full bg-transparent text-white text-sm p-5">
         <div className="flex justify-between">
           <p>&copy; {new Date().getFullYear()} | AcadVault2.0</p>
           <div className="flex">

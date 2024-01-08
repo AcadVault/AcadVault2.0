@@ -76,7 +76,7 @@ const NavBar = ({ isResourceManager, session }) => {
                     fontWeight: pathname.includes("/browse") ? "bold" : "",
                   }}
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-sm text-white h max-lg:w-full max-lg:h-full max-lg:hover:bg-[#48343422] lg:hover:text-blue-400 transition-all max-lg:px-5 max-lg:py-2 lg:mt-0"
+                  className="text-sm text-white w-full h-full hover:bg-[#0002] lg:hover:text-blue-400 transition-all max-lg:px-5 max-lg:py-2 lg:mt-0"
                 >
                   Browse
                 </a>
