@@ -33,7 +33,7 @@ export default async function RootLayout({ children }) {
         </div>
         <SessionProvider session={session}>
           <Redirecter session={session} isResourceManager={_isResourceManager}>
-            <Navbar isResourceManager={_isResourceManager} />
+            <Navbar isResourceManager={_isResourceManager} session={session} />
             {children}
           </Redirecter>
         </SessionProvider>
