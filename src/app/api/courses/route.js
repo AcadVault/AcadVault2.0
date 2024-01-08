@@ -17,7 +17,8 @@ export const GET = async (request) => {
       }
     }
 
-    await connectMongoDB('catalogue');
+    await connectMongoDB();
+    console.log(filter);
     const data = await Course.find(filter).sort({ courseName: 1 });
     return NextResponse.json({ success: true, data })
   }
@@ -30,7 +31,7 @@ export const GET = async (request) => {
 export const POST = async (request) => {
   try {
     const { courseName, categoryCode } = await request.json();
-    await connectMongoDB('catalogue');
+    await connectMongoDB();
     const _course = await Course.findOne({ courseName });
     if (_course) {
       return NextResponse.json({ success: false, error: 'Course already exists' }, { status: 400 })

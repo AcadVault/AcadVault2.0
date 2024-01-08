@@ -11,7 +11,7 @@ export const authOptions = {
       authorization: "https://accounts.google.com/o/oauth2/auth?response_type=code&hd=daiict.ac.in",
     })
   ],
-  adapter: MongoDBAdapter(clientPromise, { databaseName: "nextauth" }),
+  adapter: MongoDBAdapter(clientPromise, { databaseName: "catalogue" }),
   callbacks: {
     async session({ session, user }) {
       session.user.id = user.email.split('@')[0];

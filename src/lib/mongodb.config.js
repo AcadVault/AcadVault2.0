@@ -19,9 +19,17 @@ if (process.env.NODE_ENV === "development") {
 }
 export { clientPromise };
 
-export const connectMongoDB = async (dbName) => {
+export const connectMongoDB = async () => {
   try {
-    mongoose.connect(uri, { dbName });
+    await mongoose.connect(uri, { dbName: 'catalogue' });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const disconnectMongoDB = async () => {
+  try {
+    await mongoose.disconnect();
   } catch (error) {
     console.log(error);
   }

@@ -25,7 +25,7 @@ const ProfilePage = () => {
             </div>
             <div className="mt-16">
               <h1 className="font-bold text-center text-3xl">
-                Hi, {session.user.name}!
+                Hey, {session.user.name}!
               </h1>
               <p className="text-center text-sm text-gray-400 font-medium">
                 {session.user.email}

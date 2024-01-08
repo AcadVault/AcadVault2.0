@@ -7,7 +7,7 @@ const CourseCategoryListPage = () => {
   const allCategories = COURSE_CATEGORY_CODES;
 
   return (
-    <div className="grid gap-2 md:gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mx-auto">
+    <div className="grid gap-2 md:gap-4 grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 mx-auto">
       {allCategories.map((categoryCode, index) => {
         return (
           <BrowseCard key={index} href={`/browse/${categoryCode}`}>

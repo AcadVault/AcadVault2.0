@@ -13,7 +13,7 @@ export const PUT = async (req) => {
     const approverID = user.id;
     if (!isResourceManager(approverID)) throw new Error('User not authorized');
 
-    await connectMongoDB('catalogue');
+    await connectMongoDB();
 
     const materialRequest = await MaterialRequest.findOne({ _id: requestID });
     if (!materialRequest) {

@@ -28,7 +28,7 @@ export const GET = async (request) => {
         delete filterObject[key];
       }
     }
-    await connectMongoDB('catalogue');
+    await connectMongoDB();
     const data = await ApprovedMaterial.find(filterObject);
     return NextResponse.json({ success: true, data })
   }

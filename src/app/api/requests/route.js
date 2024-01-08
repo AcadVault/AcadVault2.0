@@ -8,7 +8,7 @@ import { getCurrentUser, isResourceManager } from "@/lib/server-helper-functions
 
 export const GET = async () => {
   try {
-    await connectMongoDB('catalogue');
+    await connectMongoDB();
     const requests = await MaterialRequest.find({}).populate('material').sort({ createdAt: -1 });
     return NextResponse.json({ success: true, data: requests })
   } catch (error) {
@@ -37,7 +37,7 @@ export const POST = async (req) => {
     const { id, webViewLink } = await uploadFile(file, 'Requests', fileName);
     const fileID = id;
 
-    await connectMongoDB('catalogue');
+    await connectMongoDB();
     const material = new UnapprovedMaterial({ fileID, courseName, materialType, exam, number, year, referenceBookName });
     await material.save();
     const request = new MaterialRequest({ material: material._id, studentID, status: "REQUESTED" })
