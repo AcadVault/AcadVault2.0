@@ -8,7 +8,7 @@ const AboutPage = () => {
   const managers = [...founders, ...data.resourceManagers];
 
   return (
-    <div className="left-0 top-0 h-full w-full">
+    <div className="left-0 top-0 h-full -z-10 w-full">
       <h1 className="text-3xl font-bold text-white text-center mt-10">
         What is AcadVault2.0?
       </h1>

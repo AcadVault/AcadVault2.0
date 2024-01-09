@@ -63,7 +63,7 @@ const NavBar = ({ isResourceManager, session }) => {
           <div
             className={`${
               isMenuOpen
-                ? "flex absolute right-5 top-16 py-3 z-50 bg-white bg-opacity-[0.2] backdrop-filter backdrop-blur-sm border border-gray-500 rounded-md  min-w-[200px] items-center text-white"
+                ? "flex absolute right-5 top-16 py-3 z-50 bg-slate-900 border border-gray-500 rounded-md  min-w-[200px] items-center text-white"
                 : "hidden"
             } flex-col lg:flex lg:flex-row lg:items-center lg:w-auto lg:space-x-6 rtl:space-x-reverse`}
           >

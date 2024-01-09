@@ -9,7 +9,7 @@ const ProfilePage = () => {
   const { session } = useContext(SessionContext);
 
   return (
-    <div className="fixed left-0 top-0 h-full w-full">
+    <div className="fixed left-0 top-0 -z-10 h-full w-full">
       <div className="flex items-center justify-center h-full">
         <div className="mx-auto w-11/12 sm:w-3/4 md:w-2/3 lg:w-2/5">
           <div className="bg-white bg-opacity-5  backdrop-filter backdrop-blur-sm outline outline-1 outline-gray-500 rounded-lg transition ease-in-out duration-300 p-3 text-[#ffffff] py-5 px-5">
