@@ -52,9 +52,8 @@ export default function HomePage() {
             </button>
           </a>
         </div>
-
         <div className="absolute bottom-0 mb-3 text-sm font-medium text-gray-100 text-center">
-          Total Visitors: {totalVisitors}
+          Total Users: {totalVisitors}
         </div>
       </div>
     </div>
