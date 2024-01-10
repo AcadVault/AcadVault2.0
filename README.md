@@ -8,7 +8,7 @@ Welcome to AcadVault2.0, a dynamic and collaborative open-source repository dedi
 
 AcadVault2.0 offers a host of features designed to enhance your academic journey:
 
-- Browse Academic Resources: Seamlessly explore a wealth of academic materials, from lecture notes to research papers, carefully organized for your convenience.
+- Browse Academic Resources: Seamlessly explore a wealth of academic materials, from lecture notes to previous year papers, carefully organized for your convenience.
 
 - Upload New Materials: Contribute to the collective knowledge by sharing your academic resources, creating a thriving ecosystem of shared learning.
 
