@@ -12,7 +12,7 @@ function RequestsPage() {
     try {
       const response = await fetch("/api/requests");
       const { data } = await response.json();
-      setData(data.reverse());
+      setData(data);
     } catch (error) {
       console.log(error.message);
     }
