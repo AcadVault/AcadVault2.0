@@ -11,8 +11,9 @@ function RequestsPage() {
   const fetchData = async () => {
     try {
       const response = await fetch("/api/requests");
-      const { data } = await response.json();
-      setData(data);
+      const data = await response.json();
+      if(data.success) setData(data.data);
+      else throw new Error(data.error);
     } catch (error) {
       console.log(error.message);
     }
