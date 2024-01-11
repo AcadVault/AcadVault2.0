@@ -32,4 +32,6 @@ export const COURSE_CATEGORY_CODES = [
   "HM",
   "MC",
   "CS",
+  "IC",
+  "PC",
 ]
