@@ -136,3 +136,14 @@ export const moveFile = async (fileID, fromFolderName, toFolderName) => {
   });
   return res.data;
 }
+
+export const deleteFile = async (fileID) => {
+  const drive = getDrive();
+  try {
+    await drive.files.delete({
+      fileId: fileID,
+    });
+  } catch (error) {
+    throw error;
+  }
+};

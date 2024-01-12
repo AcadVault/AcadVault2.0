@@ -43,6 +43,40 @@ const RequestCard = (props) => {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      setIsProcessing(true);
+      const response = await fetch(`/api/requests/delete`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          requestID: data._id,
+        }),
+      });
+
+      const res = await response.json();
+      if (res.success) {
+        toast.success("Material request deleted successfully!", {
+          duration: 2000,
+          icon: "👏",
+        });
+      } else {
+        throw new Error(res.error);
+      }
+    } catch (error) {
+      console.error(error.message);
+      toast.error("Could not delete material request", {
+        duration: 2000,
+        icon: "😞",
+      });
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+
   const handleApprove = async () => {
     toast.promise(
       handleRequest("approve"),
@@ -125,6 +159,13 @@ const RequestCard = (props) => {
               Reject
             </button>
           )}
+          <button
+            onClick={handleDelete}
+            className="bg-[#828282] hover:bg-[#B0B0B0] text-white font-semibold py-1.5 px-4 rounded disabled:bg-opacity-50 disabled:cursor-not-allowed"
+            disabled={isProcessing}
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>
