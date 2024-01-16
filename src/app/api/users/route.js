@@ -5,7 +5,7 @@ import { connectMongoDB } from "@/lib/mongodb.config";
 export const GET = async () => {
   try {
     await connectMongoDB();
-    const users = await User.find();
+    const users = await User.find().count();
     return NextResponse.json({ success: true, data: users});
   } catch (err) {
     console.error("Error:", err);

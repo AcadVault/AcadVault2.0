@@ -11,7 +11,7 @@ export default function HomePage() {
     try {
       const response = await fetch("/api/users/");
       const data = await response.json();
-      if (data.success) setTotalUsers(data.data.length);
+      if (data.success) setTotalUsers(data.data);
     } catch (err) {
       console.log(err);
     }
