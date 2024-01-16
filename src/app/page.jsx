@@ -9,7 +9,7 @@ export default function HomePage() {
   const [totalUsers, setTotalUsers] = useState(0);
   const fetchData = async () => {
     try {
-      const response = await fetch("/api/users/");
+      const response = await fetch("/api/users/", { next: {revalidate: 10}});
       const data = await response.json();
       if (data.success) setTotalUsers(data.data);
     } catch (err) {
