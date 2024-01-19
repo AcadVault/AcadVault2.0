@@ -22,7 +22,7 @@ const NavBar = ({ isResourceManager, session }) => {
       >
         <a href="/" className="flex gap-2 items-center rtl:space-x-reverse">
           <span
-            className={`${font.className} self-center text-2xl font-semibold whitespace-nowrap dark:text-white`}
+            className={`${font.className} self-center text-2xl font-semibold whitespace-nowrap text-white`}
           >
             AcadVault2.0
           </span>

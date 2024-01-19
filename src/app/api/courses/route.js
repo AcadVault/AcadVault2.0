@@ -18,7 +18,6 @@ export const GET = async (request) => {
     }
 
     await connectMongoDB();
-    console.log(filter);
     const data = await Course.find(filter).sort({ courseName: 1 });
     return NextResponse.json({ success: true, data })
   }

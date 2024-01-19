@@ -3,7 +3,7 @@ const Loading = () => {
     <div className="fixed flex content-center left-0 top-0 h-full w-full">
       <svg
         aria-hidden="true"
-        className="mx-auto inline w-12 h-12text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+        className="mx-auto inline w-12 text-gray-600 animate-spin fill-[#461f60]"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
