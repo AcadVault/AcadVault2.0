@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 const Redirecter = ({ session, isResourceManager, children }) => {
   const pathname = usePathname();
-  if (!session && !(pathname === "/login" || pathname === "/about"))
+  if (!session && !(pathname === "/login" || pathname === "/about" || pathname === "/tos" || pathname === "/privacy"))
     redirect("/login");
   if (session && pathname === "/login") redirect("/");
   if (!isResourceManager && pathname === "/requests") redirect("/");
