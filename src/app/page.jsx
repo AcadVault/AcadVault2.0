@@ -1,25 +1,9 @@
-"use client";
-
 import { GiOpenBook } from "react-icons/gi";
 import { PiUploadSimpleBold } from "react-icons/pi";
 import { FaGithub } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import TotalVisitors from "@/components/TotalVisitors";
 
 export default function HomePage() {
-  const [totalUsers, setTotalUsers] = useState(0);
-  const fetchData = async () => {
-    try {
-      const response = await fetch("/api/users/");
-      const data = await response.json();
-      if (data.success) setTotalUsers(data.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   return (
     <div className="fixed left-0 top-0 -z-10 h-full w-full">
       <div className="flex flex-col items-center justify-center h-full text-center content-center">
@@ -53,9 +37,7 @@ export default function HomePage() {
             </button>
           </a>
         </div>
-        <div className="absolute bottom-0 mb-3 text-sm font-medium text-gray-100 text-center">
-          Total Users: {totalUsers}
-        </div>
+        <TotalVisitors />
       </div>
     </div>
   );
