@@ -3,6 +3,7 @@
 import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import TotalVisitors from "@/components/TotalVisitors";
 
 const LoginPage = () => {
   return (
@@ -31,6 +32,7 @@ const LoginPage = () => {
             </span>
           </button>
         </div>
+        <TotalVisitors />
       </div>
     </div>
   );
