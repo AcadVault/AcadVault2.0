@@ -4,7 +4,8 @@ import { connectMongoDB } from "@/lib/mongodb.config";
 
 export const GET = async (req) => {
   try {
-    req.nextUrl;
+    const url = req.nextUrl;
+    console.log(url);
     await connectMongoDB();
     const users = await User.find().count();
     return NextResponse.json({ success: true, data: users });
