@@ -6,7 +6,7 @@ const TotalVisitors = () => {
   const [totalVisitors, setTotalUsers] = useState(0);
   const fetchData = async () => {
     try {
-      const response = await fetch("/api/users/", { cache: "no-cache" });
+      const response = await fetch("/api/users/");
       const data = await response.json();
       if (data.success) setTotalUsers(data.data);
     } catch (err) {
