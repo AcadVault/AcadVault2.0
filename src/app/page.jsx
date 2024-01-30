@@ -1,7 +1,12 @@
 import { GiOpenBook } from "react-icons/gi";
 import { PiUploadSimpleBold } from "react-icons/pi";
 import { FaGithub } from "react-icons/fa";
-import TotalVisitors from "@/components/TotalVisitors";
+import TotalUsers from "../components/TotalUsers";
+
+export const metadata = {
+  title: "AcadVault2.0",
+  description: "A living open-source repository of Academic Resources for DA-IICT",
+}
 
 export default function HomePage() {
   return (
@@ -37,7 +42,7 @@ export default function HomePage() {
             </button>
           </a>
         </div>
-        <TotalVisitors />
+        <TotalUsers />
       </div>
     </div>
   );

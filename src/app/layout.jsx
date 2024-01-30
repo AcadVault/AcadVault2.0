@@ -9,10 +9,6 @@ import { isResourceManager, getSession } from "@/lib/server-helper-functions";
 import { Heebo as Font } from "next/font/google";
 
 const font = Font({ subsets: ["latin"] });
-export const metadata = {
-  title: "AcadVault 2.0",
-  description: "A living open-source repository of academic resources for DA-IICT",
-};
 
 export default async function RootLayout({ children }) {
   const session = await getSession();

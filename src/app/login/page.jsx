@@ -3,7 +3,7 @@
 import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-import TotalVisitors from "@/components/TotalVisitors";
+import TotalUsers from "@/components/TotalUsers";
 
 const LoginPage = () => {
   return (
@@ -32,7 +32,7 @@ const LoginPage = () => {
             </span>
           </button>
         </div>
-        <TotalVisitors />
+        <TotalUsers />
       </div>
     </div>
   );

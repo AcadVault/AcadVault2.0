@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 
-const TotalVisitors = () => {
-  const [totalVisitors, setTotalUsers] = useState(0);
+const TotalUsers = () => {
+  const [totalUsers, setTotalUsers] = useState(0);
   const fetchData = async () => {
     try {
       const response = await fetch("/api/users/");
@@ -19,9 +19,9 @@ const TotalVisitors = () => {
 
   return (
     <div className="absolute bottom-0 mb-3 text-sm font-medium text-gray-100 text-center">
-      Total Visitors: {totalVisitors}
+      Total Users: {totalUsers}
     </div>
   );
 };
 
-export default TotalVisitors;
+export default TotalUsers;
