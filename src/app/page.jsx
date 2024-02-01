@@ -2,6 +2,7 @@ import { GiOpenBook } from "react-icons/gi";
 import { PiUploadSimpleBold } from "react-icons/pi";
 import { FaGithub } from "react-icons/fa";
 import TotalUsers from "../components/TotalUsers";
+import TotalRequests from "../components/TotalRequests";
 
 export const metadata = {
   title: "AcadVault2.0",
@@ -42,7 +43,10 @@ export default function HomePage() {
             </button>
           </a>
         </div>
-        <TotalUsers />
+        <div className="absolute bottom-0 mb-3 text-sm font-medium text-gray-100 text-center">
+          <TotalUsers /> 
+          {/* {isResourceManager && <TotalUsers />} */}
+        </div>
       </div>
     </div>
   );
