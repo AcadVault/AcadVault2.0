@@ -1,11 +1,29 @@
+"use client"
+
 import React from "react";
 import data from "./data.json";
+import { useState, useEffect } from "react";
 import ContributorCard from "@/components/ContributorCard";
+import CollaboratorCard from "@/components/CollaboratorCard";
 import { FaGithub, FaDiscord } from "react-icons/fa";
 
 const AboutPage = () => {
   const founders = data.founders;
   const managers = [...founders, ...data.resourceManagers];
+  const [contributors, setContributors] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch("https://api.github.com/repos/AcadVault/AcadVault2.0/contributors");
+      const data = await response.json();
+      setContributors(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className="left-0 top-0 h-full -z-10 w-full">
@@ -41,6 +59,14 @@ const AboutPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto w-11/12 sm:w-4/5 md:w-3/4 lg:w-2/3 gap-4 p-1 md:p-5 mt-5 mb-10">
         {managers.map((manager, index) => (
           <ContributorCard key={index} data={manager} />
+        ))}
+      </div>
+      <h1 className="text-3xl font-bold text-white text-center mt-10">
+        GitHub Contributors
+      </h1>
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mx-auto w-11/12 sm:w-4/5 md:w-3/4 lg:w-2/3 gap-4 p-1 md:p-5 mt-5 mb-10">
+        {contributors.map((contributor, index) => (
+          <CollaboratorCard key={index} data={contributor} />
         ))}
       </div>
       <footer className="bottom-0 left-0 w-full bg-transparent text-white text-sm p-5">
