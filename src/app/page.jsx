@@ -3,13 +3,17 @@ import { PiUploadSimpleBold } from "react-icons/pi";
 import { FaGithub } from "react-icons/fa";
 import TotalUsers from "../components/TotalUsers";
 import TotalRequests from "../components/TotalRequests";
+import { isResourceManager, getSession } from "@/lib/server-helper-functions";
 
 export const metadata = {
   title: "AcadVault2.0",
   description: "A living open-source repository of Academic Resources for DA-IICT",
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  const session = await getSession();
+  const _isResourceManager = session && session.user && (await isResourceManager(session.user.id));
+
   return (
     <div className="fixed left-0 top-0 -z-10 h-full w-full">
       <div className="flex flex-col items-center justify-center h-full text-center content-center">
@@ -44,8 +48,8 @@ export default function HomePage() {
           </a>
         </div>
         <div className="absolute bottom-0 mb-3 text-sm font-medium text-gray-100 text-center">
-          <TotalUsers /> 
-          {/* {isResourceManager && <TotalUsers />} */}
+          <TotalUsers />
+          {_isResourceManager && <TotalRequests />}
         </div>
       </div>
     </div>
