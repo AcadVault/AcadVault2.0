@@ -46,6 +46,7 @@ const RequestCard = (props) => {
   const handleDelete = async () => {
     try {
       setIsProcessing(true);
+      toast.loading("Deleting...");
       const response = await fetch(`/api/requests/delete`, {
         method: "DELETE",
         headers: {
@@ -58,21 +59,17 @@ const RequestCard = (props) => {
 
       const res = await response.json();
       if (res.success) {
-        toast.success("Material request deleted successfully!", {
-          duration: 2000,
-          icon: "👏",
-        });
+        toast.success("Material request deleted successfully!");
       } else {
         throw new Error(res.error);
       }
     } catch (error) {
       console.error(error.message);
-      toast.error("Could not delete material request", {
-        duration: 2000,
-        icon: "😞",
-      });
+      toast.error("Could not delete material request"); 
+      throw error;
     } finally {
       setIsProcessing(false);
+      window.location.reload();
     }
   };
 
