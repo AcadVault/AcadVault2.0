@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
 import { toast } from "react-hot-toast";
 import { PiUploadSimpleBold } from "react-icons/pi";
+import { Helmet } from "react-helmet";
 
 export default function NewMaterialPage() {
   const router = useRouter();
@@ -92,6 +93,10 @@ export default function NewMaterialPage() {
 
   return (
     <div className="left-0 top-0 -z-10 h-full w-full">
+      <Helmet>
+        <title>New Material | AcadVault2.0</title>
+        <meta name="description" content="Request new academic material for DA-IICT" />
+      </Helmet>
       <div className="flex items-center justify-center text-white my-10">
         <div className="mx-auto w-11/12 sm:w-3/4 md:w-2/3 xl:w-1/2">
           <form onSubmit={handleSubmit}>

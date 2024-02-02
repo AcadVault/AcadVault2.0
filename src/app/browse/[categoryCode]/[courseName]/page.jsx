@@ -1,9 +1,12 @@
+"use client"
+
 import { MATERIAL_CATEGORIES } from '@/lib/constants'
 import BrowseCard from '@/components/BrowseCard'
 import { FaChalkboardTeacher } from 'react-icons/fa'
 import { PiExam } from 'react-icons/pi'
 import { MdOutlineAssignment } from 'react-icons/md'
 import { GiEvilBook } from 'react-icons/gi'
+import { Helmet } from 'react-helmet'
 
 const iconList = {
     Exams: <PiExam />,
@@ -22,6 +25,9 @@ const MaterialCategoryListPage = ({ params }) => {
 
     return (
         <div className="grid gap-2 md:gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mx-auto">
+            <Helmet>
+                <title>{categoryCode} - {courseName} | AcadVault2.0</title>
+            </Helmet>
             {materialCategoryList.map((category, index) => {
                 return (
                     <BrowseCard

@@ -4,10 +4,15 @@ import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import TotalUsers from "@/components/TotalUsers";
+import { Helmet } from "react-helmet";
 
 const LoginPage = () => {
   return (
     <div className="fixed left-0 top-0 -z-10 h-full w-full">
+      <Helmet>
+        <title>Login | AcadVault2.0</title>
+        <meta name="description" content="Login to AcadVault2.0" />
+      </Helmet>
       <div className="flex flex-col items-center justify-center h-full text-center content-center">
         <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl text-white">
           AcadVault2.0

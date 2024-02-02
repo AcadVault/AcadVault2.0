@@ -1,5 +1,10 @@
 import { FaGithub, FaDiscord } from 'react-icons/fa'
 
+export const metadata = {
+    title: 'Privacy Policy | AcadVault2.0',
+    description: 'A living open-source repository of Academic Resources for DA-IICT',
+}
+
 const Privacy = () => {
     return (
         <div className="left-0 top-0 -z-10 h-full w-full text-gray-50">

@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import ContributorCard from "@/components/ContributorCard";
 import CollaboratorCard from "@/components/CollaboratorCard";
 import { FaGithub, FaDiscord } from "react-icons/fa";
+import { Helmet } from "react-helmet";
 
 const AboutPage = () => {
   const founders = data.founders;
@@ -27,6 +28,10 @@ const AboutPage = () => {
 
   return (
     <div className="left-0 top-0 h-full -z-10 w-full">
+      <Helmet>
+        <title>About | AcadVault2.0</title>
+        <meta name="description" content="About AcadVault2.0 project." />
+      </Helmet>
       <h1 className="text-3xl font-bold text-white text-center mt-10">
         What is AcadVault2.0?
       </h1>

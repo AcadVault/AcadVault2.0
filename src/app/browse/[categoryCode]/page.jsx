@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import BrowseCard from "@/components/BrowseCard";
+import { Helmet } from "react-helmet";
 
 const CourseListPage = ({ params }) => {
   const categoryCode = params.categoryCode;
@@ -24,6 +25,9 @@ const CourseListPage = ({ params }) => {
 
   return (
     <div className="grid gap-2 md:gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mx-auto">
+      <Helmet>
+        <title>Browse {categoryCode} | AcadVault2.0</title>
+      </Helmet>
       {allCourses.map(({ courseName }, index) => {
         return (
           <BrowseCard
