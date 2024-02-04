@@ -37,7 +37,9 @@ const LoginPage = () => {
             </span>
           </button>
         </div>
-        <TotalUsers />
+        <div className="absolute bottom-0 mb-3 text-sm font-medium text-gray-100 text-center">
+          <TotalUsers />
+        </div>
       </div>
     </div>
   );
