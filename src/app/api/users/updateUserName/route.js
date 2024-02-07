@@ -4,7 +4,7 @@ import { connectMongoDB } from "@/lib/mongodb.config";
 
 export const POST = async (req) => {
   try {
-    const { email, username } = req.body;
+    const { email, username } = await req.json();
     await connectMongoDB();
     const userDatabase = await User.findOne({ email: email });
 
@@ -13,6 +13,7 @@ export const POST = async (req) => {
     }
 
     userDatabase.name = username;
+    userDatabase.emailVerified = true; 
     const updatedUser = await userDatabase.save();
 
     return NextResponse.json({ success: true, data: updatedUser });
