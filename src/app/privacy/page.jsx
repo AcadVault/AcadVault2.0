@@ -7,11 +7,11 @@ export const metadata = {
 
 const Privacy = () => {
     return (
-        <div className="left-0 top-0 -z-10 h-full w-full text-gray-50">
+        <div className="left-0 top-0 -z-10 h-full w-full md:w-3/4 xl:w-2/3 2xl:1/2 text-gray-50 mx-auto">
             <div className="h-full text-center ">
                 <h1 className="text-4xl font-bold my-5">Privacy Policy</h1>
             </div>
-            <div className="p-5 md:p-10">
+            <div className="p-5">
                 <h2 className="text-2xl font-bold mb-3 mt-8 text-center">
                     Information We Collect
                 </h2>

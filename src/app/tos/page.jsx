@@ -7,11 +7,11 @@ export const metadata = {
 
 const TermsOfService = () => {
     return (
-        <div className="left-0 top-0 -z-10 h-full w-full text-gray-50">
+        <div className="left-0 top-0 -z-10 h-full w-full md:w-3/4 xl:w-2/3 2xl:1/2 text-gray-50 mx-auto">
             <div className="h-full text-center ">
                 <h1 className="text-4xl font-bold my-5">Terms of Service</h1>
             </div>
-            <div className="p-5 md:p-10">
+            <div className="p-5">
                 <p className="text-lg mb-3 mt-8 ">
                     Please read these Terms of Service (&quot;Terms&quot;)
                     carefully before using our website and services provided by{' '}
