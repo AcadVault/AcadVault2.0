@@ -9,8 +9,7 @@ import { FaGithub, FaDiscord } from "react-icons/fa";
 import { Helmet } from "react-helmet";
 
 const AboutPage = () => {
-  const founders = data.founders;
-  const managers = [...founders, ...data.resourceManagers];
+  const managers = [...data.resourceManagers];
   const [contributors, setContributors] = useState([]);
 
   const fetchData = async () => {
@@ -50,14 +49,6 @@ const AboutPage = () => {
         . We aim to maintain a network for an{" "}
         <b className="whitespace-nowrap">Academic Material Sharing Platform</b>.
       </p>
-      <h1 className="text-3xl font-bold text-white text-center mt-10">
-        Founders
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 mx-auto w-11/12 sm:w-4/5 md:w-3/4 lg:w-2/3 gap-4 p-1 md:p-5 mt-5">
-        {founders.map((founder, index) => (
-          <ContributorCard key={index} data={founder} />
-        ))}
-      </div>
       <h1 className="text-3xl font-bold text-white text-center mt-10">
         Resource Managers
       </h1>
