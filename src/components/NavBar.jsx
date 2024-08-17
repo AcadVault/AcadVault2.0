@@ -30,17 +30,17 @@ const NavBar = ({ isResourceManager, session }) => {
                     </button>
                     <div className={`${isMenuOpen ? "flex absolute right-5 top-16 py-3 z-50 bg-slate-900 border border-gray-500 rounded-md  min-w-[200px] items-center text-white" : "hidden"} flex-col lg:flex lg:flex-row lg:items-center lg:w-auto lg:space-x-6 rtl:space-x-reverse`}>
                         {session ? (
-                            <div>
-                                <a href="/browse" style={{ color: pathname.includes("/browse") ? `${activeColor}` : "", fontWeight: pathname.includes("/browse") ? "bold" : "", }} onClick={() => setIsMenuOpen(false)} className="text-sm text-white w-full h-full hover:bg-[#0002] lg:hover:text-blue-400 transition-all max-lg:px-5 max-lg:py-2 lg:mt-0">Browse</a>
-                                <a href="/new-material" style={{ color: pathname === "/new-material" ? `${activeColor}` : "", fontWeight: pathname === "/new-material" ? "bold" : "", }} onClick={() => setIsMenuOpen} className="text-sm text-white w-full h-full hover:bg-[#0002] lg:hover:text-blue-400 transition-all max-lg:px-5 max-lg:py-2 lg:mt-0">Upload</a>
-                                {isResourceManager && (<a href="/requests" style={{ color: pathname === "/requests" ? `${activeColor}` : "", fontWeight: pathname === "/requests" ? "bold" : "", }} onClick={() => setIsMenuOpen} className="text-sm text-white w-full h-full hover:bg-[#0002] lg:hover:text-blue-400 transition-all max-lg:px-5 max-lg:py-2 lg:mt-0">Requests</a>)}
-                                <a href="/about" style={{ color: pathname === "/about" ? `${activeColor}` : "", fontWeight: pathname === "/about" ? "bold" : "", }} onClick={() => setIsMenuOpen} className="text-sm text-white w-full h-full hover:bg-[#0002] lg:hover:text-blue-400 transition-all max-lg:px-5 max-lg:py-2 lg:mt-0">About</a>
+                            <>
+                                <a href="/browse" style={{ color: pathname.includes("/browse") ? `${activeColor}` : "", fontWeight: pathname.includes("/browse") ? "bold" : "", }} onClick={() => setIsMenuOpen(false)} className="text-sm text-white w-full h-full hover:bg-[#0002] lg:hover:text-blue-400 transition-all max-lg:px-5 max-lg:py-2 lg:mt-0">Browse </a>
+                                <a href="/new-material" style={{ color: pathname === "/new-material" ? `${activeColor}` : "", fontWeight: pathname === "/new-material" ? "bold" : "", }} onClick={() => setIsMenuOpen} className="text-sm text-white w-full h-full hover:bg-[#0002] lg:hover:text-blue-400 transition-all max-lg:px-5 max-lg:py-2 lg:mt-0">Upload </a>
+                                {isResourceManager && (<a href="/requests" style={{ color: pathname === "/requests" ? `${activeColor}` : "", fontWeight: pathname === "/requests" ? "bold" : "", }} onClick={() => setIsMenuOpen} className="text-sm text-white w-full h-full hover:bg-[#0002] lg:hover:text-blue-400 transition-all max-lg:px-5 max-lg:py-2 lg:mt-0">Requests </a>)}
+                                <a href="/about" style={{ color: pathname === "/about" ? `${activeColor}` : "", fontWeight: pathname === "/about" ? "bold" : "", }} onClick={() => setIsMenuOpen} className="text-sm text-white w-full h-full hover:bg-[#0002] lg:hover:text-blue-400 transition-all max-lg:px-5 max-lg:py-2 lg:mt-0">About </a>
                                 <a href="/me" style={{ color: pathname === "/me" ? `${activeColor}` : "", fontWeight: pathname === "/me" ? "bold" : "", }} onClick={() => setIsMenuOpen} className="text-sm text-white w-full h-full hover:bg-[#0002] lg:hover:text-blue-400 transition-all max-lg:px-5 max-lg:py-2 lg:mt-0">{isMenuOpen ? ("Profile") : (<FaRegUserCircle className="inline-block w-5 h-5 me-1" />)}</a>
-                            </div>
+                            </>
                         ) : (
-                            <div>
+                            <>
                                 <a href="/about" style={{ color: pathname === "/about" ? `${activeColor}` : "", fontWeight: pathname === "/about" ? "bold" : "", }} onClick={() => setIsMenuOpen} className="text-sm text-white w-full h-full hover:bg-[#0002] lg:hover:text-blue-400 transition-all max-lg:px-5 max-lg:py-2 lg:mt-0">About</a>
-                            </div>
+                            </>
                         )}
                     </div>
                 </div>
