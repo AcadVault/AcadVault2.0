@@ -4,12 +4,10 @@ import { createContext } from "react";
 
 export const SessionContext = createContext();
 
-const SessionProvider = ({ children, session }) => {
-  return (
+const SessionProvider = ({ children, session }) => (
     <SessionContext.Provider value={{ session }}>
-      {children}
+        {children}
     </SessionContext.Provider>
-  );
-};
+);
 
 export default SessionProvider;

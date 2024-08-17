@@ -20,29 +20,14 @@ const MaterialCategoryListPage = ({ params }) => {
     const courseName = decodeURIComponent(params.courseName)
 
     const materialCategoryList = []
-    for (const key in MATERIAL_CATEGORIES)
-        materialCategoryList.push(MATERIAL_CATEGORIES[key])
+    for (const key in MATERIAL_CATEGORIES) materialCategoryList.push(MATERIAL_CATEGORIES[key])
 
     return (
         <div className="grid gap-2 md:gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mx-auto">
             <Helmet>
                 <title>{categoryCode} - {courseName} | AcadVault2.0</title>
             </Helmet>
-            {materialCategoryList.map((category, index) => {
-                return (
-                    <BrowseCard
-                        key={index}
-                        href={`/browse/${categoryCode}/${courseName}/${category}`}
-                    >
-                        <div className="flex flex-col items-center">
-                            <div className=" text-6xl md:text-7xl mb-5">
-                                {iconList[category]}
-                            </div>
-                            <div className="card-text-2">{category}</div>
-                        </div>
-                    </BrowseCard>
-                )
-            })}
+            {materialCategoryList.map((category, index) => { return (<BrowseCard key={index} href={`/browse/${categoryCode}/${courseName}/${category}`}><div className="flex flex-col items-center"><div className=" text-6xl md:text-7xl mb-5">{iconList[category]}</div><div className="card-text-2">{category}</div></div></BrowseCard>) })}
         </div>
     )
 }

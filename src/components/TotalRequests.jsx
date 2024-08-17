@@ -25,9 +25,7 @@ const TotalRequests = () => {
     }, []);
 
     return (
-        <span>
-            | Approved Requests: {Approved} | Requested: {Requested} | Rejected: {Rejected}
-        </span>
+        <span>| Approved Requests: {Approved} | Requested: {Requested} | Rejected: {Rejected}</span>
     );
 };
 
