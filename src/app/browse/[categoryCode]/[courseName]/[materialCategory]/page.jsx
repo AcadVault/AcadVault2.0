@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import BrowseMaterialCard from "@/components/BrowseMaterialCard";
-import Loading from "@/components/Loading";
-import NothingHere from "@/components/NothingHere";
+import BrowseMaterialCard from "@/components/(browse)/BrowseMaterialCard";
+import Loading from "@/components/(layout)/Loading";
+import NothingHere from "@/components/(layout)/NothingHere";
 import { Helmet } from "react-helmet";
 
 const MaterialResultsPage = ({ params }) => {

@@ -1,6 +1,6 @@
 "use client";
 
-import MaterialCard from "@/components/MaterialCard";
+import MaterialCard from "@/components/(browse)/MaterialCard";
 import { formatDate } from "@/lib/client-helper-functions";
 import { useState } from "react";
 import toast from "react-hot-toast";

@@ -1,9 +1,9 @@
 "use client";
 
-import RequestCard from "@/components/RequestCard";
+import RequestCard from "@/components/(requests)/RequestCard";
 import { useState, useEffect } from "react";
-import Loading from "@/components/Loading";
-import NothingHere from "@/components/NothingHere";
+import Loading from "@/components/(layout)/Loading";
+import NothingHere from "@/components/(layout)/NothingHere";
 
 function RequestsPage() {
     const [cardData, setCardData] = useState(null);

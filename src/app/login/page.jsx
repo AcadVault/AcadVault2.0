@@ -3,7 +3,7 @@
 import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-import TotalUsers from "@/components/TotalUsers";
+import TotalUsers from "@/components/(layout)/TotalUsers";
 import { Helmet } from "react-helmet";
 
 const LoginPage = () => {

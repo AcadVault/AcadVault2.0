@@ -11,3 +11,7 @@ export const openFile = (fileID) => {
     const webviewLink = `https://drive.google.com/file/d/${fileID}/view`;
     window.open(webviewLink, '_blank');
 }
+
+export const deldupe = (arr) => {
+    return [...new Set(arr)];
+};

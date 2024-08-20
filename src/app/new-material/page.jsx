@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import FileUploader from "@/components/FileUploader";
+import FileUploader from "@/components/(new-material)/FileUploader";
 import { EXAMS, MATERIAL_TYPES } from "@/lib/constants";
 import { useRouter } from "next/navigation";
-import Loading from "@/components/Loading";
+import Loading from "@/components/(layout)/Loading";
 import { toast } from "react-hot-toast";
 import { PiUploadSimpleBold } from "react-icons/pi";
 import { Helmet } from "react-helmet";

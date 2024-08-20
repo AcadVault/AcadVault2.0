@@ -1,4 +1,4 @@
-import BrowseCard from "@/components/BrowseCard";
+import BrowseCard from "@/components/(browse)/BrowseCard";
 import { MATERIAL_TYPES } from "@/lib/constants";
 import { formatDate, openFile } from "@/lib/client-helper-functions";
 import { GoVerified } from "react-icons/go";

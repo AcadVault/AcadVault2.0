@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import BrowseCard from "@/components/BrowseCard";
+import BrowseCard from "@/components/(browse)/BrowseCard";
 import { Helmet } from "react-helmet";
 
 const CourseListPage = ({ params }) => {

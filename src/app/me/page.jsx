@@ -4,7 +4,7 @@ import { useState } from "react";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import { useContext } from "react";
-import { SessionContext } from "@/components/SessionProvider";
+import { SessionContext } from "@/components/(layout)/SessionProvider";
 import { Helmet } from "react-helmet";
 import toast from "react-hot-toast";
 

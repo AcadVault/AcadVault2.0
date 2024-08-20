@@ -1,7 +1,7 @@
 "use client"
 
 import { MATERIAL_CATEGORIES } from '@/lib/constants'
-import BrowseCard from '@/components/BrowseCard'
+import BrowseCard from '@/components/(browse)/BrowseCard'
 import { FaChalkboardTeacher } from 'react-icons/fa'
 import { PiExam } from 'react-icons/pi'
 import { MdOutlineAssignment } from 'react-icons/md'

@@ -3,8 +3,9 @@
 import React from "react";
 import data from "./data.json";
 import { useState, useEffect } from "react";
-import ContributorCard from "@/components/ContributorCard";
-import CollaboratorCard from "@/components/CollaboratorCard";
+import ContributorCard from "@/components/(about)/ContributorCard";
+import CollaboratorCard from "@/components/(about)/CollaboratorCard";
+import DriveContributors from "@/components/(about)/DriveContributors";
 import { FaGithub, FaDiscord } from "react-icons/fa";
 import { Helmet } from "react-helmet";
 
@@ -44,6 +45,10 @@ const AboutPage = () => {
                 {contributors.map((contributor, index) => (
                     <CollaboratorCard key={index} data={contributor} />
                 ))}
+            </div>
+            <h1 className="text-3xl font-bold text-white text-center mt-10">Material Contributors</h1>
+            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mx-auto w-11/12 sm:w-4/5 md:w-3/4 lg:w-2/3 gap-4 p-1 md:p-5 mt-5 mb-10">
+                <DriveContributors />
             </div>
             <footer className="bottom-0 left-0 w-full bg-transparent text-white text-sm p-5">
                 <div className="flex justify-between">

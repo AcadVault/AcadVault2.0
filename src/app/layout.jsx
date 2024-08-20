@@ -1,7 +1,7 @@
 import "./globals.css";
-import SessionProvider from "@/components/SessionProvider";
-import Redirecter from "@/components/Redirecter";
-import Navbar from "@/components/NavBar";
+import SessionProvider from "@/components/(layout)/SessionProvider";
+import Redirecter from "@/components/(layout)/Redirecter";
+import Navbar from "@/components/(layout)/NavBar";
 import { Toaster } from "react-hot-toast";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";

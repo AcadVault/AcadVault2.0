@@ -1,8 +1,8 @@
 import { GiOpenBook } from "react-icons/gi";
 import { PiUploadSimpleBold } from "react-icons/pi";
 import { FaGithub } from "react-icons/fa";
-import TotalUsers from "../components/TotalUsers";
-import TotalRequests from "../components/TotalRequests";
+import TotalUsers from "../components/(layout)/TotalUsers";
+import TotalRequests from "../components/(layout)/TotalRequests";
 import { isResourceManager, getSession } from "@/lib/server-helper-functions";
 
 export const metadata = {

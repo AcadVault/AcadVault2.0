@@ -1,6 +1,6 @@
 "use client";
 
-import BrowseCard from "@/components/BrowseCard";
+import BrowseCard from "@/components/(browse)/BrowseCard";
 import { COURSE_CATEGORY_CODES } from "@/lib/constants";
 import { Helmet } from "react-helmet";
 
