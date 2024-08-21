@@ -5,7 +5,9 @@ import { connectMongoDB } from "@/lib/mongodb.config";
 
 export const GET = async (req) => {
     try {
+        const { searchParams } = req.nextUrl;
         await connectMongoDB();
+
         function deldupe(arr) {
             return [...new Set(arr)];
         };
