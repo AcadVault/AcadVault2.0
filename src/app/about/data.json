@@ -1,5 +1,5 @@
 {
-    "resourceManagers": [
+    "founders": [
         {
             "name": "Jay Malaviya",
             "batch": "B.Tech. 2021",
@@ -17,7 +17,9 @@
             "twitter": "https://twitter.com/Pranshu_05",
             "instagram": "https://www.instagram.com/pranshu.05/",
             "pfp": "https://avatars.githubusercontent.com/u/70943732?v=4"
-        },
+        }
+    ],
+    "resourceManagers": [
         {
             "name": "Jash Shah",
             "batch": "B.Tech. 2022",
