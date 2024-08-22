@@ -1,5 +1,5 @@
 {
-    "founders": [
+    "resourceManagers": [
         {
             "name": "Jay Malaviya",
             "batch": "B.Tech. 2021",
@@ -17,9 +17,7 @@
             "twitter": "https://twitter.com/Pranshu_05",
             "instagram": "https://www.instagram.com/pranshu.05/",
             "pfp": "https://avatars.githubusercontent.com/u/70943732?v=4"
-        }
-    ],
-    "resourceManagers": [
+        },
         {
             "name": "Jash Shah",
             "batch": "B.Tech. 2022",
@@ -28,6 +26,15 @@
             "twitter": "https://twitter.com/jashshah0803",
             "instagram": "https://www.instagram.com/jash0803/",
             "pfp": "https://avatars.githubusercontent.com/u/105346233?v=4"
+        },
+        {
+            "name": "Shivam Javiya",
+            "batch": "M.Sc. 2023",
+            "linkedin": "https://www.linkedin.com/in/shivam-javiya/",
+            "github": "https://github.com/ShivamJaviya",
+            "twitter": "https://x.com/shivam_javiya",
+            "instagram": "https://www.instagram.com/mr.j_s_j/",
+            "pfp": "https://avatars.githubusercontent.com/u/94696278?v=4"
         }
     ]
 }
