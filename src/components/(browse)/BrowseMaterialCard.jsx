@@ -1,10 +1,8 @@
 import BrowseCard from "@/components/(browse)/BrowseCard";
 import { MATERIAL_TYPES } from "@/lib/constants";
-import { formatDate, openFile } from "@/lib/client-helper-functions";
-import { GoVerified } from "react-icons/go";
+import { openFile } from "@/lib/client-helper-functions";
 
 const BrowseMaterialCard = ({ data }) => {
-    const formattedDate = formatDate(data.createdAt);
     const handleClick = () => { openFile(data.fileID); };
 
     return (
@@ -43,8 +41,7 @@ const BrowseMaterialCard = ({ data }) => {
                     )}
                     {data.year && <div className="card-text-4 mt-3">{data.year}</div>}
                     <div className="flex card-text-6 mt-3 items-center justify-center gap-1">
-                        <span><GoVerified className="w-3 h-3 opacity-60" strokeWidth="1.5" stroke="#6370ff" /></span>
-                        <span>Approved on {formattedDate}</span>
+                        Uploaded by: {data.uploaderName}
                     </div>
                 </div>
             </BrowseCard>
