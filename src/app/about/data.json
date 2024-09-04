@@ -3,97 +3,20 @@
         {
             "name": "Jay Malaviya",
             "batch": "B.Tech. 2021",
-            "email": "202101143@daiict.ac.in"
+            "email": "202101143@daiict.ac.in",
+            "pfp": "https://avatars.githubusercontent.com/u/89834788?v=4"
         },
         {
             "name": "Pranshu Patel",
             "batch": "B.Tech. 2023",
-            "email": "202301143@daiict.ac.in"
+            "email": "202301143@daiict.ac.in",
+            "pfp": "https://avatars.githubusercontent.com/u/70943732?v=4"
         },
         {
             "name": "Jash Shah",
             "batch": "B.Tech. 2022",
-            "email": "202201143@daiict.ac.in"
-        },
-        {
-            "name": "Akshar Panchani",
-            "batch": "B.Tech. 2021",
-            "email": "202101522@daiict.ac.in"
-        },
-        {
-            "name": "Yash Tarapara",
-            "batch": "B.Tech. 2022",
-            "email": "202201422@daiict.ac.in"
-        },
-        {
-            "name": "Chaitanya Sheth",
-            "batch": "B.Tech. 2021",
-            "email": "202101030@daiict.ac.in"
-        },
-        {
-            "name": "Aditya Singhania",
-            "batch": "B.Tech. 2021",
-            "email": "202101086@daiict.ac.in"
-        },
-        {
-            "name": "Dhruv Shah",
-            "batch": "B.Tech. 2021",
-            "email": "202103017@daiict.ac.in"
-        },
-        {
-            "name": "Vraj Dobariya",
-            "batch": "B.Tech. 2022",
-            "email": "202201106@daiict.ac.in"
-        },
-        {
-            "name": "Zeel Ghori",
-            "batch": "B.Tech. 2022",
-            "email": "202201287@daiict.ac.in"
-        },
-        {
-            "name": "Madhav Kanjilimadom",
-            "batch": "B.Tech. 2022",
-            "email": "202203018@daiict.ac.in"
-        },
-        {
-            "name": "Parshv Joshi",
-            "batch": "B.Tech. 2023",
-            "email": "202301039@daiict.ac.in"
-        },
-        {
-            "name": "Parva Raval",
-            "batch": "B.Tech. 2023",
-            "email": "202301055@daiict.ac.in"
-        },
-        {
-            "name": "Jas Mehta",
-            "batch": "B.Tech. 2023",
-            "email": "202301432@daiict.ac.in"
-        },
-        {
-            "name": "Khanak Patel",
-            "batch": "B.Tech. 2023",
-            "email": "202303020@daiict.ac.in"
-        },
-        {
-            "name": "Karthik Maddimsetti",
-            "batch": "B.Tech. 2023",
-            "email": "202304006@daiict.ac.in"
-        },
-        {
-            "name": "Manish Sharma",
-            "batch": "M.Tech. 2023",
-            "email": "202312103@daiict.ac.in"
-        },
-        {
-            "name": "Anurag Shukla",
-            "batch": "M.Tech. 2023",
-            "email": "202318039@daiict.ac.in"
-        },
-        {
-            "name": "Niraj Italiya",
-            "batch": "M.Tech. 2023",
-            "email": "202311012@daiict.ac.in"
+            "email": "202201143@daiict.ac.in",
+            "pfp": "https://avatars.githubusercontent.com/u/105346233?v=4"
         }
     ]
 }
