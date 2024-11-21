@@ -20,7 +20,7 @@ export default function NewMaterialPage() {
 
     for (const key in MATERIAL_TYPES) materialsList.push(MATERIAL_TYPES[key]);
     for (const key in EXAMS) examsList.push(EXAMS[key]);
-    for (let i = 2019; i <= new Date().getFullYear(); i++) yearsList.push(i);
+    for (let i = 2009; i <= new Date().getFullYear(); i++) yearsList.push(i);
 
     const [courseName, setCourseName] = useState(null);
     const [materialType, setMaterialType] = useState(materialsList[0]);
