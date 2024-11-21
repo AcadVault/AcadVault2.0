@@ -27,12 +27,37 @@ const MaterialResultsPage = ({ params }) => {
     if (data === null) return <Loading />;
     if (data.length === 0) return <NothingHere />;
 
+    const groupedData = data.reduce((acc, material) => {
+        const year = material.year;
+        if (!acc[year]) acc[year] = [];
+        acc[year].push(material);
+        return acc;
+    }, {});
+
+    Object.keys(groupedData).forEach(year => {
+        groupedData[year].sort((a, b) => {
+            if (a.name && b.name) {
+                return a.name.localeCompare(b.name);
+            }
+            return 0;
+        });
+    });
+
     return (
-        <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4 mx-auto">
+        <div className="mx-auto">
             <Helmet>
                 <title>{courseName} - {materialCategory} | AcadVault2.0</title>
             </Helmet>
-            {data.map((material, index) => { return <BrowseMaterialCard key={index} data={material} />; })}
+            {Object.keys(groupedData).sort().map(year => (
+                <div key={year}>
+                    <h2 className="text-xl font-bold my-4 text-zinc-100">{year}</h2>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4">
+                        {groupedData[year].map((material, index) => (
+                            <BrowseMaterialCard key={index} data={material} />
+                        ))}
+                    </div>
+                </div>
+            ))}
         </div>
     );
 };
