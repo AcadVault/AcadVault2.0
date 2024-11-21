@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 
 const TotalRequests = () => {
-    const [Approved, setApproved] = useState(0);
     const [Requested, setRequested] = useState(0);
     const [Rejected, setRejected] = useState(0);
 
@@ -12,7 +11,6 @@ const TotalRequests = () => {
             const response = await fetch("/api/requests");
             const data = await response.json();
             if (data.success) {
-                setApproved(data.data.filter(item => item.status === "APPROVED").length);
                 setRequested(data.data.filter(item => item.status === "REQUESTED").length);
                 setRejected(data.data.filter(item => item.status === "REJECTED").length);
             }
@@ -25,7 +23,7 @@ const TotalRequests = () => {
     }, []);
 
     return (
-        <span>| Approved Requests: {Approved} | Requested: {Requested} | Rejected: {Rejected}</span>
+        <span>| Requested: {Requested} | Rejected: {Rejected}</span>
     );
 };
 

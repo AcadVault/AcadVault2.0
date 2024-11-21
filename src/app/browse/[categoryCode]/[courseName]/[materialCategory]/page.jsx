@@ -36,8 +36,17 @@ const MaterialResultsPage = ({ params }) => {
 
     Object.keys(groupedData).forEach(year => {
         groupedData[year].sort((a, b) => {
-            if (a.number !== undefined && b.number !== undefined) {
-                return a.number - b.number;
+            const parseStart = (number) => {
+                if (!number) return 0;
+                const match = number.match(/^\d+/);
+                return match ? parseInt(match[0], 10) : 0;
+            };
+
+            const startA = parseStart(a.number);
+            const startB = parseStart(b.number);
+
+            if (startA !== startB) {
+                return startA - startB;
             }
 
             const nameA = a.name || "";
