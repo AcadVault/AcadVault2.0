@@ -17,7 +17,7 @@ const MaterialSchema = new Schema({
         type: String,
     },
     number: {
-        type: Number,
+        type: String,
     },
     year: {
         type: Number,

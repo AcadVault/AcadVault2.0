@@ -65,6 +65,7 @@ export default function NewMaterialPage() {
             setMaterialType(materialsList[0]);
         }
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!file) {
@@ -140,7 +141,7 @@ export default function NewMaterialPage() {
                                 {materialType === MATERIAL_TYPES.LECTURE_SLIDES && (
                                     <div className="mb-5">
                                         <label className="mb-3 block text-base font-medium ">Which Lecture?</label>
-                                        <input type="number" name="number" min="1" max="40" placeholder="Lecture Number" className="w-full rounded-md border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] placeholder:opacity-50 outline-none focus:border-[#6A64F1] focus:shadow-md" required />
+                                        <input type="text" name="number" placeholder="Enter Lecture number or Range (e.g. 1 to 5)" className="w-full rounded-md border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md" required/>
                                     </div>
                                 )}
                             </div>
