@@ -14,7 +14,7 @@ const MaterialResultsPage = ({ params }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("/api/materials?" + new URLSearchParams({ courseName, materialCategory }).toString(), { method: "GET", });
+                const response = await fetch("/api/materials?" + new URLSearchParams({ courseName, materialCategory }).toString(), { method: "GET" });
                 const { data } = await response.json();
                 setData(data);
             } catch (error) {
@@ -28,7 +28,7 @@ const MaterialResultsPage = ({ params }) => {
     if (data.length === 0) return <NothingHere />;
 
     const groupedData = data.reduce((acc, material) => {
-        const year = material.year;
+        const year = material.year || "Uncategorized";
         if (!acc[year]) acc[year] = [];
         acc[year].push(material);
         return acc;
@@ -36,10 +36,13 @@ const MaterialResultsPage = ({ params }) => {
 
     Object.keys(groupedData).forEach(year => {
         groupedData[year].sort((a, b) => {
-            if (a.name && b.name) {
-                return a.name.localeCompare(b.name);
+            if (a.number !== undefined && b.number !== undefined) {
+                return a.number - b.number;
             }
-            return 0;
+
+            const nameA = a.name || "";
+            const nameB = b.name || "";
+            return nameA.localeCompare(nameB, undefined, { numeric: true, sensitivity: "base" });
         });
     });
 
@@ -50,7 +53,7 @@ const MaterialResultsPage = ({ params }) => {
             </Helmet>
             {Object.keys(groupedData).sort().map(year => (
                 <div key={year}>
-                    <h2 className="text-xl font-bold my-4 text-zinc-100">{year}</h2>
+                    <h2 className="text-xl font-bold my-4 text-zinc-100">{year === "Uncategorized" ? "" : year}</h2>
                     <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4">
                         {groupedData[year].map((material, index) => (
                             <BrowseMaterialCard key={index} data={material} />
