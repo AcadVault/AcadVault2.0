@@ -128,7 +128,7 @@ export default function NewMaterialPage() {
                                 {(materialType === MATERIAL_TYPES.ASSIGNMENT_QUESTIONS || materialType === MATERIAL_TYPES.ASSIGNMENT_SOLUTION) && (
                                     <div className="mb-5">
                                         <label className="mb-3 block text-base font-medium ">Which Lab/Tutorial?</label>
-                                        <select name="number" className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md">{[...Array(12).keys()].map((i) => { return (<option value={i + 1} key={i + 1} className="text-[#676c79]">{i + 1}</option>); })}</select>
+                                        <select name="number" className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md">{[...Array(15).keys()].map((i) => { return (<option value={i + 1} key={i + 1} className="text-[#676c79]">{i + 1}</option>); })}</select>
                                     </div>
                                 )}
                                 {(materialType === MATERIAL_TYPES.EXAM_QUESTION_PAPER || materialType === MATERIAL_TYPES.EXAM_PAPER_SOLUTION) && (
