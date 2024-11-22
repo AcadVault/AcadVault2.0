@@ -21,8 +21,8 @@ const RequestCard = (props) => {
             setIsProcessing(true);
             const response = await fetch(`/api/requests/${operation}`, {
                 method: "PUT",
-                headers: { "Content-Type": "application/json", },
-                body: JSON.stringify({ requestID: data._id, }),
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ requestID: data._id }),
             });
 
             const res = await response.json();
@@ -45,8 +45,8 @@ const RequestCard = (props) => {
             toast.loading("Deleting...");
             const response = await fetch(`/api/requests/delete`, {
                 method: "DELETE",
-                headers: { "Content-Type": "application/json", },
-                body: JSON.stringify({ requestID: data._id, }),
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ requestID: data._id }),
             });
 
             const res = await response.json();
@@ -56,7 +56,6 @@ const RequestCard = (props) => {
                 throw new Error(res.error);
             }
         } catch (error) {
-            console.error(error.message);
             toast.error("Could not delete material request");
             throw error;
         } finally {

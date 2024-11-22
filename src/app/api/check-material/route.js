@@ -15,11 +15,9 @@ export const POST = async (req) => {
             ...(exam && { exam }),
         };
 
-        // Fetch materials from both collections
         const approvedMaterials = await ApprovedMaterial.find(query);
         const unapprovedMaterials = await UnapprovedMaterial.find(query);
 
-        // Check for duplicates, including range-based matches for "number"
         const isDuplicate = (materials) =>
             materials.some((material) => {
                 if (number && material.number) {
