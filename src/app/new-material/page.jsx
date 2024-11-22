@@ -42,21 +42,50 @@ export default function NewMaterialPage() {
 
     if (coursesList === null) return <Loading />;
 
+    const checkMaterial = async (formData) => {
+        try {
+            const response = await fetch("/api/check-material", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    courseName: formData.get("courseName") || formData.get("otherCourseName"),
+                    materialType: formData.get("materialType"),
+                    year: formData.get("year"),
+                    number: formData.get("number"),
+                    exam: formData.get("exam"),
+                }),
+            });
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error("Error checking material:", error);
+            return { success: false, exists: false };
+        }
+    };
+
     const uploadData = async (e) => {
         try {
             const formData = new FormData(e.target);
             formData.append("file", file);
             formData.set("materialType", materialType);
+
+            const checkResult = await checkMaterial(formData);
+
+            if (checkResult.exists) {
+                toast.error(`Material already exists in ${checkResult.type === "APPROVED" ? "Approved" : "Unapproved"} materials!`);
+                return;
+            }
+
             setIsUploading(true);
-            const response = await fetch("/api/requests", {
-                method: "POST",
-                body: formData,
-            });
+            const response = await fetch("/api/requests", { method: "POST", body: formData });
             const data = await response.json();
-            if (!data.success) throw new Error(data.error);
-        } catch (e) {
-            console.log(e);
-            throw e;
+
+            if (!data.success) throw new Error(data.message || data.error);
+
+            toast.success("Material requested successfully!");
+        } catch (error) {
+            console.error("Upload failed:", error);
+            toast.error("Could not upload material.");
         } finally {
             e.target.reset();
             setFile(null);
@@ -69,27 +98,11 @@ export default function NewMaterialPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!file) {
-            toast.error("file not selected");
+            toast.error("File not selected");
             return;
         }
-        toast.promise(
-            uploadData(e),
-            {
-                loading: "Uploading...",
-                success: <b>Material requested successfully!</b>,
-                error: <b>Could not upload</b>,
-            },
-            {
-                success: {
-                    duration: 2000,
-                    icon: "👏",
-                },
-                error: {
-                    duration: 2000,
-                    icon: "😞",
-                },
-            }
-        );
+
+        uploadData(e);
     };
 
     return (
@@ -104,7 +117,7 @@ export default function NewMaterialPage() {
                         <FileUploader file={file} setFile={setFile} />
                         <div className="mb-5">
                             <label htmlFor="courseName" className="mb-3 block text-base font-medium">Which course does this material belong?</label>
-                            <select id="courseName" name="courseName" className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md" onChange={(e) => setCourseName(e.target.value)}>{[...coursesList.map(({ courseName }, index) => { return (<option value={courseName} key={index} className="text-[#676c79]">{courseName}</option>); }), <option value="Other" key={coursesList.length} className="text-[#676c79]">Other</option>,]}</select>
+                            <select id="courseName" name="courseName" className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md" onChange={(e) => setCourseName(e.target.value)}>{[...coursesList.map(({ courseName }, index) => (<option value={courseName} key={index} className="text-[#676c79]">{courseName}</option>)), <option value="Other" key={coursesList.length} className="text-[#676c79]">Other</option>]}</select>
                         </div>
                         {courseName === "Other" && (
                             <div className="-mt-3 mb-5 ml-3">
@@ -112,8 +125,8 @@ export default function NewMaterialPage() {
                             </div>
                         )}
                         <div className="mb-5">
-                            <label className="mb-3 block text-base font-medium ">Which type of material is it?</label>
-                            <select id="materialType" name="materialType" className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md" onChange={(e) => setMaterialType(e.target.value)}>{materialsList.map((_materialType, index) => { return (<option value={_materialType} key={index} className="text-[#676c79]">{_materialType}</option>); })}</select>
+                            <label className="mb-3 block text-base font-medium">Which type of material is it?</label>
+                            <select id="materialType" name="materialType" className="w-full rounded-md appearance-none border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md" onChange={(e) => setMaterialType(e.target.value)}>{materialsList.map((_materialType, index) => (<option value={_materialType} key={index} className="text-[#676c79]">{_materialType}</option>))}</select>
                         </div>
                         {materialType === MATERIAL_TYPES.REFERENCE_BOOK ? (
                             <div className="mb-5">
@@ -141,13 +154,13 @@ export default function NewMaterialPage() {
                                 {materialType === MATERIAL_TYPES.LECTURE_SLIDES && (
                                     <div className="mb-5">
                                         <label className="mb-3 block text-base font-medium ">Which Lecture?</label>
-                                        <input type="text" name="number" placeholder="Enter Lecture number or Range (e.g. 1 to 5)" className="w-full rounded-md border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md" required/>
+                                        <input type="text" name="number" placeholder="Enter Lecture number or Range (e.g. 1 to 5)" className="w-full rounded-md border border-[#e0e0e0] bg-transparent py-3 px-6 text-base font-medium text-[#a4b0c6] outline-none focus:border-[#6A64F1] focus:shadow-md" required />
                                     </div>
                                 )}
                             </div>
                         )}
                         <div className="flex justify-center content-center mt-10">
-                            <button type="submit" disabled={isUploading} className=" inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white text-white focus:ring-4 focus:outline-none focus:ring-blue-800 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <button type="submit" disabled={isUploading} className="inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white text-white focus:ring-4 focus:outline-none focus:ring-blue-800 disabled:opacity-50 disabled:cursor-not-allowed">
                                 <span className="inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-gray-900 rounded-md group-hover:bg-opacity-0"><PiUploadSimpleBold className="w-4 h-4 me-2" />Submit</span>
                             </button>
                             <button type="button" onClick={() => router.back()} className="inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white text-white focus:ring-4 focus:outline-none focus:ring-blue-800">
