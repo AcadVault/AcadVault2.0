@@ -3,7 +3,7 @@
 import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-import TotalUsers from "@/components/(layout)/TotalUsers";
+import FooterStats from "@/components/(layout)/FooterStats";
 import { Helmet } from "react-helmet";
 
 const LoginPage = () => {
@@ -23,7 +23,7 @@ const LoginPage = () => {
                     <button onClick={() => signIn("google", { callbackUrl: "/" })} className="inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white text-white focus:ring-4 focus:outline-none focus:ring-blue-800"><span className="inline-flex items-center pl-4 pr-5 py-2.5 transition-all ease-in duration-75 bg-gray-900 rounded-md group-hover:bg-opacity-0"><FcGoogle className="w-4 h-4 me-2" /> Login with Google</span></button>
                 </div>
                 <div className="absolute bottom-0 mb-3 text-sm font-medium text-gray-100 text-center">
-                    <TotalUsers />
+                    <FooterStats />
                 </div>
             </div>
         </div>
