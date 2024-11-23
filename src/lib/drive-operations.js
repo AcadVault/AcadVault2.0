@@ -129,3 +129,33 @@ export const deleteFile = async (fileID) => {
         throw error;
     }
 };
+
+export const getTotalSizeFromFileIDs = async (fileIDs) => {
+    const drive = getDrive();
+    let totalSize = 0;
+
+    for (const fileID of fileIDs) {
+        try {
+            const response = await drive.files.get({
+                fileId: fileID,
+                fields: "size",
+            });
+            totalSize += parseInt(response.data.size || 0, 10);
+        } catch (error) {
+            console.error(`Error fetching size for fileID ${fileID}:`, error.message);
+            throw error;
+        }
+    }
+
+    return totalSize;
+};
+
+export const formatSize = (sizeInBytes) => {
+    const units = ["B", "KB", "MB", "GB", "TB"];
+    let i = 0;
+    while (sizeInBytes >= 1024 && i < units.length - 1) {
+        sizeInBytes /= 1024;
+        i++;
+    }
+    return `${sizeInBytes.toFixed(2)} ${units[i]}`;
+};

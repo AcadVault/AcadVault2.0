@@ -1,7 +1,7 @@
 import { GiOpenBook } from "react-icons/gi";
 import { PiUploadSimpleBold } from "react-icons/pi";
 import { FaGithub } from "react-icons/fa";
-import TotalUsers from "../components/(layout)/TotalUsers";
+import FooterStats from "../components/(layout)/FooterStats";
 import TotalRequests from "../components/(layout)/TotalRequests";
 import { isResourceManager, getSession } from "@/lib/server-helper-functions";
 
@@ -37,7 +37,7 @@ export default async function HomePage() {
                     </a>
                 </div>
                 <div className="absolute bottom-0 mb-3 text-sm font-medium text-gray-100 text-center">
-                    <TotalUsers />{_isResourceManager && <TotalRequests />}
+                    <FooterStats />{_isResourceManager && <TotalRequests />}
                 </div>
             </div>
         </div>
