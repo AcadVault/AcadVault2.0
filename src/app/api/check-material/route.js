@@ -8,6 +8,13 @@ export const POST = async (req) => {
 
         const { courseName, materialType, year, number, exam } = await req.json();
 
+        if (materialType === "Handwritten Notes") {
+            return NextResponse.json({
+                success: true,
+                exists: false,
+            });
+        }        
+
         const query = {
             courseName,
             materialType,
