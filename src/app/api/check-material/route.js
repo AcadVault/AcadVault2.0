@@ -8,7 +8,7 @@ export const POST = async (req) => {
 
         const { courseName, materialType, year, number, exam } = await req.json();
 
-        if (materialType === "Handwritten Notes") {
+        if (materialType === "Handwritten Notes" || materialType === "Reference Book") {
             return NextResponse.json({
                 success: true,
                 exists: false,
