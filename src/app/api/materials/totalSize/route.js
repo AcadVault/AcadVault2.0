@@ -18,6 +18,7 @@ async function getTotalSizeInBatches(fileIDs) {
 
 export const GET = async (req) => {
     try {
+        const { searchParams } = req.nextUrl;
         await connectMongoDB();
         const materials = await ApprovedMaterial.find({}, { fileID: 1 });
         const fileIDs = materials.map((material) => material.fileID);
