@@ -6,7 +6,7 @@ export const GET = async (req) => {
     try {
         const { searchParams } = req.nextUrl;
         await connectMongoDB();
-        const users = await User.find().count();
+        const users = await User.countDocuments();
         return NextResponse.json({ success: true, data: users });
     } catch (err) {
         console.error("Error: ", err);

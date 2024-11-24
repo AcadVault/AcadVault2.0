@@ -13,26 +13,22 @@ export default function NewMaterialPage() {
     const router = useRouter();
     const [file, setFile] = useState(null);
 
-    const materialsList = [];
-    const yearsList = [];
-    const examsList = [];
+    const materialsList = Object.values(MATERIAL_TYPES);
+    const yearsList = Array.from({ length: new Date().getFullYear() - 2009 + 1 }, (_, i) => i + 2009);
+    const examsList = Object.values(EXAMS);
+
     const [coursesList, setCoursesList] = useState(null);
-
-    for (const key in MATERIAL_TYPES) materialsList.push(MATERIAL_TYPES[key]);
-    for (const key in EXAMS) examsList.push(EXAMS[key]);
-    for (let i = 2009; i <= new Date().getFullYear(); i++) yearsList.push(i);
-
     const [courseName, setCourseName] = useState(null);
     const [materialType, setMaterialType] = useState(materialsList[0]);
     const [isUploading, setIsUploading] = useState(false);
 
     const fetchCourses = async () => {
         try {
-            const response = await fetch("api/courses?courseName=*");
+            const response = await fetch("/api/courses?courseName=*");
             const data = await response.json();
             setCoursesList(data.data);
         } catch (e) {
-            console.log(e);
+            console.error("Error fetching courses:", e);
         }
     };
 
@@ -55,8 +51,7 @@ export default function NewMaterialPage() {
                     exam: formData.get("exam"),
                 }),
             });
-            const data = await response.json();
-            return data;
+            return await response.json();
         } catch (error) {
             console.error("Error checking material:", error);
             return { success: false, exists: false };
