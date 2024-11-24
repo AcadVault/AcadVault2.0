@@ -6,6 +6,7 @@ import { connectMongoDB } from "@/lib/mongodb.config";
 import { getCurrentUser, isResourceManager } from "@/lib/server-helper-functions";
 
 export const PUT = async (req) => {
+    const { searchParams } = req.nextUrl;
     const { requestID } = await req.json();
 
     try {
@@ -30,6 +31,7 @@ export const PUT = async (req) => {
         materialRequest.status = 'REJECTED';
         await materialRequest.save();
         await materialRequest.populate('material');
+        
         return NextResponse.json({ success: true, data: materialRequest });
     } catch (error) {
         return NextResponse.json({ success: false, error: error.message });

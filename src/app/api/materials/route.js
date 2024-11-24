@@ -32,11 +32,10 @@ export const GET = async (request) => {
         }
 
         await connectMongoDB();
-
         const materials = await ApprovedMaterial.find(filterObject);
-
         const results = await Promise.all(materials.map(async (material) => {
             const request = await Request.findOne({ material: material._id });
+
             if (!request) {
                 return {
                     ...material.toObject(),
@@ -51,6 +50,7 @@ export const GET = async (request) => {
                 uploaderName: user ? user.name : 'Unknown',
             };
         }));
+
         return NextResponse.json({ success: true, data: results });
     } catch (e) {
         console.log(e);

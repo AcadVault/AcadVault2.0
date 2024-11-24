@@ -3,10 +3,10 @@ import { connectMongoDB } from "@/lib/mongodb.config";
 import { ApprovedMaterial } from "@/models/material.model";
 import { getTotalSizeFromFileIDs, formatSize } from "@/lib/drive-operations";
 
-export const GET = async () => {
+export const GET = async (req) => {
     try {
+        const { searchParams } = req.nextUrl;
         await connectMongoDB();
-
         const materials = await ApprovedMaterial.find({}, { fileID: 1 });
         const fileIDs = materials.map((material) => material.fileID);
 
@@ -20,9 +20,6 @@ export const GET = async () => {
         return NextResponse.json({ success: true, totalSize: formattedSize });
     } catch (error) {
         console.error("Error calculating total size:", error.message);
-        return NextResponse.json(
-            { success: false, error: error.message },
-            { status: 500 }
-        );
+        return NextResponse.json({ success: false, error: error.message }, { status: 500 });
     }
 };

@@ -4,16 +4,13 @@ import { ApprovedMaterial, UnapprovedMaterial } from "@/models/material.model";
 
 export const POST = async (req) => {
     try {
+        const { searchParams } = req.nextUrl;
         await connectMongoDB();
-
         const { courseName, materialType, year, number, exam } = await req.json();
 
         if (materialType === "Handwritten Notes" || materialType === "Reference Book") {
-            return NextResponse.json({
-                success: true,
-                exists: false,
-            });
-        }        
+            return NextResponse.json({ success: true, exists: false });
+        }
 
         const query = {
             courseName,
@@ -21,10 +18,8 @@ export const POST = async (req) => {
             ...(year && { year }),
             ...(exam && { exam }),
         };
-
         const approvedMaterials = await ApprovedMaterial.find(query);
         const unapprovedMaterials = await UnapprovedMaterial.find(query);
-
         const isDuplicate = (materials) =>
             materials.some((material) => {
                 if (number && material.number) {
@@ -39,29 +34,15 @@ export const POST = async (req) => {
             });
 
         if (isDuplicate(approvedMaterials)) {
-            return NextResponse.json({
-                success: true,
-                exists: true,
-                type: "APPROVED",
-            });
+            return NextResponse.json({ success: true, exists: true, type: "APPROVED" });
         }
 
         if (isDuplicate(unapprovedMaterials)) {
-            return NextResponse.json({
-                success: true,
-                exists: true,
-                type: "UNAPPROVED",
-            });
+            return NextResponse.json({ success: true, exists: true, type: "UNAPPROVED" });
         }
 
-        return NextResponse.json({
-            success: true,
-            exists: false,
-        });
+        return NextResponse.json({ success: true, exists: false });
     } catch (error) {
-        return NextResponse.json({
-            success: false,
-            error: error.message,
-        });
+        return NextResponse.json({ success: false, error: error.message }, { status: 500 });
     }
 };

@@ -3,9 +3,6 @@
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { FaRegUserCircle } from "react-icons/fa";
-import { Tektur } from "next/font/google";
-
-const font = Tektur({ subsets: ["latin"], weight: "400" });
 
 const NavBar = ({ isResourceManager, session }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,7 +17,7 @@ const NavBar = ({ isResourceManager, session }) => {
         <nav className="bg-transparent backdrop-filter backdrop-blur-sm">
             <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4 transition-all duration-300">
                 <a href="/" className="flex gap-2 items-center rtl:space-x-reverse">
-                    <span className={`${font.className} self-center text-2xl font-semibold whitespace-nowrap text-white`}>AcadVault2.0</span>
+                    <span className={`self-center text-2xl font-semibold whitespace-nowrap text-white`}>AcadVault2.0</span>
                 </a>
                 <div className={"flex flex-col rtl:space-x-reverse"}>
                     <button className="text-white focus:outline-none lg:hidden" onClick={toggleMenu}>

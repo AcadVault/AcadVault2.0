@@ -6,13 +6,14 @@ import { connectMongoDB } from "@/lib/mongodb.config";
 import { getCurrentUser, isResourceManager } from "@/lib/server-helper-functions";
 
 export const PUT = async (req) => {
+    const { searchParams } = req.nextUrl;
     const { requestID } = await req.json();
+
     try {
         const user = await getCurrentUser();
         if (!user) throw new Error('User not found');
         const approverID = user.id;
         if (!isResourceManager(approverID)) throw new Error('User not authorized');
-
         await connectMongoDB();
 
         const materialRequest = await MaterialRequest.findOne({ _id: requestID });
@@ -22,7 +23,6 @@ export const PUT = async (req) => {
 
         const oldMaterial = await UnapprovedMaterial.findByIdAndDelete(materialRequest.material);
         const { fileID, courseName, materialType, exam, number, year, referenceBookName } = oldMaterial;
-
         const material = new ApprovedMaterial({ fileID, courseName, materialType, exam, number, year, referenceBookName });
         material.approvedBy = approverID;
         await material.save();
@@ -33,6 +33,7 @@ export const PUT = async (req) => {
         await materialRequest.populate('material');
 
         await moveFile(material.fileID, 'Requests', material.courseName);
+        
         return NextResponse.json({ success: true, data: materialRequest });
     } catch (error) {
         return NextResponse.json({ success: false, error: error.message });

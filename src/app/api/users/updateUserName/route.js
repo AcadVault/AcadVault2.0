@@ -3,6 +3,7 @@ import { User } from '@/models/user.model';
 import { connectMongoDB } from "@/lib/mongodb.config";
 
 export const POST = async (req) => {
+    const { searchParams } = req.nextUrl;
     try {
         const { email, username } = await req.json();
         await connectMongoDB();

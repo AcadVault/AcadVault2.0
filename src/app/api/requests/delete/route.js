@@ -6,6 +6,7 @@ import { connectMongoDB } from "@/lib/mongodb.config";
 import { getCurrentUser, isResourceManager } from "@/lib/server-helper-functions";
 
 export const DELETE = async (req) => {
+    const { searchParams } = req.nextUrl;
     const { requestID } = await req.json();
 
     try {
@@ -13,13 +14,12 @@ export const DELETE = async (req) => {
         if (!user) throw new Error('User not found');
         const deleterID = user.id;
         if (!isResourceManager(deleterID)) throw new Error('User not authorized');
-
         await connectMongoDB();
 
         const materialRequest = await MaterialRequest.findOne({ _id: requestID });
         if (!materialRequest) { return NextResponse.json({ success: false, error: 'Request not found' }); }
 
-        let material = null;
+        let material = null; 0
 
         if (materialRequest.status === 'APPROVED') {
             material = await ApprovedMaterial.findByIdAndDelete(materialRequest.material);
@@ -28,6 +28,7 @@ export const DELETE = async (req) => {
         }
         if (material) { await deleteFile(material.fileID); }
         await MaterialRequest.deleteOne({ _id: requestID });
+
         return NextResponse.json({ success: true, message: 'File deleted successfully' });
     } catch (error) {
         console.error(error);
