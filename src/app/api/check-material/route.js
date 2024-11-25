@@ -4,7 +4,6 @@ import { ApprovedMaterial, UnapprovedMaterial } from "@/models/material.model";
 
 export const POST = async (req) => {
     try {
-        const { searchParams } = req.nextUrl;
         await connectMongoDB();
         const { courseName, materialType, year, number, exam } = await req.json();
 

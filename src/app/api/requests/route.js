@@ -6,8 +6,7 @@ import { Request as MaterialRequest } from "@/models/request.model";
 import { connectMongoDB } from "@/lib/mongodb.config";
 import { getCurrentUser } from "@/lib/server-helper-functions";
 
-export const GET = async (req) => {
-    const { searchParams } = req.nextUrl;
+export const GET = async () => {
     try {
         await connectMongoDB();
         const requests = await MaterialRequest.find({}).populate('material').sort({ createdAt: -1 });
@@ -19,7 +18,6 @@ export const GET = async (req) => {
 }
 
 export const POST = async (req) => {
-    const { searchParams } = req.nextUrl;
     try {
         const formData = await req.formData();
         const user = await getCurrentUser();

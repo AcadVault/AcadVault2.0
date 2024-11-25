@@ -6,7 +6,6 @@ import { connectMongoDB } from "@/lib/mongodb.config";
 import { getCurrentUser, isResourceManager } from "@/lib/server-helper-functions";
 
 export const PUT = async (req) => {
-    const { searchParams } = req.nextUrl;
     const { requestID } = await req.json();
 
     try {
