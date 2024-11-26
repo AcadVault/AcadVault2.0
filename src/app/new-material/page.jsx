@@ -76,11 +76,8 @@ export default function NewMaterialPage() {
             const data = await response.json();
 
             if (!data.success) throw new Error(data.message || data.error);
-
-            toast.success("Material requested successfully!");
         } catch (error) {
             console.error("Upload failed:", error);
-            toast.error("Could not upload material.");
         } finally {
             e.target.reset();
             setFile(null);
@@ -97,6 +94,24 @@ export default function NewMaterialPage() {
             return;
         }
 
+        toast.promise(
+            uploadData(e),
+            {
+                loading: "Uploading...",
+                success: <b>Material requested successfully!</b>,
+                error: <b>Could not upload</b>,
+            },
+            {
+                success: {
+                    duration: 2000,
+                    icon: "👏",
+                },
+                error: {
+                    duration: 2000,
+                    icon: "😞",
+                },
+            }
+        );
         uploadData(e);
     };
 
