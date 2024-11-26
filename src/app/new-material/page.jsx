@@ -12,31 +12,30 @@ import { Helmet } from "react-helmet";
 export default function NewMaterialPage() {
     const router = useRouter();
     const [file, setFile] = useState(null);
+    const [coursesList, setCoursesList] = useState(null);
+    const [courseName, setCourseName] = useState(null);
+    const [materialType, setMaterialType] = useState(MATERIAL_TYPES[0]);
+    const [isUploading, setIsUploading] = useState(false);
 
     const materialsList = Object.values(MATERIAL_TYPES);
     const yearsList = Array.from({ length: new Date().getFullYear() - 2009 + 1 }, (_, i) => i + 2009);
     const examsList = Object.values(EXAMS);
 
-    const [coursesList, setCoursesList] = useState(null);
-    const [courseName, setCourseName] = useState(null);
-    const [materialType, setMaterialType] = useState(materialsList[0]);
-    const [isUploading, setIsUploading] = useState(false);
-
-    const fetchCourses = async () => {
-        try {
-            const response = await fetch("/api/courses?courseName=*");
-            const data = await response.json();
-            setCoursesList(data.data);
-        } catch (e) {
-            console.error("Error fetching courses:", e);
-        }
-    };
-
     useEffect(() => {
+        const fetchCourses = async () => {
+            try {
+                const response = await fetch("/api/courses?courseName=*");
+                const data = await response.json();
+                setCoursesList(data.data);
+            } catch (error) {
+                console.error("Error fetching courses:", error);
+            }
+        };
+
         fetchCourses();
     }, []);
 
-    if (coursesList === null) return <Loading />;
+    if (!coursesList) return <Loading />;
 
     const checkMaterial = async (formData) => {
         try {
@@ -58,32 +57,14 @@ export default function NewMaterialPage() {
         }
     };
 
-    const uploadData = async (e) => {
+    const uploadData = async (formData) => {
         try {
-            const formData = new FormData(e.target);
-            formData.append("file", file);
-            formData.set("materialType", materialType);
-
-            const checkResult = await checkMaterial(formData);
-
-            if (checkResult.exists) {
-                toast.error(`Material already exists in ${checkResult.type === "APPROVED" ? "Approved" : "Unapproved"} materials!`);
-                return;
-            }
-
-            setIsUploading(true);
             const response = await fetch("/api/requests", { method: "POST", body: formData });
             const data = await response.json();
-
             if (!data.success) throw new Error(data.message || data.error);
+            return data;
         } catch (error) {
             console.error("Upload failed:", error);
-        } finally {
-            e.target.reset();
-            setFile(null);
-            setIsUploading(false);
-            setCourseName(null);
-            setMaterialType(materialsList[0]);
         }
     };
 
@@ -94,25 +75,38 @@ export default function NewMaterialPage() {
             return;
         }
 
-        toast.promise(
-            uploadData(e),
+        const formData = new FormData(e.target);
+        formData.append("file", file);
+        formData.set("materialType", materialType);
+
+        const checkResult = await checkMaterial(formData);
+
+        if (checkResult.exists) {
+            toast.error(`Material already exists in ${checkResult.type === "APPROVED" ? "Approved" : "Unapproved"} materials!`);
+            return;
+        }
+
+        setIsUploading(true);
+
+        await toast.promise(
+            uploadData(formData),
             {
                 loading: "Uploading...",
                 success: <b>Material requested successfully!</b>,
                 error: <b>Could not upload</b>,
             },
             {
-                success: {
-                    duration: 2000,
-                    icon: "👏",
-                },
-                error: {
-                    duration: 2000,
-                    icon: "😞",
-                },
+                success: { duration: 2000, icon: "👏", },
+                error: { duration: 2000, icon: "😞", },
             }
         );
-        uploadData(e);
+
+        setIsUploading(false);
+
+        e.target.reset();
+        setFile(null);
+        setCourseName(null);
+        setMaterialType(materialsList[0]);
     };
 
     return (

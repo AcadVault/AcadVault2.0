@@ -42,6 +42,33 @@ export const uploadFile = async (fileObject, folderName, fileName) => {
     return data;
 }
 
+export const initiateResumableUpload = async (fileName, mimeType, folderName) => {
+    const drive = getDrive();
+    const folderID = await searchFolder(folderName);
+
+    const requestBody = {
+        name: fileName,
+        mimeType: mimeType,
+        parents: [folderID],
+    };
+
+    try {
+        const response = await drive.files.create({
+            requestBody,
+            media: {
+                mimeType: mimeType,
+                body: null, // No file content here, just preparing the upload session.
+            },
+            uploadType: 'resumable', // This is what makes the upload resumable.
+        });
+
+        // The response should return a URL for uploading the file
+        return response.headers['location']; // This is the resumable upload URL.
+    } catch (err) {
+        throw new Error('Error initiating upload: ' + err.message);
+    }
+};
+
 export const createFolder = async (folderName, parentFolderName) => {
     if (!['ROOT', 'Materials', 'Requests'].includes(parentFolderName)) {
         throw { message: "outside allowed directories" }
