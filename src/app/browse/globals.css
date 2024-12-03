@@ -19,9 +19,9 @@
 }
 
 .card-text-5 {
-  @apply text-sm lg:text-base font-light opacity-75;
+  @apply text-sm lg:text-base font-light;
 }
 
 .card-text-6 {
-  @apply text-xs lg:text-sm font-extralight opacity-70;
+  @apply text-xs lg:text-sm font-extralight;
 }

@@ -1,8 +1,9 @@
 "use client";
 
-import MaterialCard from "@/components/(browse)/MaterialCard";
-import { formatDate } from "@/lib/client-helper-functions";
+import MaterialCard from "@/components/(requests)/MaterialCard";
 import { useState } from "react";
+import { openFile } from "@/lib/client-helper-functions";
+import { Trash2, XCircle, CheckCircle } from "lucide-react";
 import toast from "react-hot-toast";
 
 const statusColors = {
@@ -14,7 +15,10 @@ const statusColors = {
 const RequestCard = (props) => {
     const [data, setData] = useState(props.data);
     const [isProcessing, setIsProcessing] = useState(false);
-    const formattedRequestTime = formatDate(data.createdAt);
+
+    const handleOpenFile = async () => {
+        openFile(data.fileID);
+    };
 
     const handleRequest = async (operation) => {
         try {
@@ -107,23 +111,18 @@ const RequestCard = (props) => {
     };
 
     return (
-        <div className="text-xs sm:text-sm md:text-base border border-gray-500 rounded-xl p-4 text-white backdrop backdrop-blur-sm bg-white bg-opacity-5">
-            <div className="flex flex-row justify-between items-center">
-                <div className="flex flex-row">
-                    <div className="text-gray-500">Submitted by </div>
-                    <div className="text-gray-200 ml-1">{data.studentID}</div>
-                </div>
-                <div className="border p-2 rounded-md font-bold" style={{ borderColor: statusColors[data.status] }}>
-                    <div className="ml-1" style={{ color: statusColors[data.status] }}>{data.status}</div>
-                </div>
+        <div className="text-xs sm:text-sm md:text-base border rounded-lg p-4 bg-white">
+            <div className="flex flex-row justify-between items-center text-sm">
+                <div className="text-gray-500">Submitted by {data.studentID}</div>
+                <div className="border px-2 py-1 rounded-full text-black" style={{ backgroundColor: statusColors[data.status] }}>{data.status}</div>
             </div>
             <MaterialCard data={data.material} />
-            <div className="flex justify-between items-stretch flex-row-reverse mx-2">
-                <div className="text-gray-500 self-end text-right">Posted on {formattedRequestTime}</div>
+            <div className="flex justify-between items-stretch mx-2 text-sm">
+                <button onClick={handleOpenFile} className="text-white bg-black hover:bg-gray-900 rounded-lg px-5 py-2.5">Open File</button>
                 <div className="flex gap-2 h-fit self-center">
-                    {data.status !== "APPROVED" && (<button onClick={handleApprove} className="bg-[#39b03f] hover:bg-[#60e162] text-white font-semibold py-1.5 px-4 rounded disabled:bg-opacity-50 disabled:cursor-not-allowed" disabled={isProcessing}>Approve</button>)}
-                    {data.status !== "REJECTED" && (<button onClick={handleReject} className="bg-[#da3636] hover:bg-[#ff6262] text-white font-semibold py-1.5 px-4 rounded disabled:bg-opacity-50 disabled:cursor-not-allowed" disabled={isProcessing}>Reject</button>)}
-                    <button onClick={handleDelete} className="bg-[#828282] hover:bg-[#B0B0B0] text-white font-semibold py-1.5 px-4 rounded disabled:bg-opacity-50 disabled:cursor-not-allowed" disabled={isProcessing}>Delete</button>
+                    {data.status !== "APPROVED" && (<button onClick={handleApprove} className="bg-green-500 hover:bg-green-600 p-2 border rounded disabled:bg-opacity-50 disabled:cursor-not-allowed" disabled={isProcessing}><CheckCircle className="size-5"/></button>)}
+                    {data.status !== "REJECTED" && (<button onClick={handleReject} className="bg-red-500 hover:bg-red-600 p-2 border rounded disabled:bg-opacity-50 disabled:cursor-not-allowed text-white font-light" disabled={isProcessing}><XCircle className="size-5"/></button>)}
+                    <button onClick={handleDelete} className="bg-white hover:bg-gray-100 p-2 border rounded disabled:bg-opacity-50 disabled:cursor-not-allowed" disabled={isProcessing}><Trash2 className="size-5"/></button>
                 </div>
             </div>
         </div>

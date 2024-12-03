@@ -60,10 +60,11 @@ const MaterialResultsPage = ({ params }) => {
             <Helmet>
                 <title>{courseName} - {materialCategory} | AcadVault2.0</title>
             </Helmet>
+            <h1 className="text-2xl font-bold mt-4 text-black">{courseName}</h1>
             {Object.keys(groupedData).sort().map(year => (
                 <div key={year}>
-                    <h2 className="text-xl font-bold my-4 text-zinc-100">{year === "Uncategorized" ? "" : year}</h2>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4">
+                    <h2 className="text-base my-2 text-gray-700">{year === "Uncategorized" ? "" : `Course materials for ${year}`}</h2>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4">
                         {groupedData[year].map((material, index) => (
                             <BrowseMaterialCard key={index} data={material} />
                         ))}

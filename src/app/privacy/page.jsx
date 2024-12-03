@@ -6,9 +6,9 @@ export const metadata = {
 }
 
 const Privacy = () => (
-    <div className="left-0 top-0 -z-10 h-full w-full md:w-3/4 xl:w-2/3 2xl:1/2 text-gray-50 mx-auto">
+    <div className="left-0 top-0 -z-10 h-full w-full md:w-3/4 xl:w-2/3 2xl:1/2 mx-auto">
         <div className="h-full text-center ">
-            <h1 className="text-4xl font-bold my-5">Privacy Policy</h1>
+            <h1 className="text-4xl font-bold mt-10 mb-5">Privacy Policy</h1>
         </div>
         <div className="p-5">
             <h2 className="text-2xl font-bold mb-3 mt-8 text-center">Information We Collect</h2>
@@ -48,7 +48,7 @@ const Privacy = () => (
             <hr className="opacity-70 mb-3" />
             <p className="my-2">We reserve the right to update or modify this Privacy Policy at any time. Any changes will be effective immediately upon posting the revised policy on our website. We encourage you to review this Privacy Policy periodically.</p>
         </div>
-        <footer className="bottom-0 left-0 w-full bg-transparent text-white text-sm p-5">
+        <footer className="bottom-0 left-0 w-full bg-transparent text-sm p-5 border-t">
             <div className="flex justify-between">
                 <p>&copy; {new Date().getFullYear()} | AcadVault2.0</p>
                 <div className="flex">

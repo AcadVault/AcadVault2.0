@@ -12,7 +12,7 @@ const DriveContributors = () => {
             .catch(err => console.error("Error fetching contributors:", err));
     }, []);
 
-    return (contributors.map((contributor, index) => (<div key={index} className='p-4 bg-[rgb(246,245,245)] bg-opacity-5 backdrop-filter backdrop-blur-sm outline outline-1 outline-gray-500 rounded-lg text-[#ffffff] text-center'>{contributor}</div>)));
+    return (contributors.map((contributor, index) => (<div key={index} className='p-4 bg-[rgb(246,245,245)] bg-opacity-5 backdrop-filter backdrop-blur-sm outline outline-1 outline-gray-500 rounded-lg text-center'>{contributor}</div>)));
 };
 
 export default DriveContributors;

@@ -66,34 +66,34 @@ const ProfilePage = () => {
                 <title>Profile | AcadVault2.0</title>
                 <meta name="description" content="Your profile page" />
             </Helmet>
-            <div className="flex flex-col items-center justify-center mx-auto w-11/12 sm:w-3/4 md:w-2/3">
-                <div className="bg-white bg-opacity-5 backdrop-filter backdrop-blur-sm outline outline-1 outline-gray-500 rounded-lg transition ease-in-out duration-300 p-3 text-[#ffffff] py-5 px-5 mt-32 lg:w-3/5">
-                    <div className="flex justify-center">
-                        <Image src={session.user.image} alt="Profile picture" width={100} height={100} priority={true} className="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110" />
-                    </div>
-                    <div className="mt-16">
-                        <h1 className="font-bold text-center text-3xl mb-2 flex justify-center">
-                            Hey, {isEditing ? null : ` ${newUsername}`}{" "}{isEditing ? (
-                                <div className="flex text-2xl justify-center">
-                                    <input type="text" value={newUsername} onChange={(e) => setNewUsername(e.target.value)} className="border bg-transparent border-gray-300 rounded-md mx-2 px-4 w-fit" />
-                                    <button onClick={handleUpdateProfile} className="inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white text-white focus:ring-4 focus:outline-none focus:ring-blue-800"><span className="inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-gray-900 rounded-md group-hover:bg-opacity-0">Update</span></button>
-                                </div>
-                            ) : (
-                                <span onClick={() => setIsEditing(true)} style={{ cursor: "pointer" }}>✏️</span>
-                            )}
-                        </h1>
-                        <p className="text-center text-sm text-gray-400 font-medium">{session.user.email}</p>
+            <div className="flex flex-col items-center justify-center mx-auto w-11/12 sm:w-3/4">
+                <div className="bg-white border rounded-lg transition ease-in-out duration-300 p-5 my-8 w-full">
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <h1 className="font-bold text-3xl mb-2 flex justify-center">
+                                {isEditing ? null : ` ${newUsername}`}{" "}
+                                {isEditing ? (
+                                    <div className="flex justify-center">
+                                        <input type="text" value={newUsername} onChange={(e) => setNewUsername(e.target.value)} className="border-b bg-transparent mx-2 px-4" />
+                                        <button onClick={handleUpdateProfile} className="inline-flex items-center justify-center me-2 text-white bg-black hover:bg-gray-900 rounded-lg text-base px-5 py-2.5">Update</button>
+                                    </div>
+                                ) : (
+                                    <button onClick={() => setIsEditing(true)} className="inline-flex items-center justify-center text-white bg-black hover:bg-gray-900 rounded-lg text-sm px-4 py-2 ml-2">Edit Name</button>
+                                )}
+                            </h1>
+                            <p className="text-sm text-gray-400 font-medium">{session.user.email}</p>
+                        </div>
                         <div className="flex items-center justify-center mt-3">
-                            <button onClick={() => signOut({ callbackUrl: "/login" })} className="inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white text-white focus:ring-4 focus:outline-none focus:ring-blue-800"><span className="inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-gray-900 rounded-md group-hover:bg-opacity-0">Log out</span></button>
+                            <button onClick={() => signOut({ callbackUrl: "/login" })} className="inline-flex items-center justify-center me-2 text-white bg-black hover:bg-gray-900 rounded-lg text-base px-5 py-2.5">Log out</button>
                         </div>
                     </div>
                 </div>
-                <div className="mt-5 text-white text-center">
-                    <h2 className="text-2xl font-semibold mb-2">Uploaded Materials:</h2>
+                <div className="bg-white border rounded-lg transition ease-in-out duration-300 p-5 mb-8 w-full">
+                    <h2 className="text-2xl font-semibold mb-2">Uploaded Materials</h2>
                     {isLoadingFiles ? (
                         <p>Loading...</p>
                     ) : userFiles.length > 0 ? (
-                        <div className="grid grid-cols-1 gap-x-4 lg:grid-cols-2">
+                        <div className="flex-col gap-2">
                             {userFiles.map((file) => (
                                 <UserFileCard key={file._id} file={file} />
                             ))}

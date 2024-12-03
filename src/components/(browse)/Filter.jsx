@@ -11,7 +11,7 @@ const Filter = () => {
     };
 
     return (
-        <div className="flex text-white justify-between">
+        <div className="flex justify-between">
             <div>
                 <input type="text" onChange={(e) => { setFilter({ ...filter, courseName: e.target.value }); }} />
             </div>

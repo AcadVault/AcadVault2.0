@@ -21,17 +21,10 @@ export default async function RootLayout({ children }) {
 
     return (
         <html lang="en">
-            <body className={font.className}>
+            <body className={`${font.className} bg-[#F9FAFB]`}>
                 <Analytics />
                 <SpeedInsights />
                 <Toaster position="top-center" reverseOrder={false} />
-                <div className="fixed left-0 top-0 -z-10 h-full w-full">
-                    <div className="flex h-full w-full bg-primary pt-[40%]">
-                        <div className="absolute max-sm:hidden left-[-200px] top-[-100px] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
-                        <div className="mx-auto -mt-[150px] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.10),rgba(0,0,0,0))]"></div>
-                        <div className="absolute max-sm:hidden right-[-200px] top-[-100px] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
-                    </div>
-                </div>
                 <SessionProvider session={session}>
                     <Redirecter session={session} isResourceManager={_isResourceManager}>
                         <Navbar isResourceManager={_isResourceManager} session={session} />

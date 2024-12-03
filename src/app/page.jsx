@@ -1,9 +1,5 @@
-import { GiOpenBook } from "react-icons/gi";
-import { PiUploadSimpleBold } from "react-icons/pi";
-import { FaGithub } from "react-icons/fa";
+import { Github, Upload, BookOpen } from "lucide-react";
 import FooterStats from "../components/(layout)/FooterStats";
-import TotalRequests from "../components/(layout)/TotalRequests";
-import { isResourceManager, getSession } from "@/lib/server-helper-functions";
 
 export const metadata = {
     title: "AcadVault2.0",
@@ -11,33 +7,18 @@ export const metadata = {
 }
 
 export default async function HomePage() {
-    const session = await getSession();
-    const _isResourceManager = session && session.user && (await isResourceManager(session.user.id));
-
     return (
         <div className="fixed left-0 top-0 -z-10 h-full w-full">
             <div className="flex flex-col items-center justify-center h-full text-center content-center">
-                <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl text-white">AcadVault2.0</h1>
-                <p className="mb-6 text-lg font-medium lg:text-xl sm:px-16 xl:px-48 text-gray-400">A living open-source repository of Academic Resources for DA-IICT</p>
+                <h1 className="mb-4 text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight">Welcome to<span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-500"> AcadVault2.0</span></h1>
+                <p className="mb-6 text-lg font-medium lg:text-xl sm:px-16 xl:px-48 text-gray-600">A living open-source repository of Academic Resources for DA-IICT. Share, discover, and learn from a growing collection of materials.</p>
                 <div className="flex flex-row">
-                    <a href="https://github.com/Acadvault/AcadVault2.0" target="_blank">
-                        <button className="inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white text-white focus:ring-4 focus:outline-none focus:ring-blue-800">
-                            <span className="inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-gray-900 rounded-md group-hover:bg-opacity-0"><FaGithub className="w-4 h-4 me-2" /> GitHub</span>
-                        </button>
-                    </a>
-                    <a href="/browse">
-                        <button className="inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white text-white focus:ring-4 focus:outline-none focus:ring-blue-800">
-                            <span className="inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-gray-900 rounded-md group-hover:bg-opacity-0"><GiOpenBook className="w-4 h-4 me-2" /> Browse</span>
-                        </button>
-                    </a>
-                    <a href="/new-material">
-                        <button className="inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white text-white focus:ring-4 focus:outline-none focus:ring-blue-800">
-                            <span className="inline-flex items-center px-5 py-2.5 transition-all ease-in duration-75 bg-gray-900 rounded-md group-hover:bg-opacity-0"><PiUploadSimpleBold className="w-4 h-4 me-2" />Upload</span>
-                        </button>
-                    </a>
+                    <a href="https://github.com/Acadvault/AcadVault2.0" target="_blank"><button className="inline-flex items-center justify-center me-2 text-white bg-black hover:bg-gray-900 rounded-lg text-base px-5 py-2.5"><Github className="w-4 h-4 me-2" /> GitHub</button></a>
+                    <a href="/browse"><button className="inline-flex items-center justify-center text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 font-medium rounded-lg text-base px-5 py-2.5 me-2"><BookOpen className="w-4 h-4 me-2" /> Browse Resources</button></a>
+                    <a href="/new-material"><button className="inline-flex items-center justify-center text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 font-medium rounded-lg text-base px-5 py-2.5 me-2"><Upload className="w-4 h-4 me-2" />Upload Material</button></a>
                 </div>
-                <div className="absolute bottom-0 mb-3 text-sm font-medium text-gray-100 text-center">
-                    <FooterStats />{_isResourceManager && <TotalRequests />}
+                <div className="absolute inline-flex gap-4 md:gap-8 lg:gap-12 bottom-0 mb-3 text-sm font-medium text-center">
+                    <FooterStats />
                 </div>
             </div>
         </div>
