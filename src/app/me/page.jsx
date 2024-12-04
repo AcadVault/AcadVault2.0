@@ -68,24 +68,22 @@ const ProfilePage = () => {
             </Helmet>
             <div className="flex flex-col items-center justify-center mx-auto w-11/12 sm:w-3/4">
                 <div className="bg-white border rounded-lg transition ease-in-out duration-300 p-5 my-8 w-full">
-                    <div className="flex justify-between items-center">
+                    <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2">
                         <div>
-                            <h1 className="font-bold text-3xl mb-2 flex justify-center">
+                            <h1 className="font-bold text-2xl lg:text-3xl mb-2 flex items-center gap-2">
                                 {isEditing ? null : ` ${newUsername}`}{" "}
                                 {isEditing ? (
-                                    <div className="flex justify-center">
-                                        <input type="text" value={newUsername} onChange={(e) => setNewUsername(e.target.value)} className="border-b bg-transparent mx-2 px-4" />
-                                        <button onClick={handleUpdateProfile} className="inline-flex items-center justify-center me-2 text-white bg-black hover:bg-gray-900 rounded-lg text-base px-5 py-2.5">Update</button>
+                                    <div className="flex flex-col lg:flex-row gap-2">
+                                        <input type="text" value={newUsername} onChange={(e) => setNewUsername(e.target.value)} className="border-b bg-transparent" />
+                                        <button onClick={handleUpdateProfile} className="inline-flex items-center justify-center text-white bg-black hover:bg-gray-900 rounded-lg text-base px-4 py-2">Update</button>
                                     </div>
                                 ) : (
-                                    <button onClick={() => setIsEditing(true)} className="inline-flex items-center justify-center text-white bg-black hover:bg-gray-900 rounded-lg text-sm px-4 py-2 ml-2">Edit Name</button>
+                                    <button onClick={() => setIsEditing(true)} className="inline-flex items-center justify-center text-white bg-black hover:bg-gray-900 rounded-lg text-base px-4 py-2">Edit</button>
                                 )}
                             </h1>
                             <p className="text-sm text-gray-400 font-medium">{session.user.email}</p>
                         </div>
-                        <div className="flex items-center justify-center mt-3">
-                            <button onClick={() => signOut({ callbackUrl: "/login" })} className="inline-flex items-center justify-center me-2 text-white bg-black hover:bg-gray-900 rounded-lg text-base px-5 py-2.5">Log out</button>
-                        </div>
+                        <button onClick={() => signOut({ callbackUrl: "/login" })} className="inline-flex items-center justify-center text-white bg-black hover:bg-gray-900 rounded-lg text-base px-4 py-2">Log out</button>
                     </div>
                 </div>
                 <div className="bg-white border rounded-lg transition ease-in-out duration-300 p-5 mb-8 w-full">

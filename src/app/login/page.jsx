@@ -8,7 +8,7 @@ import { Helmet } from "react-helmet";
 
 const LoginPage = () => {
     return (
-        <div className="fixed left-0 top-0 -z-10 h-full w-full">
+        <div className="fixed left-0 top-0 -z-10 h-full w-full px-2">
             <Helmet>
                 <title>Login | AcadVault2.0</title>
                 <meta name="description" content="Login to AcadVault2.0" />

@@ -32,8 +32,8 @@ export default function FileUploader({ file, setFile }) {
     return (
         <div className="mb-6 pt-4">
             <label className="mb-5 block">
-                <span className="text-3xl font-bold">Upload Academic Resource</span>
-                <span className="block text-base text-gray-700">Share your course materials with other students</span>
+                <span className="text-2xl md:text-3xl font-bold">Upload Academic Resource</span>
+                <span className="block text-sm md:text-base text-gray-700">Share your course materials with other students</span>
             </label>
             <div className="mb-8">
                 <input id="file" type="file" className="sr-only" onChange={(e) => setFile(e.target.files[0])} />

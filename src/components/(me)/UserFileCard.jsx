@@ -10,7 +10,7 @@ const UserFileCard = ({ file }) => {
 
     return (
         <div className="w-full my-3 border rounded-lg transition ease-in-out duration-300 p-3 text-[#ffffff]">
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col lg:flex-row justify-between lg:items-center">
                 <div>
                     <div className="mb-4 text-left">
                         <div className="text-black font-semibold">{file.courseName}</div>
