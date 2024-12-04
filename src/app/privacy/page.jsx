@@ -48,12 +48,12 @@ const Privacy = () => (
             <hr className="opacity-70 mb-3" />
             <p className="my-2">We reserve the right to update or modify this Privacy Policy at any time. Any changes will be effective immediately upon posting the revised policy on our website. We encourage you to review this Privacy Policy periodically.</p>
         </div>
-        <footer className="bottom-0 left-0 w-full bg-transparent text-sm p-5 border-t">
+        <footer className="bottom-0 left-0 w-full bg-transparent text-sm p-5 border-t border-gray-700">
             <div className="flex justify-between">
                 <p>&copy; {new Date().getFullYear()} | AcadVault2.0</p>
                 <div className="flex">
-                    <a href="https://github.com/AcadVault/AcadVault2.0" target="_blank" rel="noopener noreferrer" className="mx-2 hover:scale-110 hover:text-[#211F1F]"><FaGithub size={24} /></a>
-                    <a href="https://discord.gg/mbAJsEnXgr" target="_blank" rel="noopener noreferrer" className="mx-2 hover:scale-110 hover:text-[#7289DA]"><FaDiscord size={24} /></a>
+                    <a href="https://github.com/AcadVault/AcadVault2.0" target="_blank" rel="noopener noreferrer" className="me-2"><FaGithub size={24} /></a>
+                    <a href="https://discord.gg/mbAJsEnXgr" target="_blank" rel="noopener noreferrer" className="me-2"><FaDiscord size={24} /></a>
                 </div>
             </div>
         </footer>

@@ -5,8 +5,8 @@ const BrowseMaterialCard = ({ data }) => {
     const handleClick = () => { openFile(data.fileID); };
 
     return (
-        <div className="flex flex-col max-w-full max-h-full overflow-y-scroll bg-white border px-3 py-5 rounded-lg cursor-pointer no-scrollbar hover:shadow-md" onClick={handleClick}>
-            <div className="card-text-6 mb-2 text-gray-700">{data.courseName}</div>
+        <div className="flex flex-col max-w-full max-h-full overflow-y-scroll bg-neutral-950 border border-gray-700 px-3 py-5 rounded-lg cursor-pointer no-scrollbar" onClick={handleClick}>
+            <div className="card-text-6 mb-2 text-gray-400">{data.courseName}</div>
             {[MATERIAL_TYPES.ASSIGNMENT_QUESTIONS, MATERIAL_TYPES.ASSIGNMENT_SOLUTION,].includes(data.materialType) && (
                 <div>
                     <div className="card-text-3">Assignment {data.number}</div>
@@ -31,7 +31,7 @@ const BrowseMaterialCard = ({ data }) => {
             {data.materialType === MATERIAL_TYPES.HANDWRITTEN_NOTES && (
                 <div className="card-text-3">Handwritten Notes</div>
             )}
-            <div className="flex justify-between mt-3 text-gray-700">
+            <div className="flex justify-between mt-3 text-gray-400">
                 {data.year && <div className="card-text-4">{data.year}</div>}
                 <div className="flex card-text-6 items-center justify-center gap-1">
                     by <span className="font-semibold">{data.uploaderName}</span>

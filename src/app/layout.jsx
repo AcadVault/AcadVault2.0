@@ -18,7 +18,7 @@ export default async function RootLayout({ children }) {
 
     return (
         <html lang="en">
-            <body className="bg-[#F9FAFB]">
+            <body className="bg-neutral-950 text-zinc-100">
                 <Analytics />
                 <SpeedInsights />
                 <Toaster position="top-center" reverseOrder={false} />

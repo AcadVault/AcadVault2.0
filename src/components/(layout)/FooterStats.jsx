@@ -36,11 +36,11 @@ const FooterStats = () => {
         <>
             <div className="space-y-2">
                 <div className="text-4xl font-bold text-blue-600">{totalUsers}</div>
-                <div className="text-gray-600">Total Users</div>
+                <div className="text-gray-400">Total Users</div>
             </div>
             <div className="space-y-2">
                 <div className="text-4xl font-bold text-blue-600">{totalMaterials}</div>
-                <div className="text-gray-600">Total Materials</div>
+                <div className="text-gray-400">Total Materials</div>
             </div>
         </>
     );

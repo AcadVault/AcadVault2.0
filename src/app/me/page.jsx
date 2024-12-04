@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useContext } from "react";
 import { signOut } from "next-auth/react";
-import Image from "next/image";
 import { SessionContext } from "@/components/(layout)/SessionProvider";
 import { Helmet } from "react-helmet";
 import toast from "react-hot-toast";
@@ -67,7 +66,7 @@ const ProfilePage = () => {
                 <meta name="description" content="Your profile page" />
             </Helmet>
             <div className="flex flex-col items-center justify-center mx-auto w-11/12 sm:w-3/4">
-                <div className="bg-white border rounded-lg transition ease-in-out duration-300 p-5 my-8 w-full">
+                <div className="bg-neutral-950 border border-gray-700 rounded-lg transition ease-in-out duration-300 p-5 my-8 w-full">
                     <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2">
                         <div>
                             <h1 className="font-bold text-2xl lg:text-3xl mb-2 flex items-center gap-2">
@@ -75,18 +74,18 @@ const ProfilePage = () => {
                                 {isEditing ? (
                                     <div className="flex flex-col lg:flex-row gap-2">
                                         <input type="text" value={newUsername} onChange={(e) => setNewUsername(e.target.value)} className="border-b bg-transparent" />
-                                        <button onClick={handleUpdateProfile} className="inline-flex items-center justify-center text-white bg-black hover:bg-gray-900 rounded-lg text-base px-4 py-2">Update</button>
+                                        <button onClick={handleUpdateProfile} className="inline-flex items-center justify-center bg-neutral-950 hover:bg-neutral-900 border border-gray-700 rounded-lg text-base px-4 py-2">Update</button>
                                     </div>
                                 ) : (
-                                    <button onClick={() => setIsEditing(true)} className="inline-flex items-center justify-center text-white bg-black hover:bg-gray-900 rounded-lg text-base px-4 py-2">Edit</button>
+                                    <button onClick={() => setIsEditing(true)} className="inline-flex items-center justify-center bg-neutral-950 hover:bg-neutral-900 border border-gray-700 rounded-lg text-base px-4 py-2">Edit</button>
                                 )}
                             </h1>
                             <p className="text-sm text-gray-400 font-medium">{session.user.email}</p>
                         </div>
-                        <button onClick={() => signOut({ callbackUrl: "/login" })} className="inline-flex items-center justify-center text-white bg-black hover:bg-gray-900 rounded-lg text-base px-4 py-2">Log out</button>
+                        <button onClick={() => signOut({ callbackUrl: "/login" })} className="inline-flex items-center justify-center bg-neutral-950 hover:bg-neutral-900 border border-gray-700 rounded-lg text-base px-4 py-2">Log out</button>
                     </div>
                 </div>
-                <div className="bg-white border rounded-lg transition ease-in-out duration-300 p-5 mb-8 w-full">
+                <div className="bg-neutral-950 border border-gray-700 rounded-lg transition ease-in-out duration-300 p-5 mb-8 w-full">
                     <h2 className="text-2xl font-semibold mb-2">Uploaded Materials</h2>
                     {isLoadingFiles ? (
                         <p>Loading...</p>
