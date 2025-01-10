@@ -97,6 +97,7 @@ export default function NewMaterialPage() {
             return;
         }
 
+        toast("Uploading material...", { icon: "🔄" });
         uploadData(e);
     };
 
@@ -156,7 +157,7 @@ export default function NewMaterialPage() {
                         )}
                         <div className="flex justify-end content-center mt-10">
                             <button type="button" onClick={() => router.back()} className="inline-flex items-center justify-center bg-neutral-950 hover:bg-neutral-900 border border-gray-700 font-medium rounded-lg text-base px-5 py-2.5 me-2">Cancel</button>
-                            <button type="submit" disabled={isUploading} className="inline-flex items-center justify-center bg-neutral-950 hover:bg-neutral-900 border border-gray-700 font-medium rounded-lg text-base px-5 py-2.5 me-2"><Upload className="w-4 h-4 me-2" />Upload Material</button>
+                            <button type="submit" disabled={isUploading} className={`inline-flex items-center justify-center bg-neutral-950 hover:bg-neutral-900 border border-gray-700 font-medium rounded-lg text-base px-5 py-2.5 me-2 ${isUploading ? "opacity-50 cursor-not-allowed" : ""}`}><Upload className="w-4 h-4 me-2" />{isUploading ? "Uploading..." : "Upload Material"}</button>
                         </div>
                     </form>
                 </div>
