@@ -5,14 +5,14 @@ import BrowseCard from '@/components/(browse)/BrowseCard'
 import { FaChalkboardTeacher } from 'react-icons/fa'
 import { PiExam } from 'react-icons/pi'
 import { MdOutlineAssignment } from 'react-icons/md'
-import { GiEvilBook } from 'react-icons/gi'
+import { PiBooks } from "react-icons/pi";
 import { Helmet } from 'react-helmet'
 
 const iconList = {
     Exams: <PiExam />,
     Lectures: <FaChalkboardTeacher />,
     Assignments: <MdOutlineAssignment />,
-    'Reference Books': <GiEvilBook />,
+    'Reference Books': <PiBooks />,
 }
 
 const MaterialCategoryListPage = ({ params }) => {

@@ -63,7 +63,7 @@ const MaterialResultsPage = ({ params }) => {
             <h1 className="text-2xl font-bold mt-4">{courseName}</h1>
             {Object.keys(groupedData).sort().map(year => (
                 <div key={year}>
-                    <h2 className="text-base my-2 text-gray-400">{year === "Uncategorized" ? "" : `Course materials for ${year}`}</h2>
+                    <h2 className="text-base my-2 text-gray-200">{year === "Uncategorized" ? "" : `Course materials for ${year}`}</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4">
                         {groupedData[year].map((material, index) => (
                             <BrowseMaterialCard key={index} data={material} />

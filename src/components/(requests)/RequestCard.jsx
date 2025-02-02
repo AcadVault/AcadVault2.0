@@ -105,18 +105,18 @@ const RequestCard = (props) => {
     };
 
     return (
-        <div className="text-xs sm:text-sm md:text-base border rounded-lg p-4 bg-neutral-950 border-gray-700">
+        <div className="text-xs sm:text-sm md:text-base border rounded-lg p-4 bg-neutral-950 border-gray-300">
             <div className="flex flex-row justify-between items-center text-sm">
-                <div className="text-gray-400">Submitted by {data.studentID}</div>
-                <div className="bg-neutral-950 border border-gray-700 px-2 py-1 rounded-full">{data.status}</div>
+                <div className="text-gray-200">Submitted by {data.studentID}</div>
+                <div className="bg-neutral-950 border border-gray-300 px-2 py-1 rounded-full">{data.status}</div>
             </div>
             <MaterialCard data={data.material} />
             <div className="flex justify-between items-stretch mx-2 text-sm">
-                <button onClick={handleOpenFile} className="bg-neutral-950 hover:bg-neutral-900 border border-gray-700 rounded-lg px-5 py-2.5">Open File</button>
+                <button onClick={handleOpenFile} className="bg-neutral-950 hover:bg-neutral-950 border border-gray-300 rounded-lg px-5 py-2.5">Open File</button>
                 <div className="flex gap-2 h-fit self-center">
-                    {data.status !== "APPROVED" && (<button onClick={handleApprove} className="bg-neutral-950 hover:bg-neutral-900 p-2 border rounded disabled:bg-opacity-50 disabled:cursor-not-allowed border-gray-700" disabled={isProcessing}><CheckCircle className="size-5"/></button>)}
-                    {data.status !== "REJECTED" && (<button onClick={handleReject} className="bg-neutral-950 hover:bg-neutral-900 p-2 border rounded disabled:bg-opacity-50 disabled:cursor-not-allowed font-light border-gray-700" disabled={isProcessing}><XCircle className="size-5"/></button>)}
-                    <button onClick={handleDelete} className="bg-neutral-950 hover:bg-neutral-900 p-2 border border-gray-700 rounded disabled:bg-opacity-50 disabled:cursor-not-allowed" disabled={isProcessing}><Trash2 className="size-5"/></button>
+                    {data.status !== "APPROVED" && (<button onClick={handleApprove} className="bg-neutral-950 hover:bg-neutral-950 p-2 border rounded disabled:bg-opacity-50 disabled:cursor-not-allowed border-gray-300" disabled={isProcessing}><CheckCircle className="size-5"/></button>)}
+                    {data.status !== "REJECTED" && (<button onClick={handleReject} className="bg-neutral-950 hover:bg-neutral-950 p-2 border rounded disabled:bg-opacity-50 disabled:cursor-not-allowed font-light border-gray-300" disabled={isProcessing}><XCircle className="size-5"/></button>)}
+                    <button onClick={handleDelete} className="bg-neutral-950 hover:bg-neutral-950 p-2 border border-gray-300 rounded disabled:bg-opacity-50 disabled:cursor-not-allowed" disabled={isProcessing}><Trash2 className="size-5"/></button>
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@ const DriveContributors = () => {
             .catch(err => console.error("Error fetching contributors:", err));
     }, []);
 
-    return (contributors.map((contributor, index) => (<div key={index} className='p-4 bg-neutral-950 hover:bg-neutral-900 border border-gray-700 rounded-lg text-center'>{contributor}</div>)));
+    return (contributors.map((contributor, index) => (<div key={index} className='p-4 bg-neutral-950 hover:bg-neutral-950 border border-gray-300 rounded-lg text-center'>{contributor}</div>)));
 };
 
 export default DriveContributors;

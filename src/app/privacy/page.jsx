@@ -48,7 +48,7 @@ const Privacy = () => (
             <hr className="opacity-70 mb-3" />
             <p className="my-2">We reserve the right to update or modify this Privacy Policy at any time. Any changes will be effective immediately upon posting the revised policy on our website. We encourage you to review this Privacy Policy periodically.</p>
         </div>
-        <footer className="bottom-0 left-0 w-full bg-transparent text-sm p-5 border-t border-gray-700">
+        <footer className="bottom-0 left-0 w-full bg-transparent text-sm p-5 border-t border-gray-300">
             <div className="flex justify-between">
                 <p>&copy; {new Date().getFullYear()} | AcadVault2.0</p>
                 <div className="flex">

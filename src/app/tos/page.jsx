@@ -49,7 +49,7 @@ const TermsOfService = () => (
             <hr className="opacity-70 mb-3" />
             <p className="my-2">We may suspend or terminate your access to our website and services at any time, without prior notice or liability, for any reason whatsoever, including if we believe that you have violated these Terms or applicable laws.</p>
         </div>
-        <footer className="bottom-0 left-0 w-full bg-transparent text-sm p-5 border-t border-gray-700">
+        <footer className="bottom-0 left-0 w-full bg-transparent text-sm p-5 border-t border-gray-300">
             <div className="flex justify-between">
                 <p>&copy; {new Date().getFullYear()} | AcadVault2.0</p>
                 <div className="flex">
