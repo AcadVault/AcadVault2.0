@@ -11,7 +11,7 @@ const RequestCard = (props) => {
     const [isProcessing, setIsProcessing] = useState(false);
 
     const handleOpenFile = async () => {
-        openFile(data.fileID);
+        openFile(data.material.fileID);
     };
 
     const handleRequest = async (operation) => {
