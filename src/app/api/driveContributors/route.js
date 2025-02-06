@@ -16,9 +16,19 @@ export const GET = async (req) => {
         const requests = await Request.find({ status: "APPROVED" });
         const all_students = requests.map((request) => request.studentID);
         const students = deldupe(all_students);
-        const studentUsers = users.filter(user => { const emailPrefix = user.email.split('@')[0]; return students.includes(emailPrefix); }).map(user => user.name);
 
-        return NextResponse.json({ success: true, data: studentUsers });
+        const studentData = users
+            .filter(user => {
+                const emailPrefix = user.email.split('@')[0];
+                return students.includes(emailPrefix);
+            })
+            .map(user => {
+                const emailPrefix = user.email.split('@')[0];
+                const uploadCount = requests.filter(request => request.studentID === emailPrefix).length;
+                return { name: user.name, uploadCount };
+            });
+
+        return NextResponse.json({ success: true, data: studentData });
     } catch (err) {
         console.error("Error: ", err);
         return NextResponse.json({ success: false, error: err.message }, { status: 500 });

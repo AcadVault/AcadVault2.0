@@ -91,6 +91,7 @@ const ProfilePage = () => {
                         <p>Loading...</p>
                     ) : userFiles.length > 0 ? (
                         <div className="flex-col gap-2">
+                            Total {userFiles.length} files uploaded!!
                             {userFiles.map((file) => (
                                 <UserFileCard key={file._id} file={file} />
                             ))}

@@ -25,9 +25,7 @@ const AboutPage = () => {
                 ))}
             </div>
             <h1 className="text-2xl lg:text-3xl font-bold text-center mt-10">Material Contributors</h1>
-            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mx-auto w-11/12 sm:w-4/5 md:w-3/4 lg:w-2/3 gap-4 p-1 md:p-5 mt-5 mb-10">
-                <DriveContributors />
-            </div>
+            <DriveContributors />
             <footer className="bottom-0 left-0 w-full bg-transparent text-sm p-5 border-t border-gray-300">
                 <div className="flex justify-between">
                     <p>&copy; {new Date().getFullYear()} | AcadVault2.0</p>
