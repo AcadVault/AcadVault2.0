@@ -28,12 +28,12 @@ const DriveContributors = () => {
     return (
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mx-auto w-11/12 sm:w-4/5 md:w-3/4 lg:w-2/3 gap-4 p-1 md:p-5 mt-5 mb-10">
             {contributors.map((contributor, index) => (
-                <div key={index} className='p-2 bg-neutral-950 hover:bg-neutral-950 border border-gray-300 rounded-lg text-center flex flex-col gap-1'>
+                <a href={`/userContributions/${contributor.email.split('@')[0]}`} key={index} className='p-2 bg-neutral-950 hover:bg-neutral-950 border border-gray-300 rounded-lg text-center flex flex-col gap-1'>
                     <div>{contributor.name}</div>
                     <div className='text-sm text-gray-300'>
                         {contributor.uploadCount} {contributor.uploadCount > 1 ? 'contributions' : 'contribution'}
                     </div>
-                </div>
+                </a>
             ))}
         </div>
     );

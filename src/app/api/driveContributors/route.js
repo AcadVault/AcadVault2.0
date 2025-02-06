@@ -25,7 +25,7 @@ export const GET = async (req) => {
             .map(user => {
                 const emailPrefix = user.email.split('@')[0];
                 const uploadCount = requests.filter(request => request.studentID === emailPrefix).length;
-                return { name: user.name, uploadCount };
+                return { name: user.name, uploadCount, email: user.email };
             });
 
         return NextResponse.json({ success: true, data: studentData });
