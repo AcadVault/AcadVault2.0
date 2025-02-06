@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import UserContributionsCard from "@/components/(userContributions)/UserContributionsCard";
 
 const UserContributionsPage = ({ params }) => {
@@ -35,11 +36,16 @@ const UserContributionsPage = ({ params }) => {
     if (contributions.length === 0) return <div className="text-center py-5">No contributions found.</div>;
 
     return (
-        <div className="max-w-4xl mx-auto p-5">
-            <h1 className="text-xl font-semibold mb-5">Material Contributions by {userId}</h1>
-            {contributions.map((file) => (
-                <UserContributionsCard key={file._id} file={file.material} />
-            ))}
+        <div className="left-0 top-0 h-full w-full">
+            <Helmet>
+                <title>Material Contributions by {userId}</title>
+            </Helmet>
+            <div className="flex flex-col items-center justify-center mx-auto w-11/12 sm:w-3/4">
+                <h1 className="text-xl font-semibold mb-5">Material Contributions by {userId}</h1>
+                {contributions.map((file) => (
+                    <UserContributionsCard key={file._id} file={file.material} />
+                ))}
+            </div>
         </div>
     );
 };
