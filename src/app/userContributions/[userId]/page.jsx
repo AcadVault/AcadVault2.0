@@ -40,11 +40,16 @@ const UserContributionsPage = ({ params }) => {
             <Helmet>
                 <title>Material Contributions by {userId}</title>
             </Helmet>
-            <div className="flex flex-col items-center justify-center mx-auto w-11/12 sm:w-3/4">
-                <h1 className="text-xl font-semibold mb-5">Material Contributions by {userId}</h1>
-                {contributions.map((file) => (
-                    <UserContributionsCard key={file._id} file={file.material} />
-                ))}
+            <div className="flex flex-col items-center justify-center mx-auto w-11/12 sm:w-3/4 py-8">
+                <div className="bg-neutral-950 border border-gray-300 rounded-lg transition ease-in-out duration-300 p-5 mb-8 w-full">
+                    <h2 className="text-2xl font-semibold mb-2">Uploaded Materials by {userId}</h2>
+                    <div className="flex-col gap-2">
+                        Total {contributions.length} files uploaded!!
+                        {contributions.map((file) => (
+                            <UserContributionsCard key={file._id} file={file.material} />
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     );
