@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@auth/mongodb-adapter": "^2.0.9",
+    "@auth/mongodb-adapter": "^3.11.1",
     "@vercel/analytics": "^1.1.1",
     "@vercel/speed-insights": "^1.0.2",
     "dotenv": "^16.3.1",
@@ -17,7 +17,7 @@
     "lucide-react": "^0.462.0",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.3",
-    "next": "14.0.4",
+    "next": "^14.2.33",
     "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
